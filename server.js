@@ -1,10 +1,13 @@
 const express = require('express');
+var cors = require('cors');
 const app = express();
 const path = require('path');
 
 app.use(express.static(__dirname + '/dist'));
 
 app.listen(process.env.PORT || 8080);
+
+app.use(cors());
 
 app.get('/*', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
