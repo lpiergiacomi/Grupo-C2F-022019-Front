@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Provider } from './../provider/provider';
+import { Provider } from './../provider';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProviderService } from '../provider/provider.service';
+import { ProviderService } from '../provider.service';
 
 @Component({
   selector: 'app-update-provider',

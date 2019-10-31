@@ -1,5 +1,5 @@
-import { ProviderService } from '../provider/provider.service';
-import { Provider } from '../provider/provider';
+import { ProviderService } from '../provider.service';
+import { Provider } from '../provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

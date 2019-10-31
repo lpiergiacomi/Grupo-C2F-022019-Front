@@ -7,8 +7,8 @@ import { Provider } from './provider'
   providedIn: 'root'
 })
 export class ProviderService {
-  private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com';
-  //private urlEndPoint: string = 'http://localhost:8080';
+  //private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com';
+  private urlEndPoint: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +29,6 @@ export class ProviderService {
     }
   
     getProvidersList(): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}`);
+      return this.http.get(`${this.urlEndPoint}/providers`);
     }
 }

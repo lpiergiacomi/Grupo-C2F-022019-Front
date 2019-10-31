@@ -1,7 +1,7 @@
 import { ProviderDetailsComponent } from './../provider-details/provider-details.component';
 import { Observable } from "rxjs";
-import { ProviderService } from "./../provider/provider.service";
-import { Provider } from "./../provider/provider";
+import { ProviderService } from "./../provider.service";
+import { Provider } from "./../provider";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -39,7 +39,7 @@ export class ProviderListComponent implements OnInit {
   }
 
   updateProvider(id: number) {
-    this.router.navigate(['update, id']);
+    this.router.navigate(['update/' + id]);
   }
 
 }
