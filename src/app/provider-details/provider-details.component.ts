@@ -1,0 +1,36 @@
+import { Provider } from '../provider/provider';
+import { Component, OnInit, Input } from '@angular/core';
+import { ProviderService } from '../provider/provider.service';
+import { ProviderListComponent } from '../provider-list/provider-list.component';
+import { Router, ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-provider-details',
+  templateUrl: './provider-details.component.html',
+  styleUrls: ['./provider-details.component.css']
+})
+export class ProviderDetailsComponent implements OnInit {
+
+  id: number;
+  provider: Provider;
+
+  constructor(private route: ActivatedRoute, private router: Router, private providerService: ProviderService) { }
+
+  ngOnInit() {
+    this.provider = new Provider();
+
+    this.id = this.route.snapshot.params['id'];
+
+    this.providerService.getProvider(this.id)
+      .subscribe(data => {
+        console.log("hola")
+        console.log(data)
+        this.provider = data;
+      }, error => console.log(error));
+  }
+
+  list() {
+    this.router.navigate(['providers']);
+  }
+
+}

@@ -14,10 +14,10 @@ export class ProviderComponent implements OnInit {
   constructor(private providerService: ProviderService) { }
 
   ngOnInit() {
-    this.providerService.getProviders()
-      .subscribe(response => {
-      this.providers = response as Provider[];
-    })
+    //this.providerService.getProviders()
+    //  .subscribe(response => {
+    //  this.providers = response as Provider[];
+    //})
   }
 
 }

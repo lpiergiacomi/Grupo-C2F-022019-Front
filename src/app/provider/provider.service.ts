@@ -7,13 +7,28 @@ import { Provider } from './provider'
   providedIn: 'root'
 })
 export class ProviderService {
-  private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/';
+  private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com';
+  //private urlEndPoint: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
-    
-    getProviders(): Observable<Provider[]> {
-      return this.http.get(this.urlEndPoint).pipe(
-        map(response => response as Provider[])
-      );
+
+    getProvider(id: number): Observable<any> {
+      return this.http.get(`${this.urlEndPoint}/providers/${id}`);
+    }
+
+    createProvider(provider: Object): Observable<Object> {
+      return this.http.post(`${this.urlEndPoint}/providers`, provider);
+    }
+
+    updateProvider(id: number, value: any): Observable<Object> {
+      return this.http.put(`${this.urlEndPoint}/providers/${id}`, value);
+    }
+  
+    deleteProvider(id: number): Observable<any> {
+      return this.http.delete(`${this.urlEndPoint}/providers/${id}`, { responseType: 'text' });
+    }
+  
+    getProvidersList(): Observable<any> {
+      return this.http.get(`${this.urlEndPoint}`);
     }
 }

@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Lista de proveedores</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Localidad</th>
+            <th>Dirección</th>
+            <th>Descripción</th>
+            <th>Sitio web</th>
+            <th>Email</th>
+            <th>Telefono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let provider of providers | async">
+            <td>{{provider.name}}</td>
+            <td>{{provider.locality}}</td>
+            <td>{{provider.address}}</td>
+            <td>{{provider.description}}</td>
+            <td>{{provider.site}}</td>
+            <td>{{provider.mail}}</td>
+            <td>{{provider.phone}}</td>
+            <td><button (click)="deleteProvider(provider.id)" class="btn btn-danger">Borrar proveedor</button>
+                <button (click)="updateProvider(provider.id)" class="btn btn-info" style="margin-left: 10px">Actualizar proveedor</button>
+                <button (click)="providerDetails(provider.id)" class="btn btn-info" style="margin-left: 10px">Detalles del proveedor</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
