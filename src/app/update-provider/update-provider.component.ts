@@ -12,6 +12,7 @@ export class UpdateProviderComponent implements OnInit {
 
   id: number;
   provider: Provider;
+  submitted = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private providerService: ProviderService) { }
 
@@ -35,7 +36,8 @@ export class UpdateProviderComponent implements OnInit {
   }
 
   onSubmit() {
-    this.updateProvider();    
+    this.updateProvider();
+    this.submitted = true;
   }
 
   gotoList() {
