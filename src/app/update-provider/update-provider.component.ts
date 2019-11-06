@@ -35,7 +35,6 @@ export class UpdateProviderComponent implements OnInit {
 
   onSubmit() {
     this.updateProvider();
-    this.submitted = true;
   }
 
   gotoList() {

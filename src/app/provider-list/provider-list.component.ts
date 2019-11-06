@@ -4,7 +4,6 @@ import { ProviderService } from "./../provider.service";
 import { Provider } from "./../provider";
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-provider-list',
@@ -15,7 +14,7 @@ export class ProviderListComponent implements OnInit {
 
   providers: Observable<Provider[]>;
 
-  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute, private _ngZone: NgZone) { }
+  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(val => {
