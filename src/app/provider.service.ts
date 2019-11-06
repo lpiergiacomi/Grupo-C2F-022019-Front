@@ -28,7 +28,12 @@ export class ProviderService {
       return this.http.delete(`${this.urlEndPoint}/providers/${id}`, { responseType: 'text' });
     }
   
-    getProvidersList(): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/providers`);
+    getProvidersList(): Observable<Provider[]> {
+      return this.http.get(`${this.urlEndPoint}/providers`).pipe(map(response => response as Provider[])
+      );
+    }
+
+    updateCredit(id: number, value: any): Observable<Object> {
+      return this.http.put(`${this.urlEndPoint}/providers/${id}/credit`, value);
     }
 }

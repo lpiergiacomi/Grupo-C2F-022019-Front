@@ -13,6 +13,7 @@
             <th>Sitio web</th>
             <th>Email</th>
             <th>Telefono</th>
+            <th>Crédito</th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +25,11 @@
             <td>{{provider.site}}</td>
             <td>{{provider.mail}}</td>
             <td>{{provider.phone}}</td>
+            <td>{{provider.credit}}</td>
             <td><button (click)="deleteProvider(provider.id)" class="btn btn-danger">Borrar proveedor</button>
                 <button (click)="updateProvider(provider.id)" class="btn btn-info" style="margin-left: 10px">Actualizar proveedor</button>
                 <button (click)="providerDetails(provider.id)" class="btn btn-info" style="margin-left: 10px">Detalles del proveedor</button>
+                <button (click)="providerCredit(provider.id)" class="btn btn-info" style="margin-left: 10px">Actualizar crédito</button>
             </td>
           </tr>
         </tbody>

@@ -1,0 +1,10 @@
+<h3>Cargar/Retirar crédito</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Crédito</label>
+      <input type="text" class="form-control" id="credit" required [(ngModel)]="provider.credit" name="credit">
+    </div>
+    <button type="submit" class="btn btn-success">Actualizar crédito</button>
+  </form>
+</div>

@@ -11,32 +11,22 @@ import { Router } from '@angular/router';
 export class CreateProviderComponent implements OnInit {
 
   provider: Provider = new Provider();
-  submitted = false;
-
-  constructor(private providerService: ProviderService,
-    private router: Router) { }
+  constructor(private providerService: ProviderService, private router: Router) { }
 
   ngOnInit() {
   }
-
-  newProvider(): void {
-    this.submitted = false;
-    this.provider = new Provider();
+  
+  onSubmit() {
+    this.save();    
+  }
+  
+  gotoList() {
+    this.router.navigate(['/providers']);
   }
 
   save() {
     this.providerService.createProvider(this.provider)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.provider = new Provider();
-    this.gotoList();
+      .subscribe(data => this.gotoList(), error => console.log(error));
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
-  }
-
-  gotoList() {
-    this.router.navigate(['/providers']);
-  }
 }

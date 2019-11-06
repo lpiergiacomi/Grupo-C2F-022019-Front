@@ -3,7 +3,8 @@ import { Observable } from "rxjs";
 import { ProviderService } from "./../provider.service";
 import { Provider } from "./../provider";
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-provider-list',
@@ -14,10 +15,12 @@ export class ProviderListComponent implements OnInit {
 
   providers: Observable<Provider[]>;
 
-  constructor(private providerService: ProviderService, private router: Router) { }
+  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute, private _ngZone: NgZone) { }
 
   ngOnInit() {
-    this.reloadData();
+    this.route.params.subscribe(val => {
+        this.reloadData();
+    });
   }
 
   reloadData() {
@@ -40,6 +43,10 @@ export class ProviderListComponent implements OnInit {
 
   updateProvider(id: number) {
     this.router.navigate(['update/' + id]);
+  }
+
+  providerCredit(id: number) {
+    this.router.navigate(['credit/' + id])
   }
 
 }

@@ -10,6 +10,7 @@ import { ProviderDetailsComponent } from './provider-details/provider-details.co
 import { UpdateProviderComponent } from './update-provider/update-provider.component';
 import { CreateProviderComponent } from './create-provider/create-provider.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AddRemoveCreditComponent } from './add-remove-credit/add-remove-credit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
     ProviderListComponent,
     ProviderDetailsComponent,
     UpdateProviderComponent,
-    CreateProviderComponent
+    CreateProviderComponent,
+    AddRemoveCreditComponent
   ],
   imports: [
     BrowserModule,

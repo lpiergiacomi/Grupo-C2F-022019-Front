@@ -4,16 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderService } from '../provider.service';
 
 @Component({
-  selector: 'app-update-provider',
-  templateUrl: './update-provider.component.html',
-  styleUrls: ['./update-provider.component.css']
+  selector: 'app-add-remove-credit',
+  templateUrl: './add-remove-credit.component.html',
+  styleUrls: ['./add-remove-credit.component.css']
 })
-export class UpdateProviderComponent implements OnInit {
+export class AddRemoveCreditComponent implements OnInit {
 
   id: number;
   provider: Provider;
 
   constructor(private route: ActivatedRoute, private router: Router, private providerService: ProviderService) { }
+
 
   ngOnInit() {
     this.provider = new Provider();
@@ -27,13 +28,13 @@ export class UpdateProviderComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  updateProvider() {
-    this.providerService.updateProvider(this.id, this.provider)
+  updateCredit() {
+    this.providerService.updateCredit(this.id, this.provider)
       .subscribe(data => this.gotoList(), error => console.log(error));
   }
 
   onSubmit() {
-    this.updateProvider();    
+    this.updateCredit();
   }
 
   gotoList() {
