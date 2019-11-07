@@ -1,0 +1,37 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Lista de menús</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio de delivery</th>
+            <th>Precio</th>
+            <th>Cantidad mínima</th>
+            <th>Precio cantidad mínima</th>
+            <th>Cantidad mínima 2</th>
+            <th>Precio cantidad mínima 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let menu of menus | async">
+            <td>{{menu.name}}</td>
+            <td>{{menu.description}}</td>
+            <td>{{menu.deliveryPrice}}</td>
+            <td>{{menu.price}}</td>
+            <td>{{menu.minQuantity}}</td>
+            <td>{{menu.minQuantityPrice}}</td>
+            <td>{{menu.minQuantity2}}</td>
+            <td>{{menu.minQuantityPrice2}}</td>
+            <td><button (click)="deleteMenu(menu.id)" class="btn btn-danger">Borrar menú</button>
+                <button (click)="updateMenu(menu.id)" class="btn btn-info" style="margin-left: 10px">Actualizar menú</button>
+                <button (click)="menuDetails(menu.id)" class="btn btn-info" style="margin-left: 10px">Detalles del menú</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

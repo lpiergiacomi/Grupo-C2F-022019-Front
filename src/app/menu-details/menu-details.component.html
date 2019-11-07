@@ -1,0 +1,18 @@
+<h2>Detalles de menú</h2> 
+
+<hr/>
+<div *ngIf="menu">
+  <div>
+    <label><b>Nombre: </b></label> {{menu.name}}
+  </div>
+  <div>
+    <label><b>Descripción: </b></label> {{menu.description}}
+  </div>
+  <div>
+    <label><b>Precio de delivery: </b></label> {{menu.deliveryPrice}}
+  </div>  
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Volver a lista de menús</button><br>

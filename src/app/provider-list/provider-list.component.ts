@@ -1,4 +1,3 @@
-import { ProviderDetailsComponent } from './../provider-details/provider-details.component';
 import { Observable } from "rxjs";
 import { ProviderService } from "./../provider.service";
 import { Provider } from "./../provider";
@@ -37,11 +36,11 @@ export class ProviderListComponent implements OnInit {
   }
 
   providerDetails(id: number) {
-    this.router.navigate(['details/' + id]);
+    this.router.navigate(['detailsProvider/' + id]);
   }
 
   updateProvider(id: number) {
-    this.router.navigate(['update/' + id]);
+    this.router.navigate(['updateProvider/' + id]);
   }
 
   providerCredit(id: number) {
