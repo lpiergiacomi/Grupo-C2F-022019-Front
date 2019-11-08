@@ -29,7 +29,7 @@ export class MenuService {
     }
   
     getMenusList(): Observable<Menu[]> {
-      return this.http.get(`${this.urlEndPoint}/menus`).pipe(map(response => response as Menu[])
+      return this.http.get(`${this.urlEndPoint}/menus`).pipe(map(response => response as Array<Menu>)
       );
     }
 }

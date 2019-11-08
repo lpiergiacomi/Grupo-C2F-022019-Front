@@ -16,6 +16,9 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { CreateMenuComponent } from './create-menu/create-menu.component';
 import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { MenuDetailsComponent } from './menu-details/menu-details.component';
+import { FilterPipe } from './filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -28,12 +31,14 @@ import { MenuDetailsComponent } from './menu-details/menu-details.component';
     MenuListComponent,
     CreateMenuComponent,
     UpdateMenuComponent,
-    MenuDetailsComponent
+    MenuDetailsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     AppRoutingModule
   ],
   providers: [ProviderService, MenuService],

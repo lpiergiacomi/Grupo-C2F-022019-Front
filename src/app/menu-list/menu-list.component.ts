@@ -11,7 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MenuListComponent implements OnInit {
 
-  menus: Observable<Menu[]>;
+  menus: Array<Menu>;
+  public searchString: string;
 
   constructor(private menuService: MenuService, private router: Router, private route: ActivatedRoute) { }
 
@@ -22,7 +23,14 @@ export class MenuListComponent implements OnInit {
   }
 
   reloadData() {
-    this.menus = this.menuService.getMenusList();
+    this.menuService.getMenusList().subscribe(data => {
+      this.menus = [];
+      data.forEach((x) => {
+        this.menus.push(x);
+      });
+
+    }, error => {});
+    console.log(this.menus);
   }
 
   deleteMenu(id: number) {
