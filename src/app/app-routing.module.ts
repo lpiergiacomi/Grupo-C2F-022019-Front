@@ -10,6 +10,7 @@ import { MenuDetailsComponent } from './menu-details/menu-details.component';
 import { CreateMenuComponent } from './create-menu/create-menu.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { UpdateMenuComponent } from './update-menu/update-menu.component';
+import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'provider', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'menus', component: MenuListComponent, runGuardsAndResolvers: 'always' },
   { path: 'addMenu', component: CreateMenuComponent },
   { path: 'updateMenu/:id', component: UpdateMenuComponent,  },
-  { path: 'detailsMenu/:id', component: MenuDetailsComponent }
+  { path: 'detailsMenu/:id', component: MenuDetailsComponent },
+  { path: 'providersMenus/:id', component: ProvidersMenusComponent }
 ];
 
 @NgModule({

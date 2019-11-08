@@ -47,4 +47,8 @@ export class ProviderListComponent implements OnInit {
     this.router.navigate(['credit/' + id])
   }
 
+  providerMenus(id: number) {
+    this.router.navigate(['providersMenus/' + id])
+  }
+
 }

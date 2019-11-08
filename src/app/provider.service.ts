@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
-import { Provider } from './provider'
+import { map } from 'rxjs/operators';
+import { Provider } from './provider';
+import { Menu } from './menu';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,5 +36,9 @@ export class ProviderService {
 
     updateCredit(id: number, value: any): Observable<Object> {
       return this.http.put(`${this.urlEndPoint}/providers/${id}/credit`, value);
+    }
+
+    getProvidersMenus(id: number): Observable<Menu[]> {
+      return this.http.get(`${this.urlEndPoint}/providers/${id}/menus`).pipe(map(response => response as Array<Menu>));
     }
 }

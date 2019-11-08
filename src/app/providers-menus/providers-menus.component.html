@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Lista de menús del proveedor: {{provider.name}}</h2>
+      <form id="searchForm">
+        <div class="form-group">
+            <div class="input-group" id="filterAll">
+              <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+              <input type="text" class="form-control" name="searchString" placeholder="Search..." [(ngModel)]="searchString">
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio de delivery</th>
+            <th>Precio</th>
+            <th>Cantidad mínima</th>
+            <th>Precio cantidad mínima</th>
+            <th>Cantidad mínima 2</th>
+            <th>Precio cantidad mínima 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let menu of menus | filterAll: searchString">
+            <td>{{menu.name}}</td>
+            <td>{{menu.description}}</td>
+            <td>{{menu.deliveryPrice}}</td>
+            <td>{{menu.price}}</td>
+            <td>{{menu.minQuantity}}</td>
+            <td>{{menu.minQuantityPrice}}</td>
+            <td>{{menu.minQuantity2}}</td>
+            <td>{{menu.minQuantityPrice2}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

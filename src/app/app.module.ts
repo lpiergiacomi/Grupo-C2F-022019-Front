@@ -18,6 +18,7 @@ import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { MenuDetailsComponent } from './menu-details/menu-details.component';
 import { FilterPipe } from './filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CreateMenuComponent,
     UpdateMenuComponent,
     MenuDetailsComponent,
-    FilterPipe
+    FilterPipe,
+    ProvidersMenusComponent
   ],
   imports: [
     BrowserModule,
