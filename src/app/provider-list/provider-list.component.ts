@@ -1,8 +1,15 @@
-import { Observable } from "rxjs";
+import { ProviderDetailsComponent } from './../provider-details/provider-details.component';
+import { Observable, Subject } from "rxjs";
 import { ProviderService } from "./../provider.service";
-import { Provider } from "./../provider";
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { Provider } from 'src/model/provider';
+import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
+
+
+
+
 
 @Component({
   selector: 'app-provider-list',
@@ -11,28 +18,63 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProviderListComponent implements OnInit {
 
-  providers: Observable<Provider[]>;
+  providers: Provider[];
+  dtTrigger: Subject<any> = new Subject();
+  dtOptions: DataTables.Settings = {};
 
-  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute) { }
+
+
+
+  constructor(private providerService: ProviderService, private router: Router) { }
+  
 
   ngOnInit() {
-    this.route.params.subscribe(val => {
-        this.reloadData();
-    });
+    this.getProviders(); 
+    this.dtOptions = {
+    pagingType: 'full_numbers',
+    pageLength: 5,
+    language: {
+      zeroRecords: "No existen proveedores"
+    }
+    };
   }
 
-  reloadData() {
-    this.providers = this.providerService.getProvidersList();
+  getProviders(){
+    this.providerService.getProvidersList()
+      .subscribe(response =>{ 
+        this.providers = response; 
+        this.dtTrigger.next();
+        error => console.log(error)
+      },
+    )     
   }
 
+  
   deleteProvider(id: number) {
-    this.providerService.deleteProvider(id)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
+    Swal.fire({
+      title: 'Eliminar proveedor',
+      text: "Una vez eliminado no se puede volver atrás",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar'
+    }).then((result) => {
+      if (result.value) {
+        this.providerService.deleteProvider(id)
+        .subscribe(
+          data => {
+            this.getProviders();
+            Swal.fire(
+              'Eliminado',
+              'El proveedor fue eliminado correctamente.',
+              'success'
+            )
       },
       error => console.log(error));
+      }
+    })
+    
   }
 
   providerDetails(id: number) {

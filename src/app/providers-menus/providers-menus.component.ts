@@ -3,7 +3,7 @@ import { ProviderService } from "./../provider.service";
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Menu } from "./../menu";
-import { Provider } from '../provider';
+import { Provider } from 'src/model/provider';
 
 
 @Component({

@@ -17,8 +17,8 @@ import { CreateMenuComponent } from './create-menu/create-menu.component';
 import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { MenuDetailsComponent } from './menu-details/menu-details.component';
 import { FilterPipe } from './filter.pipe';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -40,8 +40,8 @@ import { ProvidersMenusComponent } from './providers-menus/providers-menus.compo
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DataTablesModule
   ],
   providers: [ProviderService, MenuService],
   bootstrap: [AppComponent]

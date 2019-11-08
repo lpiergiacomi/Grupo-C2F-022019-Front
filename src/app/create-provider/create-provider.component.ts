@@ -1,5 +1,5 @@
 import { ProviderService } from '../provider.service';
-import { Provider } from '../provider';
+import { Provider } from '../../model/provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -30,3 +30,4 @@ export class CreateProviderComponent implements OnInit {
   }
 
 }
+  

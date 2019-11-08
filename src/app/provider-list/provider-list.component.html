@@ -1,9 +1,6 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>Lista de proveedores</h2>
-    </div>
     <div class="panel-body">
-      <table class="table table-striped">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -14,26 +11,31 @@
             <th>Email</th>
             <th>Telefono</th>
             <th>Crédito</th>
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let provider of providers | async">
-            <td>{{provider.name}}</td>
+          <tr *ngFor="let provider of providers;">
+            <td><a (click)="updateProvider(provider.id)" title="Actualizar proveedor" style="cursor: pointer; color: blue;">{{provider.name}}</a></td>
             <td>{{provider.locality}}</td>
             <td>{{provider.address}}</td>
             <td>{{provider.description}}</td>
             <td>{{provider.site}}</td>
             <td>{{provider.mail}}</td>
             <td>{{provider.phone}}</td>
-            <td>{{provider.credit}}</td>
-            <td><button (click)="deleteProvider(provider.id)" class="btn btn-danger">Borrar proveedor</button>
-                <button (click)="updateProvider(provider.id)" class="btn btn-info" style="margin-left: 10px">Actualizar proveedor</button>
-                <button (click)="providerDetails(provider.id)" class="btn btn-info" style="margin-left: 10px">Detalles del proveedor</button>
-                <button (click)="providerCredit(provider.id)" class="btn btn-info" style="margin-left: 10px">Actualizar crédito</button>
-                <button (click)="providerMenus(provider.id)" class="btn btn-info" style="margin-left: 10px">Ver menús del proveedor</button>
+            <td>{{provider.credit}}<a (click)="providerCredit(provider.id)" title="Cargar crédito" style="cursor: pointer; margin-left: 10px;"><i class="fas fa-plus-circle"></i></a></td>
+            <td>
+              <div class="row">
+                <h6><a title="Detalles del proveedor" style="cursor: pointer; margin-right: 10px;" (click)="providerDetails(provider.id)"><i class="fas fa-info"></i></a></h6>
+                <h6><a title="Menus de proveedor" style="cursor: pointer; margin-right: 10px;" (click)="providerMenus(provider.id)"><i class="fas fa-th-list"></i></a></h6>
+                <h6><a title="Eliminar proveedor" style="cursor: pointer; margin-right: 10px;" (click)="deleteProvider(provider.id)"><i class="fas fa-trash-alt"></i></a></h6>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
+
+
+
     </div>
   </div>
