@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProviderService } from '../provider.service';
-import { ProviderListComponent } from '../provider-list/provider-list.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Provider } from 'src/model/provider';
 
@@ -23,8 +22,6 @@ export class ProviderDetailsComponent implements OnInit {
 
     this.providerService.getProvider(this.id)
       .subscribe(data => {
-        console.log("hola")
-        console.log(data)
         this.provider = data;
       }, error => console.log(error));
   }

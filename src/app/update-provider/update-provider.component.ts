@@ -22,7 +22,6 @@ export class UpdateProviderComponent implements OnInit {
 
     this.providerService.getProvider(this.id)
     .subscribe(data => {
-      console.log(data)
       this.provider = data;
     }, error => console.log(error));
   }

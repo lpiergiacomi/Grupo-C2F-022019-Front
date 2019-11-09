@@ -13,7 +13,7 @@ import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'provider', pathMatch: 'full' },
+  { path: '', redirectTo: 'providers', pathMatch: 'full' },
   { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always' },
   { path: 'addProvider', component: CreateProviderComponent },
   { path: 'updateProvider/:id', component: UpdateProviderComponent },

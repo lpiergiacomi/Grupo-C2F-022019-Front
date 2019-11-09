@@ -37,7 +37,6 @@ export class MenuListComponent implements OnInit {
     this.menuService.deleteMenu(id)
     .subscribe(
       data => {
-        console.log(data);
         this.reloadData();
       },
       error => console.log(error));
