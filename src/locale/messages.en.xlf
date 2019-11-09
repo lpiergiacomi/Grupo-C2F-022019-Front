@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="6cf14e974176cdf67af9a0a4531e77fa0ecfd659" datatype="html">
+        <source>Lista de proveedores</source>
+        <target>List of providers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5533d43fc80c2d32045bd2855c868d7bd8dea830" datatype="html">
+        <source>Agregar proveedor</source>
+        <target>Add provider</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="166e535907f32395fa1312d97b827b4380475294" datatype="html">
+        <source>Lista de menús</source>
+        <target>Menu list</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e864a2afc1acd511f16aa30fa6e825085e029c11" datatype="html">
+        <source>Agregar menú</source>
+        <target>Add menu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dd2a11ebc737589080ed400dacc33a8c8c84728b" datatype="html">
+        <source>Nombre</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2262b8802ad1704e10360231f6974da0e1018b41" datatype="html">
+        <source>Localidad</source>
+        <target>Location</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="662afc70bc71dc969527402db77814797ef8a446" datatype="html">
+        <source>Dirección</source>
+        <target>Address</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0e611b2bfac70d1af43295307e558cbf9f48e57" datatype="html">
+        <source>Descripción</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c1ffe90b4e66a2ecd7fcbc0cdf5d052b57ab13d1" datatype="html">
+        <source>Sitio web</source>
+        <target>Website</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        <source>Email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c38873769d52761357ee184abd9925abb88c695" datatype="html">
+        <source>Telefono</source>
+        <target>Phone</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea2b02f6072d9a60bdcbacc9734ab2390f6f26d2" datatype="html">
+        <source>Crédito</source>
+        <target>Credit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/provider-list/provider-list.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
