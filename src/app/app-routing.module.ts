@@ -11,6 +11,9 @@ import { CreateMenuComponent } from './create-menu/create-menu.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
+import { PurchaseComponent} from './purchase/purchase.component';
+import { from } from 'rxjs';
+import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'providers', pathMatch: 'full' },
@@ -23,7 +26,9 @@ const routes: Routes = [
   { path: 'addMenu', component: CreateMenuComponent },
   { path: 'updateMenu/:id', component: UpdateMenuComponent,  },
   { path: 'detailsMenu/:id', component: MenuDetailsComponent },
-  { path: 'providersMenus/:id', component: ProvidersMenusComponent }
+  { path: 'providersMenus/:id', component: ProvidersMenusComponent },
+  { path: 'purchase/:id', component: PurchaseComponent },
+  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent}
 ];
 
 @NgModule({

@@ -18,6 +18,8 @@ import { MenuDetailsComponent } from './menu-details/menu-details.component';
 import { FilterPipe } from './filter.pipe';
 import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
 import { DataTablesModule } from 'angular-datatables';
+import { PurchaseComponent } from './purchase/purchase.component';
+import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
 
 // Multiidioma
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -41,7 +43,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpdateMenuComponent,
     MenuDetailsComponent,
     FilterPipe,
-    ProvidersMenusComponent
+    ProvidersMenusComponent,
+    PurchaseComponent,
+    SuccessfulPurchaseComponent
   ],
   imports: [
     BrowserModule,

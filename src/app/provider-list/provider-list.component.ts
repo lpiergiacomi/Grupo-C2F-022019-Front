@@ -83,4 +83,8 @@ export class ProviderListComponent implements OnInit {
     this.router.navigate(['providersMenus/' + id])
   }
 
+  purchase(id: number) {
+    this.router.navigate(['purchase/' + id])
+  }
+
 }

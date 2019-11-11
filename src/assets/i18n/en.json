@@ -39,5 +39,6 @@
     "UnaVezEliminadoNoSePuedeVolverAtras": "Once deleted, you cannot go back",
     "SiEliminar": "Yes, delete",
     "Eliminado": "Deleted",
-    "ElProveedorFueEliminadoCorrectamente": "The provider was successfully deleted"
+    "ElProveedorFueEliminadoCorrectamente": "The provider was successfully deleted",
+    "Comprar": "Buy"
 }
