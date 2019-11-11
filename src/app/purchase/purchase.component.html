@@ -1,0 +1,15 @@
+<h3>Nueva compra en {{providerName}}</h3>
+<div>
+    <form (ngSubmit)="onSubmit()" #purchaseForm="ngForm">
+        <div class="form-group">  
+        <label for="name">Menús</label>
+        <select class="form-control"
+                required
+                [(ngModel)]="menu" name="menu">
+            <option *ngFor="let menu of menus" [value]="menu">{{menu.name}}</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Comprar</button>
+  </form>
+</div>

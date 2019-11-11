@@ -1,3 +1,5 @@
+import { Menu } from 'src/app/menu';
+
 export class Provider {
     id: number;
     name: string;
@@ -13,6 +15,6 @@ export class Provider {
     attentionDayBegin: string;
     attentionDayEnd: string;
     deliveryLocalities: [];
-    menus: [];
+    menus: Array<Menu>;
     credit: number;
 }

@@ -1,5 +1,4 @@
-import { Provider } from '@angular/compiler/src/core';
-
+import { Provider } from 'src/model/provider';  
 export class Menu {
     id: number;
     name: string;
