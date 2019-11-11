@@ -5,7 +5,7 @@
         <label for="name">Menús</label>
         <select class="form-control"
                 required
-                [(ngModel)]="menu" name="menu">
+                [(ngModel)]="menus" name="menus">
             <option *ngFor="let menu of menus" [value]="menu">{{menu.name}}</option>
         </select>
     </div>
