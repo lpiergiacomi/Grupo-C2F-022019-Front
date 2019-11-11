@@ -26,6 +26,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// Spinner
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -60,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
      }
-    })
+    }),
+    NgxSpinnerModule
   ],
   providers: [ProviderService, MenuService],
   bootstrap: [AppComponent]

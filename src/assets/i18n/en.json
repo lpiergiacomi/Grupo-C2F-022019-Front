@@ -40,5 +40,6 @@
     "SiEliminar": "Yes, delete",
     "Eliminado": "Deleted",
     "ElProveedorFueEliminadoCorrectamente": "The provider was successfully deleted",
-    "Comprar": "Buy"
+    "Comprar": "Buy",
+    "Cargando": "Loading ..."
 }
