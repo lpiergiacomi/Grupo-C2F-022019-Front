@@ -1,10 +1,10 @@
-<h3>Cargar/Retirar crédito</h3>
+<h3>{{ 'CargarRetirarCredito' | translate }}</h3>
 <div>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="name">Crédito</label>
+      <label for="name">{{ 'Credito' | translate }}</label>
       <input type="text" class="form-control" id="credit" required [(ngModel)]="provider.credit" name="credit">
     </div>
-    <button type="submit" class="btn btn-success">Actualizar crédito</button>
+    <button type="submit" class="btn btn-success">{{ 'ActualizarCredito' | translate }}</button>
   </form>
 </div>

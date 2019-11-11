@@ -3,14 +3,14 @@
       <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
         <thead>
           <tr>
-            <th i18n>Nombre</th>
-            <th i18n>Localidad</th>
-            <th i18n>Dirección</th>
-            <th i18n>Descripción</th>
-            <th i18n>Sitio web</th>
-            <th i18n>Email</th>
-            <th i18n>Telefono</th>
-            <th i18n>Crédito</th>
+            <th>{{ 'Nombre' | translate }}</th>
+            <th>{{ 'Localidad' | translate }}</th>
+            <th>{{ 'Direccion' | translate }}</th>
+            <th>{{ 'Descripcion' | translate }}</th>
+            <th>{{ 'SitioWeb' | translate }}</th>
+            <th>{{ 'Email' | translate }}</th>
+            <th>{{ 'Telefono' | translate }}</th>
+            <th>{{ 'Credito' | translate }}</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -26,10 +26,10 @@
             <td>{{provider.credit}}<a (click)="providerCredit(provider.id)" title="Cargar crédito" style="cursor: pointer; margin-left: 10px;"><i class="fas fa-plus-circle"></i></a></td>
             <td>
               <div class="row">
-                <h6><a title="Detalles del proveedor" style="cursor: pointer; margin-right: 10px;" (click)="providerDetails(provider.id)"><i class="fas fa-info"></i></a></h6>
-                <h6><a title="Menus de proveedor" style="cursor: pointer; margin-right: 10px;" (click)="providerMenus(provider.id)"><i class="fas fa-th-list"></i></a></h6>
-                <h6><a title="Eliminar proveedor" style="cursor: pointer; margin-right: 10px;" (click)="deleteProvider(provider.id)"><i class="fas fa-trash-alt"></i></a></h6>
-                <h6><a title="Comprar" style="cursor: pointer; margin-right: 10px;" (click)="purchase(provider.id)"><i class="fas fa-shopping-cart"></i></a></h6>
+                <h6><a title="{{ 'DetallesDeProveedor' | translate }}" style="cursor: pointer; margin-right: 10px;" (click)="providerDetails(provider.id)"><i class="fas fa-info"></i></a></h6>
+                <h6><a title="{{ 'ListaDeMenusDelProveedor' | translate }}" style="cursor: pointer; margin-right: 10px;" (click)="providerMenus(provider.id)"><i class="fas fa-th-list"></i></a></h6>
+                <h6><a title="{{ 'EliminarProveedor' | translate }}" style="cursor: pointer; margin-right: 10px;" (click)="deleteProvider(provider.id)"><i class="fas fa-trash-alt"></i></a></h6>
+                <h6><a title="{{ 'Comprar' | translate }}" style="cursor: pointer; margin-right: 10px;" (click)="purchase(provider.id)"><i class="fas fa-shopping-cart"></i></a></h6>
               </div>
             </td>
           </tr>

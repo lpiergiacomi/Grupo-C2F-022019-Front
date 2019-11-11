@@ -36,14 +36,6 @@
             ]
           },
           "configurations": {
-            "en": {
-              "aot": true,
-              "outputPath": "dist/viandasya-app-en/",
-              "i18nFile": "src/locale/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "i18nMissingTranslation": "error"
-            },
             "production": {
               "fileReplacements": [
                 {
@@ -83,16 +75,7 @@
           "configurations": {
             "production": {
               "browserTarget": "viandasya-app:build:production"
-            },
-            "en": {
-              "browserTarget": "viandasya-app:build:en"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "viandasya-app:build"
           }
         },
         "test": {

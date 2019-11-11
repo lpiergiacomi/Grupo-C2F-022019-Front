@@ -16,7 +16,7 @@ import { from } from 'rxjs';
 import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'provider', pathMatch: 'full' },
+  { path: '', redirectTo: 'providers', pathMatch: 'full' },
   { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always' },
   { path: 'addProvider', component: CreateProviderComponent },
   { path: 'updateProvider/:id', component: UpdateProviderComponent },

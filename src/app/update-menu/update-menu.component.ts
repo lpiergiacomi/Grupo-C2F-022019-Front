@@ -22,7 +22,6 @@ export class UpdateMenuComponent implements OnInit {
 
     this.menuService.getMenu(this.id)
     .subscribe(data => {
-      console.log(data)
       this.menu = data;
     }, error => console.log(error));
   }

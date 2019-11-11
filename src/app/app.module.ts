@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { ProviderService } from './provider.service';
 import { MenuService } from './menu.service';
 
@@ -22,6 +21,14 @@ import { DataTablesModule } from 'angular-datatables';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
 
+// Multiidioma
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -45,7 +52,15 @@ import { SuccessfulPurchaseComponent } from './successful-purchase/successful-pu
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+     }
+    })
   ],
   providers: [ProviderService, MenuService],
   bootstrap: [AppComponent]

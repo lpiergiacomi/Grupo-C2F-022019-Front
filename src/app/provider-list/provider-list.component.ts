@@ -1,15 +1,9 @@
-import { ProviderDetailsComponent } from './../provider-details/provider-details.component';
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { ProviderService } from "./../provider.service";
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Provider } from 'src/model/provider';
 import Swal from 'sweetalert2';
-import { DataTableDirective } from 'angular-datatables';
-
-
-
-
 
 @Component({
   selector: 'app-provider-list',
@@ -22,11 +16,7 @@ export class ProviderListComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   dtOptions: DataTables.Settings = {};
 
-
-
-
   constructor(private providerService: ProviderService, private router: Router) { }
-  
 
   ngOnInit() {
     this.getProviders(); 

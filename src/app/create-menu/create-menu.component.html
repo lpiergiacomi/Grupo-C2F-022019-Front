@@ -1,11 +1,11 @@
-<h3>Nuevo menú</h3>
+<h3>{{ 'NuevoMenu' | translate }}</h3>
 <div>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="name">Nombre</label>
+      <label for="name">{{ 'Nombre' | translate }}</label>
       <input type="text" class="form-control" id="name" required [(ngModel)]="menu.name" name="name">
     </div>
 
-    <button type="submit" class="btn btn-success">Crear</button>
+    <button type="submit" class="btn btn-success">{{ 'Crear' | translate }}</button>
   </form>
 </div>
