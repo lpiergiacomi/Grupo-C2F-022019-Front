@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderService } from './provider.service';
 import { MenuService } from './menu.service';
 
@@ -64,7 +64,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
      }
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [ProviderService, MenuService],
   bootstrap: [AppComponent]
