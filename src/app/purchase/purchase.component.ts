@@ -56,6 +56,26 @@ export class PurchaseComponent implements OnInit {
 
   }
 
+  purchaseInformation() {
+    var menu = this.purchaseForm.get('menu').value;
+    var deliveryTimeAverage = menu.deliveryTimeAverage;
+    var preparationTime = menu.preparationTime;
+    var deliveryType = this.purchaseForm.get('deliveryType').value;
+    if (deliveryType == 'A domicilio') {
+      var totalTime = (deliveryTimeAverage /60) + (preparationTime / 60);
+      return 'El tiempo de espera es de aproximadamente ' + totalTime + ' minutos.';
+    }
+    if(deliveryType == 'Retiro en local') {
+      var totalTime = preparationTime / 60;
+      return 'El tiempo de espera para retirar es de aproximadamente ' + totalTime + ' minutos.'
+    }
+  }
+
+
+  purchaseFormValid() {
+    return !this.purchaseForm.invalid
+  }
+
   
   addMenuOrder() {
     //console.log('submit');
@@ -64,8 +84,10 @@ export class PurchaseComponent implements OnInit {
     this.menuOrder = new MenuOrder(formData.menu ,formData.quantity);
     console.log(this.menuOrder instanceof MenuOrder);
     console.log(this.menuOrder);
+    console.log(this.purchaseForm.get('menu').value);
   }
   
+ 
 
   onSubmit() {
     this.router.navigate(['/successfulPurchase']);  

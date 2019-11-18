@@ -23,6 +23,10 @@
                 placeholder="DD-MM-AAAA"/>
             <label for="time">Hora de entrega</label>
             <ngx-timepicker-field class="form-control" [buttonAlign]="'left'" formControlName="time"></ngx-timepicker-field>
+            <div *ngIf = "purchaseFormValid()">
+                <label for="information">Informacíon:</label>
+                <div>{{purchaseInformation()}}</div>
+            </div>
         </div>
 
     <button type="submit" class="btn btn-success">Comprar</button>
