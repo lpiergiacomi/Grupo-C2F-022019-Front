@@ -4,7 +4,10 @@ import { MenuOrder } from 'src/model/menuorder';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProviderService } from "./../provider.service";
 import { Menu } from './../menu';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
+import * as moment from 'moment';
+moment.locale('es');
+
 
 @Component({
   selector: 'app-purchase',
@@ -13,19 +16,29 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class PurchaseComponent implements OnInit {
 
-  purchaseForm: FormGroup;
   id: number;
   menus: Menu[];
   providerName: string;
   private menuOrder: MenuOrder = new MenuOrder(new Menu, 0);
+  locale = {
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: moment.localeData().firstDayOfWeek(),
+    applyLabel: 'ok',
+   };
+  deliveryTypes = ['A domicilio', 'Retiro en local']
 
-  constructor(private route: ActivatedRoute, private providerService: ProviderService, private router: Router,
-    private formBuilder: FormBuilder) {
-      this.purchaseForm = this.formBuilder.group({
-        menu: new FormControl(new Menu),
-        quantity: new FormControl(0)
-      })
-    }
+  constructor(private route: ActivatedRoute, private providerService: ProviderService, private router: Router){}
+
+  dateTime = new Date();
+  purchaseForm = new FormGroup({
+    menu : new FormControl('', Validators.required),
+    quantity : new FormControl('', Validators.required),
+    dateTime : new FormControl(null, Validators.required),
+    time : new FormControl(null, Validators.required),
+    deliveryType : new FormControl('', Validators.required)
+  })
+
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -43,14 +56,16 @@ export class PurchaseComponent implements OnInit {
 
   }
 
+  
   addMenuOrder() {
-    console.log('submit');
+    //console.log('submit');
     let formData = Object.assign({});
     formData = Object.assign(formData, this.purchaseForm.value);
-    this.menuOrder = new MenuOrder(formData.menu ,formData.quantity );
+    this.menuOrder = new MenuOrder(formData.menu ,formData.quantity);
     console.log(this.menuOrder instanceof MenuOrder);
     console.log(this.menuOrder);
   }
+  
 
   onSubmit() {
     this.router.navigate(['/successfulPurchase']);  

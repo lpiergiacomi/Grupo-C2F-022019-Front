@@ -20,6 +20,11 @@ import { ProvidersMenusComponent } from './providers-menus/providers-menus.compo
 import { DataTablesModule } from 'angular-datatables';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
+import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
+
 
 // Multiidioma
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -65,7 +70,12 @@ export function HttpLoaderFactory(http: HttpClient) {
      }
     }),
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule,
+    NgxMaterialTimepickerModule,
+    BrowserAnimationsModule,
+    NgxDaterangepickerMd
   ],
   providers: [ProviderService, MenuService],
   bootstrap: [AppComponent]
