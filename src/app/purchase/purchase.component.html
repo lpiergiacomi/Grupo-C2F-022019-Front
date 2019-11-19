@@ -1,15 +1,35 @@
 <h3>Nueva compra en {{providerName}}</h3>
 <div>
-    <form (ngSubmit)="onSubmit()" #purchaseForm="ngForm">
+    <form [formGroup]="purchaseForm" (ngSubmit)="addMenuOrder()">
         <div class="form-group">  
-        <label for="name">Menús</label>
-        <select class="form-control"
-                required
-                [(ngModel)]="menus" name="menus">
-            <option *ngFor="let menu of menus" [value]="menu">{{menu.name}}</option>
-        </select>
-    </div>
+            <label for="name">Menú</label>
+            <select [class.is-invalid]="purchaseForm.get('menu').touched && purchaseForm.get('menu').invalid" class="form-control" formControlName="menu">
+                <option *ngFor="let menu of menus" [ngValue]="menu">{{menu.name}}</option>
+            </select>
+            <label for="quantity">Cantidad</label>
+            <input class="form-control" type="text" formControlName="quantity">
+            <label for="deliveryType">Tipo de entrega</label>
+            <select class="form-control" formControlName="deliveryType">
+                <option *ngFor="let deliveryType of deliveryTypes" [value]="deliveryType">{{deliveryType}}</option>
+            </select>
+            <label for="date">Fecha de entrega</label>
+            <input type="text"
+                class="form-control"
+                ngxDaterangepickerMd
+                [singleDatePicker]="true"
+                [locale]="locale"
+                [autoApply]="true"
+                formControlName="dateTime"
+                placeholder="DD-MM-AAAA"/>
+            <label for="time">Hora de entrega</label>
+            <ngx-timepicker-field class="form-control" [buttonAlign]="'left'" formControlName="time"></ngx-timepicker-field>
+            <div *ngIf = "purchaseFormValid()">
+                <label for="information">Informacíon:</label>
+                <div>{{purchaseInformation()}}</div>
+            </div>
+        </div>
 
     <button type="submit" class="btn btn-success">Comprar</button>
   </form>
+  <!--{{purchaseForm.value | json}}-->
 </div>

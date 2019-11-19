@@ -10,6 +10,8 @@ export class Menu {
     deliveryTimeBegin: string;
     deliveryTimeEnd: string;
     price: number;
+    deliveryTimeAverage: number;
+    preparationTime: number;
     minQuantity: number;
     minQuantityPrice: number;
     minQuantity2: number;
