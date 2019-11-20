@@ -14,6 +14,8 @@ import { ProvidersMenusComponent } from './providers-menus/providers-menus.compo
 import { PurchaseComponent} from './purchase/purchase.component';
 import { from } from 'rxjs';
 import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'providers', pathMatch: 'full' },
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: 'detailsMenu/:id', component: MenuDetailsComponent },
   { path: 'providersMenus/:id', component: ProvidersMenusComponent },
   { path: 'purchase/:id', component: PurchaseComponent },
-  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent}
+  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {NgxSpinnerService} from 'ngx-spinner';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,14 @@ export class AppComponent implements OnInit{
 
   title = 'iandasYa';
 
-  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService) {
+  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService, private auth: AuthService) {
     translate.setDefaultLang('es');
     translate.use('es');
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.auth.localAuthSetup();
+    this.auth.handleAuthCallback();
     this.showSpinner();
   }
 

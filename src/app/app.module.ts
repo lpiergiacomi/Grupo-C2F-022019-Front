@@ -33,6 +33,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Spinner
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NavbarComponent } from './nav-bar/nav-bar.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,7 +55,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FilterPipe,
     ProvidersMenusComponent,
     PurchaseComponent,
-    SuccessfulPurchaseComponent
+    SuccessfulPurchaseComponent,
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
