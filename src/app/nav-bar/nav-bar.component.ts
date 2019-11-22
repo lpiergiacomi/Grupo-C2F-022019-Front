@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import {NgxSpinnerService} from 'ngx-spinner';
-import { AuthService } from './auth.service';
+import { faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-navbar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
 })
-export class AppComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   title = 'iandasYa';
+  isCollapsed = true;
+  faUser = faUser;
+  faPowerOff = faPowerOff;
 
-  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService, private auth: AuthService) {
+  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService, public auth: AuthService) {
     translate.setDefaultLang('es');
     translate.use('es');
   }
@@ -33,5 +37,5 @@ export class AppComponent implements OnInit{
   setLanguage(language: string) {
     this.translate.use(language);
   }
-  
+
 }

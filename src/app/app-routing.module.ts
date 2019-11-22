@@ -14,9 +14,12 @@ import { ProvidersMenusComponent } from './providers-menus/providers-menus.compo
 import { PurchaseComponent} from './purchase/purchase.component';
 import { from } from 'rxjs';
 import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
+import { NavbarComponent } from './nav-bar/nav-bar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'providers', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always' },
   { path: 'addProvider', component: CreateProviderComponent },
   { path: 'updateProvider/:id', component: UpdateProviderComponent },
@@ -28,7 +31,9 @@ const routes: Routes = [
   { path: 'detailsMenu/:id', component: MenuDetailsComponent },
   { path: 'providersMenus/:id', component: ProvidersMenusComponent },
   { path: 'purchase/:id', component: PurchaseComponent },
-  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent}
+  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent},
+  { path: 'login', component: NavbarComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

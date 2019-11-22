@@ -1,0 +1,162 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+      <div>
+        <img class="logo" src="./../assets/viandasYa.png">
+      </div>
+      <ngx-spinner
+      bdOpacity = 0.9
+      bdColor = "#333"
+      size = "medium"
+      color = "#ed2d43"
+      type = "timer"
+      [fullScreen] = "true"
+      >
+      <p style="color: white" > {{ 'Cargando' | translate }} </p>
+      </ngx-spinner>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+        [ngbCollapse]="isCollapsed"
+      >
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="providers" class="nav-link" routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="addProvider" class="nav-link" routerLinkActive="active">{{ 'AgregarProveedor' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="menus" class="nav-link" routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="addMenu" class="nav-link" routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-globe"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" (click)="setLanguage('es')" style="cursor: pointer;">{{ 'Espaniol' | translate }}</a>
+              <a class="dropdown-item" (click)="setLanguage('en')" style="cursor: pointer;">{{ 'Ingles' | translate }}</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="/" class="nav-link">Home</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav d-none d-md-block">
+          <li class="nav-item" *ngIf="auth.loggedIn === false">
+            <button
+              id="qsLoginBtn"
+              class="btn btn-primary btn-margin"
+              (click)="auth.login()"
+            >
+              Iniciar sesion
+            </button>
+          </li>
+          <li class="nav-item dropdown" *ngIf="auth.userProfile$ | async as profile" ngbDropdown>
+            <a
+              ngbDropdownToggle
+              class="nav-link dropdown-toggle"
+              id="profileDropDown"
+              data-toggle="dropdown"
+              style="cursor:pointer;"
+            >
+              <img
+                [src]="profile.picture"
+                alt="Profile picture"
+                class="nav-user-profile rounded-circle"
+                style="width: 75px"
+              />
+            </a>
+            <div class="dropdown-menu dropdown-menu-left" ngbDropdownMenu>
+              <div class="dropdown-header" *ngIf="profile">
+                {{ profile.name }}
+              </div>
+              <a
+                routerLink="/profile"
+                class="dropdown-item dropdown-profile"
+                *ngIf="profile"
+              >
+                <fa-icon [icon]="faUser" class="mr-3"></fa-icon> Perfil
+              </a>
+              <button
+                (click)="auth.logout()"
+                class="btn btn-link dropdown-item"
+                id="qsLogoutBtn"
+              >
+                <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon> Cerrar sesion
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav d-md-none" *ngIf="auth.loggedIn === false">
+          <button
+            class="btn btn-primary btn-block"
+            id="qsLoginBtn"
+            (click)="auth.login()"
+          >
+            Iniciar sesion
+          </button>
+        </ul>
+        <ul
+          class="navbar-nav d-md-none justify-content-between"
+          *ngIf="auth.userProfile$ | async as profile"
+          style="min-height: 170px"
+        >
+          <li class="nav-item">
+            <span class="user-info" *ngIf="profile">
+              <img
+                alt="Profile picture"
+                class="nav-user-profile d-inline-block rounded-circle mr-3"
+                style="width: 75px"
+                [src]="profile.picture"
+              />
+              <h6 class="d-inline-block">{{ profile.name }}</h6>
+            </span>
+          </li>
+          <li>
+            <fa-icon [icon]="faUser" class="mr-3"></fa-icon>
+            <a routerLink="/profile">Profile</a>
+          </li>
+
+          <li>
+            <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon>
+            <button
+              class="btn btn-link p-0"
+              id="qsLogoutBtn"
+              (click)="auth.logout()"
+            >
+              Cerrar sesion
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <h2 
+    style="text-align: center; color:#ed2d43">
+    <img src="./../assets/viandasYagif.gif" width="70"> {{title}}
+  </h2>
+</div>
