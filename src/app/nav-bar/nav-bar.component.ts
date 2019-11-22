@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import {NgxSpinnerService} from 'ngx-spinner';
+import { faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +12,11 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class NavbarComponent implements OnInit {
 
   title = 'iandasYa';
+  isCollapsed = true;
+  faUser = faUser;
+  faPowerOff = faPowerOff;
 
-  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService, private auth: AuthService) {
+  constructor(private translate: TranslateService, private spinnerService: NgxSpinnerService, public auth: AuthService) {
     translate.setDefaultLang('es');
     translate.use('es');
   }

@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HighlightModule } from 'ngx-highlightjs';
+import json from 'highlight.js/lib/languages/json';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderService } from './provider.service';
 import { MenuService } from './menu.service';
@@ -40,6 +44,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+export function hljsLanguages() {
+  return [{ name: 'json', func: json }];
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +74,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     DataTablesModule,
     HttpClientModule,
+    NgbModule,
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    }),
+    FontAwesomeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
