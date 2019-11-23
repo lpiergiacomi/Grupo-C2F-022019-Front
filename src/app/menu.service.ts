@@ -36,6 +36,7 @@ export class MenuService {
           return menus.map(menu => {
             let datePipe = new DatePipe('es')
             menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
+            menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
             return menu;
           });
         }

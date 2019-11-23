@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HighlightModule } from 'ngx-highlightjs';
+import json from 'highlight.js/lib/languages/json';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderService } from './provider.service';
 import { MenuService } from './menu.service';
@@ -24,8 +28,9 @@ import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-boots
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
-import localeAR from '@angular/common/locales/es-AR';
 import { MatSelectModule } from '@angular/material/select';
+import { NavbarComponent } from './nav-bar/nav-bar.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // Datepickers
 import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
@@ -41,10 +46,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { registerLocaleData } from '@angular/common';
 
 // Localización para fecha, moneda, etc.
+import localeAR from '@angular/common/locales/es-AR';
 registerLocaleData(localeAR, 'es');
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function hljsLanguages() {
+  return [{ name: 'json', func: json }];
 }
 
 @NgModule({
@@ -62,7 +73,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FilterPipe,
     ProvidersMenusComponent,
     PurchaseComponent,
-    SuccessfulPurchaseComponent
+    SuccessfulPurchaseComponent,
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +84,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     DataTablesModule,
     HttpClientModule,
+    NgbModule,
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    }),
+    FontAwesomeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

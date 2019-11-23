@@ -87,8 +87,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)='createMenu()' *ngIf="!menu.id else elseBlock"
-      [disabled]="!menuForm.form.valid">Crear</button>
+      <button mat-raised-button color="primary" (click)='createMenu()' [disabled]="!menuForm.form.valid">Crear</button>
     </mat-card-actions>
 
   </mat-card>
