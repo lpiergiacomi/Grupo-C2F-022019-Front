@@ -16,28 +16,38 @@
           <tr>
             <th>{{ 'Nombre' | translate }}</th>
             <th>{{ 'Descripcion' | translate }}</th>
+            <!--<th>Categoría</th>-->
             <th>{{ 'PrecioDeDelivery' | translate }}</th>
-            <th>{{ 'Precio' | translate }}</th>
+            <th>Fecha vigencia desde</th>
+            <th>Fecha vigencia hasta</th>
             <th>{{ 'Tiempo promedio de espera' | translate }}</th>
-            <th>{{ 'Tiempo de preparacion' | translate }}</th>
+
+            <th>{{ 'Precio' | translate }}</th>
             <th>{{ 'CantidadMinima' | translate }}</th>
             <th>{{ 'PrecioCantidadMinima' | translate }}</th>
             <th>{{ 'CantidadMinima2' | translate }}</th>
             <th>{{ 'PrecioCantidadMinima2' | translate }}</th>
+            <th>{{ 'Máximo de ventas' | translate }}</th>
+
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let menu of menus | filterAll: searchString">
             <td>{{menu.name}}</td>
             <td>{{menu.description}}</td>
+            <!--<td>{{menu.category}}</td>-->
             <td>{{menu.deliveryPrice}}</td>
-            <td>{{menu.price}}</td>
+            <td>{{menu.validityDateBegin}}</td>
+            <td>{{menu.validityDateEnd}}</td>
             <td>{{menu.deliveryTimeAverage}}</td>
-            <td>{{menu.preparationTime}}</td> 
+            <td>{{menu.price}}</td>
             <td>{{menu.minQuantity}}</td>
             <td>{{menu.minQuantityPrice}}</td>
             <td>{{menu.minQuantity2}}</td>
             <td>{{menu.minQuantityPrice2}}</td>
+            <td>{{menu.maxSalesPerDay}}</td>
+
+
             <td><button (click)="deleteMenu(menu.id)" class="btn btn-danger">{{ 'BorrarMenu' | translate }}</button>
                 <button (click)="updateMenu(menu.id)" class="btn btn-info" style="margin-left: 10px">{{ 'ActualizarMenu' | translate }}</button>
                 <button (click)="menuDetails(menu.id)" class="btn btn-info" style="margin-left: 10px">{{ 'DetallesDeMenu' | translate }}</button>

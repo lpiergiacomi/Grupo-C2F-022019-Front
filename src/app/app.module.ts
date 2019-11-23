@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderService } from './provider.service';
 import { MenuService } from './menu.service';
@@ -24,7 +24,12 @@ import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-boots
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
+import localeAR from '@angular/common/locales/es-AR';
+import { MatSelectModule } from '@angular/material/select';
 
+// Datepickers
+import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+import {MatMomentDateModule} from '@angular/material-moment-adapter'
 
 // Multiidioma
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -33,6 +38,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Spinner
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { registerLocaleData } from '@angular/common';
+
+// Localización para fecha, moneda, etc.
+registerLocaleData(localeAR, 'es');
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -75,9 +84,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgbTimepickerModule,
     NgxMaterialTimepickerModule,
     BrowserAnimationsModule,
-    NgxDaterangepickerMd
+    NgxDaterangepickerMd,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule
   ],
-  providers: [ProviderService, MenuService],
+  providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

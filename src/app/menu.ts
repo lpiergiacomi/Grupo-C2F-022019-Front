@@ -7,16 +7,18 @@ export class Menu {
     deliveryPrice: number;
     validityDateBegin: string;
     validityDateEnd: string;
-    deliveryTimeBegin: string;
-    deliveryTimeEnd: string;
-    price: number;
     deliveryTimeAverage: number;
-    preparationTime: number;
+    price: number;
     minQuantity: number;
     minQuantityPrice: number;
     minQuantity2: number;
     minQuantityPrice2: number;
     maxSalesPerDay: number;
+
+
+    deliveryTimeBegin: string;
+    deliveryTimeEnd: string;
+    preparationTime: number;
     qualification: number;
     provider: Provider;
 }
