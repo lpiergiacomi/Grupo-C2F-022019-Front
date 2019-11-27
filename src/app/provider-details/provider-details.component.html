@@ -13,12 +13,7 @@
   </div>  
 </div>
 
-<h5>Direccion: {{address}}</h5>
-<div>Latitud: {{location.lat}}</div>
-<div>Longitud: {{location.lng}}</div>
-<div>Mostrar: {{mostrar}}</div>
-
-<div *ngIf="mostrar">
+<div *ngIf="showMap">
   <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
     <agm-marker [(latitude)]="location.marker.lat" [(longitude)]="location.marker.lng" [markerDraggable]="location.marker.draggable" (dragEnd)='markerDragEnd($event)'></agm-marker>
   </agm-map>

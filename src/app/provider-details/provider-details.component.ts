@@ -40,8 +40,7 @@ export class ProviderDetailsComponent implements OnInit {
   provider: Provider;
   address: string;
   geoCoder:any;
-  zoom;
-  mostrar: boolean;
+  showMap: boolean;
   public location:Location = {
     lat: 51.678418,
     lng: 7.809007,
@@ -52,7 +51,7 @@ export class ProviderDetailsComponent implements OnInit {
     },
     zoom: 5
   };
-  @ViewChild(AgmMap, {static: false }) map: AgmMap;
+  @ViewChild(AgmMap, { read: true, static: false }) map: AgmMap;
 
   constructor(private route: ActivatedRoute, private router: Router, private providerService: ProviderService, public mapsApiLoader: MapsAPILoader,
     private zone: NgZone,
@@ -74,28 +73,26 @@ export class ProviderDetailsComponent implements OnInit {
     this.providerService.getProvider(this.id)
       .subscribe(data => {
         this.provider = data,
-        this.setCurrentLocation2(this.provider.address);
+        this.setCurrentLocation(this.provider.address);
       }, error => console.log(error));
 
-    this.mostrar = false;
     this.location.marker.draggable = true;
     
   }
 
-  setCurrentLocation2(address) {
+  setCurrentLocation(address) {
     if (!this.geoCoder) this.geoCoder = new google.maps.Geocoder()
     this.geoCoder.geocode({'address': address},(results,status) => {
       if(status == 'OK') {
-        console.log(status);
         this.location.lat = results[0].geometry.location.lat();
         this.location.lng = results[0].geometry.location.lng();
         this.location.marker.lat = results[0].geometry.location.lat();
         this.location.marker.lng = results[0].geometry.location.lng();
-        this.location.marker.draggable = true;
+        this.location.marker.draggable = false;
         this.location.viewport = results[0].geometry.viewport;
-        this.mostrar = true;
+        this.showMap = true;
       } else {
-        alert("Sorry, this search produced no results.");
+        alert("La direccion del proveedor " + this.provider.name + "no pudo ser localizada");
       }
     });
   }
