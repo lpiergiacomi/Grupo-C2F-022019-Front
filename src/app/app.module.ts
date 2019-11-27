@@ -34,8 +34,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 
-// Datepickers
-import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+
+import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatPaginatorModule, MatSortModule} from '@angular/material'
 import {MatMomentDateModule} from '@angular/material-moment-adapter'
 
 // Multiidioma
@@ -113,6 +113,12 @@ export function hljsLanguages() {
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    FormsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDH0XmsUePVkhw_LWvp4A_UY8PJPERPfAI',
       libraries: ['places']
@@ -120,6 +126,7 @@ export function hljsLanguages() {
     MatGoogleMapsAutocompleteModule.forRoot(),
     MatGoogleMapsAutocompleteModule,
     AgmCoreModule.forRoot()
+
   ],
   providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}, GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]

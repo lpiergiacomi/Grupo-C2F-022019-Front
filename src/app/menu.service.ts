@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 import { Menu } from './menu';
 import swal from 'sweetalert2';
-import { formatDate, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
