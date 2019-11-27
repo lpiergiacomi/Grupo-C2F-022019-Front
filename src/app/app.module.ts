@@ -32,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NavbarComponent } from './nav-bar/nav-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 
 // Datepickers
 import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
@@ -113,8 +114,12 @@ export function hljsLanguages() {
     MatButtonModule,
     MatCardModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDH0XmsUePVkhw_LWvp4A_UY8PJPERPfAI'
-    })
+      apiKey: 'AIzaSyDH0XmsUePVkhw_LWvp4A_UY8PJPERPfAI',
+      libraries: ['places']
+    }),
+    MatGoogleMapsAutocompleteModule.forRoot(),
+    MatGoogleMapsAutocompleteModule,
+    AgmCoreModule.forRoot()
   ],
   providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}, GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]

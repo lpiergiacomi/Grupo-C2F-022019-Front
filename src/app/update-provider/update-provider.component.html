@@ -11,10 +11,11 @@
       <input type="text" class="form-control" id="locality" required [(ngModel)]="provider.locality" name="locality">
     </div>
 
-    <div class="form-group">
-      <label for="name">{{ 'Direccion' | translate }}</label>
-      <input type="text" class="form-control" id="address" required [(ngModel)]="provider.address" name="mail">
-    </div>
+    <mat-google-maps-autocomplete
+      (click)="$event.target.select()"
+      address={{provider.address}}
+      (onAutocompleteSelected)="onAutocompleteSelected($event)">
+    </mat-google-maps-autocomplete>
 
     <button type="submit" class="btn btn-success">{{ 'Actualizar' | translate }}</button>
   </form>
