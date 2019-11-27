@@ -32,8 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { NavbarComponent } from './nav-bar/nav-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 
-// Datepickers
-import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material'
+
+import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatPaginatorModule, MatSortModule} from '@angular/material'
 import {MatMomentDateModule} from '@angular/material-moment-adapter'
 
 // Multiidioma
@@ -109,7 +109,13 @@ export function hljsLanguages() {
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]

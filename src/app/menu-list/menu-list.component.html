@@ -1,59 +1,107 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>{{ 'ListaDeMenus' | translate }}</h2>
-      <form id="searchForm">
-        <div class="form-group">
-            <div class="input-group" id="filterAll">
-              <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-              <input type="text" class="form-control" name="searchString" placeholder="Search..." [(ngModel)]="searchString">
-            </div>
-        </div>
-      </form>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>{{ 'Nombre' | translate }}</th>
-            <th>{{ 'Descripcion' | translate }}</th>
-            <!--<th>Categoría</th>-->
-            <th>{{ 'PrecioDeDelivery' | translate }}</th>
-            <th>Fecha vigencia desde</th>
-            <th>Fecha vigencia hasta</th>
-            <th>{{ 'Tiempo promedio de espera' | translate }}</th>
-
-            <th>{{ 'Precio' | translate }}</th>
-            <th>{{ 'CantidadMinima' | translate }}</th>
-            <th>{{ 'PrecioCantidadMinima' | translate }}</th>
-            <th>{{ 'CantidadMinima2' | translate }}</th>
-            <th>{{ 'PrecioCantidadMinima2' | translate }}</th>
-            <th>{{ 'Máximo de ventas' | translate }}</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let menu of menus | filterAll: searchString">
-            <td>{{menu.name}}</td>
-            <td>{{menu.description}}</td>
-            <!--<td>{{menu.category}}</td>-->
-            <td>{{menu.deliveryPrice}}</td>
-            <td>{{menu.validityDateBegin}}</td>
-            <td>{{menu.validityDateEnd}}</td>
-            <td>{{menu.deliveryTimeAverage}}</td>
-            <td>{{menu.price}}</td>
-            <td>{{menu.minQuantity}}</td>
-            <td>{{menu.minQuantityPrice}}</td>
-            <td>{{menu.minQuantity2}}</td>
-            <td>{{menu.minQuantityPrice2}}</td>
-            <td>{{menu.maxSalesPerDay}}</td>
-
-
-            <td><button (click)="deleteMenu(menu.id)" class="btn btn-danger">{{ 'BorrarMenu' | translate }}</button>
-                <button (click)="updateMenu(menu.id)" class="btn btn-info" style="margin-left: 10px">{{ 'ActualizarMenu' | translate }}</button>
-                <button (click)="menuDetails(menu.id)" class="btn btn-info" style="margin-left: 10px">{{ 'DetallesDeMenu' | translate }}</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="mat-elevation-z8 asd">
+  <div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'Buscar' | translate }}">
+    </mat-form-field>
   </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Nombre' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Descripcion' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.description}} </mat-cell>
+    </ng-container>
+
+     <!-- Categories Column -->
+     <ng-container matColumnDef="categories">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Categoria' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.categories}} </mat-cell>
+    </ng-container>
+
+    <!-- Delivery Price Column -->
+    <ng-container matColumnDef="deliveryPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioDeDelivery' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.deliveryPrice}} </mat-cell>
+    </ng-container>
+
+    <!-- Validity Date Begin Column -->
+    <ng-container matColumnDef="validityDateBegin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha vigencia desde </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.validityDateBegin}} </mat-cell>
+    </ng-container>
+
+  <!-- Validity Date End Column -->
+  <ng-container matColumnDef="validityDateEnd">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha vigencia hasta </mat-header-cell>
+    <mat-cell *matCellDef="let menu"> {{menu.validityDateEnd}} </mat-cell>
+  </ng-container>
+
+  <!-- Delivery Time Average Column -->
+  <ng-container matColumnDef="deliveryTimeAverage">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Tiempo promedio de espera' | translate }} </mat-header-cell>
+    <mat-cell *matCellDef="let menu"> {{menu.deliveryTimeAverage}} </mat-cell>
+  </ng-container>
+
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Precio' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let menu"> {{menu.price}} </mat-cell>
+      </ng-container>
+  
+      <!-- Min Quantity Column -->
+      <ng-container matColumnDef="minQuantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CantidadMinima' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let menu"> {{menu.minQuantity}} </mat-cell>
+      </ng-container>
+
+      <!-- Min Quantity Price Column -->
+    <ng-container matColumnDef="minQuantityPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioCantidadMinima' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice}} </mat-cell>
+    </ng-container>
+
+    <!-- Min Quantity 2 Column -->
+    <ng-container matColumnDef="minQuantity2">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CantidadMinima2' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.minQuantity2}} </mat-cell>
+    </ng-container>
+
+        <!-- Min Quantity Price 2 Column -->
+        <ng-container matColumnDef="minQuantityPrice2">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioCantidadMinima2' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice2}} </mat-cell>
+        </ng-container>
+    
+        <!-- Max Sales PerDay Column -->
+        <ng-container matColumnDef="maxSalesPerDay">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'MaximoDeVentasPorDia' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let menu"> {{menu.maxSalesPerDay}} </mat-cell>
+        </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let menu"> 
+        <a (click)="updateMenu(menu.id)" title="{{ 'ActualizarMenu' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-edit"></i></a> | 
+        <a (click)="deleteMenu(menu.id)" title="{{ 'Eliminar' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-trash-alt"></i></a> |  
+        <a (click)="menuDetails(menu.id)" title="{{ 'DetallesDeMenu' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-info"></i></a> 
+
+      </td>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+</div>
