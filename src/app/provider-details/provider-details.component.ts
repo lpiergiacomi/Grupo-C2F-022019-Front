@@ -41,6 +41,7 @@ export class ProviderDetailsComponent implements OnInit {
   address: string;
   geoCoder:any;
   zoom;
+  mostrar: boolean;
   public location:Location = {
     lat: 51.678418,
     lng: 7.809007,
@@ -51,7 +52,7 @@ export class ProviderDetailsComponent implements OnInit {
     },
     zoom: 5
   };
-  @ViewChild(AgmMap, { read: true, static: false }) map: AgmMap;
+  @ViewChild(AgmMap, {static: false }) map: AgmMap;
 
   constructor(private route: ActivatedRoute, private router: Router, private providerService: ProviderService, public mapsApiLoader: MapsAPILoader,
     private zone: NgZone,
@@ -76,7 +77,7 @@ export class ProviderDetailsComponent implements OnInit {
         this.setCurrentLocation2(this.provider.address);
       }, error => console.log(error));
 
-      
+    this.mostrar = false;
     this.location.marker.draggable = true;
     
   }
@@ -92,6 +93,7 @@ export class ProviderDetailsComponent implements OnInit {
         this.location.marker.lng = results[0].geometry.location.lng();
         this.location.marker.draggable = true;
         this.location.viewport = results[0].geometry.viewport;
+        this.mostrar = true;
       } else {
         alert("Sorry, this search produced no results.");
       }
