@@ -5,8 +5,10 @@
     <div class="form-group">
       <label for="name">{{ 'Nombre' | translate }}</label>
       <input type="text" class="form-control" id="name" required [(ngModel)]="provider.name" name="name">
+      <mat-google-maps-autocomplete 
+        (onAutocompleteSelected)="onAutocompleteSelected($event)">
+      </mat-google-maps-autocomplete>
     </div>
-
     <button type="submit" class="btn btn-success">{{ 'Crear' | translate }}</button>
   </form>
 </div>

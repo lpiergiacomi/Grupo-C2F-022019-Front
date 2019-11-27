@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Provider } from '../../model/provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderService } from '../provider.service';
+import PlaceResult = google.maps.places.PlaceResult;
 
 @Component({
   selector: 'app-update-provider',
@@ -37,6 +38,10 @@ export class UpdateProviderComponent implements OnInit {
 
   gotoList() {
     this.router.navigate(['/providers']);
+  }
+
+  onAutocompleteSelected(result: PlaceResult) {
+    this.provider.address = result.formatted_address;
   }
 
 }

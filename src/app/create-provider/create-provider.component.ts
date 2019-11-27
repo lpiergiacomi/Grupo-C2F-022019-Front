@@ -2,6 +2,7 @@ import { ProviderService } from '../provider.service';
 import { Provider } from '../../model/provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import PlaceResult = google.maps.places.PlaceResult;
 
 @Component({
   selector: 'app-create-provider',
@@ -27,6 +28,10 @@ export class CreateProviderComponent implements OnInit {
   save() {
     this.providerService.createProvider(this.provider)
       .subscribe(data => this.gotoList(), error => console.log(error));
+  }
+
+  onAutocompleteSelected(result: PlaceResult) {
+    this.provider.address = result.formatted_address;
   }
 
 }

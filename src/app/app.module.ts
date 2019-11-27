@@ -31,6 +31,8 @@ import { NgxDaterangepickerMd } from 'ngx-datepicker-material';
 import { MatSelectModule } from '@angular/material/select';
 import { NavbarComponent } from './nav-bar/nav-bar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 
 
 import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatPaginatorModule, MatSortModule} from '@angular/material'
@@ -47,6 +49,7 @@ import { registerLocaleData } from '@angular/common';
 
 // Localización para fecha, moneda, etc.
 import localeAR from '@angular/common/locales/es-AR';
+
 registerLocaleData(localeAR, 'es');
 
 
@@ -75,7 +78,7 @@ export function hljsLanguages() {
     PurchaseComponent,
     SuccessfulPurchaseComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,9 +118,17 @@ export function hljsLanguages() {
     MatDialogModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDH0XmsUePVkhw_LWvp4A_UY8PJPERPfAI',
+      libraries: ['places']
+    }),
+    MatGoogleMapsAutocompleteModule.forRoot(),
+    MatGoogleMapsAutocompleteModule,
+    AgmCoreModule.forRoot()
+
   ],
-  providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}],
+  providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}, GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

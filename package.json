@@ -12,6 +12,8 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
+    "@angular-material-extensions/google-maps-autocomplete": "^2.0.0",
     "@angular/animations": "^8.2.14",
     "@angular/cdk": "^8.2.3",
     "@angular/cli": "^8.3.19",
@@ -33,6 +35,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@sweetalert2/ngx-sweetalert2": "^6.0.1",
+    "@types/googlemaps": "^3.38.1",
     "angular-datatables": "^8.0.0",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
