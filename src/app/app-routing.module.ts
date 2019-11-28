@@ -1,21 +1,21 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProviderDetailsComponent } from './provider-details/provider-details.component';
-import { CreateProviderComponent } from './create-provider/create-provider.component';
-import { ProviderListComponent } from './provider-list/provider-list.component';
-import { UpdateProviderComponent } from './update-provider/update-provider.component';
-import { AddRemoveCreditComponent } from './add-remove-credit/add-remove-credit.component';
-import { MenuDetailsComponent } from './menu-details/menu-details.component';
-import { CreateMenuComponent } from './create-menu/create-menu.component';
-import { MenuListComponent } from './menu-list/menu-list.component';
-import { UpdateMenuComponent } from './update-menu/update-menu.component';
-import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
-import { PurchaseComponent} from './purchase/purchase.component';
+import { ProviderDetailsComponent } from './components/provider-details/provider-details.component';
+import { CreateProviderComponent } from './components/create-provider/create-provider.component';
+import { ProviderListComponent } from './components/provider-list/provider-list.component';
+import { UpdateProviderComponent } from './components/update-provider/update-provider.component';
+import { AddRemoveCreditComponent } from './components/add-remove-credit/add-remove-credit.component';
+import { MenuDetailsComponent } from './components/menu-details/menu-details.component';
+import { CreateMenuComponent } from './components/create-menu/create-menu.component';
+import { MenuListComponent } from './components/menu-list/menu-list.component';
+import { UpdateMenuComponent } from './components/update-menu/update-menu.component';
+import { ProvidersMenusComponent } from './components/providers-menus/providers-menus.component';
+import { PurchaseComponent} from './components/purchase/purchase.component';
 import { from } from 'rxjs';
-import { SuccessfulPurchaseComponent } from './successful-purchase/successful-purchase.component';
-import { NavbarComponent } from './nav-bar/nav-bar.component';
-import { ProfileComponent } from './profile/profile.component';
+import { SuccessfulPurchaseComponent } from './components/successful-purchase/successful-purchase.component';
+import { NavbarComponent } from './components/nav-bar/nav-bar.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [

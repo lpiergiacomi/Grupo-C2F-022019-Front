@@ -1,4 +1,4 @@
-import { Menu } from '../model/menu';
+import { Menu } from 'src/app/model/menu';
 
 export class Provider {
     id: number;
