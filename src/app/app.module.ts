@@ -19,7 +19,6 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { CreateMenuComponent } from './create-menu/create-menu.component';
 import { UpdateMenuComponent } from './update-menu/update-menu.component';
 import { MenuDetailsComponent } from './menu-details/menu-details.component';
-import { FilterPipe } from './filter.pipe';
 import { ProvidersMenusComponent } from './providers-menus/providers-menus.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PurchaseComponent } from './purchase/purchase.component';
@@ -39,16 +38,22 @@ import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModul
 import {MatMomentDateModule} from '@angular/material-moment-adapter'
 
 // Multiidioma
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Spinner
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from './services/loader.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 // Localización para fecha, moneda, etc.
 import localeAR from '@angular/common/locales/es-AR';
+import { LoaderComponent } from './components/shared/loader/loader.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 registerLocaleData(localeAR, 'es');
 
@@ -73,12 +78,12 @@ export function hljsLanguages() {
     CreateMenuComponent,
     UpdateMenuComponent,
     MenuDetailsComponent,
-    FilterPipe,
     ProvidersMenusComponent,
     PurchaseComponent,
     SuccessfulPurchaseComponent,
     NavbarComponent,
     ProfileComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +104,6 @@ export function hljsLanguages() {
         deps: [HttpClient]
      }
     }),
-    NgxSpinnerModule,
     ReactiveFormsModule,
     NgbDatepickerModule,
     NgbTimepickerModule,
@@ -125,10 +129,24 @@ export function hljsLanguages() {
     }),
     MatGoogleMapsAutocompleteModule.forRoot(),
     MatGoogleMapsAutocompleteModule,
-    AgmCoreModule.forRoot()
-
+    AgmCoreModule.forRoot(),
+    MatProgressSpinnerModule
   ],
-  providers: [ProviderService, MenuService, {provide: LOCALE_ID, useValue: 'es'}, GoogleMapsAPIWrapper],
+  providers: [ProviderService, 
+    MenuService, 
+    {
+      provide: LOCALE_ID, 
+      useValue: 'es'
+    }, 
+    GoogleMapsAPIWrapper,
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoaderInterceptor, 
+      multi: true
+    }
+  ],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }
