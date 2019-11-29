@@ -3,11 +3,11 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Provider } from 'src/model/provider';
 import { Profile } from 'selenium-webdriver/firefox';
 import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { ProviderService } from './provider.service';
+import { Provider } from '../model/provider';
 
 const VALUE_CHECK = 'checked';
 const PROVIDER_ID = 'providerId'
