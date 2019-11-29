@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
     this.auth.userProfile$.subscribe(
       profile => {
         this.profileJson = JSON.stringify(profile, null, 2);
+        console.log(this.profileJson);
       },
     );
   }

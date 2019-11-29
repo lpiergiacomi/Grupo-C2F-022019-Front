@@ -1,14 +1,25 @@
-import { Injectable } from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Provider } from 'src/model/provider';
+import { Profile } from 'selenium-webdriver/firefox';
+import { Inject, Injectable } from '@angular/core';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { ProviderService } from './provider.service';
+
+const VALUE_CHECK = 'checked';
+const PROVIDER_ID = 'providerId'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  checkboxValue = false;
+  provider = new Provider();
+
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
@@ -37,7 +48,7 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private router: Router, private providerService: ProviderService) { }
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -101,6 +112,21 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
+        this.provider.name = user.given_name;
+        //this.provider.id = +user.sub.substring(user.sub.indexOf("|")+1, user.sub.length);
+        //console.log(this.provider.id);
+        //this.storage.set(PROVIDER_ID, this.provider.id);
+        if(this.storage.get(VALUE_CHECK)) {
+          this.provider.type = 'Provider';
+        }
+        console.log(this.provider);
+        this.providerService.createProvider(this.provider)
+          .subscribe(data => {
+            this.storage.set(PROVIDER_ID, data.id);
+          console.log("data:");
+          console.log(data);
+          },
+          error => console.log(error)),
         this.router.navigate([targetRoute]);
       });
     }
@@ -115,6 +141,18 @@ export class AuthService {
         returnTo: `${window.location.origin}`
       });
     });
+    this.storage.remove(VALUE_CHECK);
+    this.storage.remove(PROVIDER_ID);
+  }
+
+  newFunction() {
+    console.log(this.provider);
+    if(this.checkboxValue) {
+      this.storage.set(VALUE_CHECK, this.checkboxValue);
+    }
+    else {
+      this.storage.remove(VALUE_CHECK);
+    }
   }
 
 }
