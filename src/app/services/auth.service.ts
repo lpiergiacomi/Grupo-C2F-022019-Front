@@ -120,6 +120,7 @@ export class AuthService {
           this.providerService.getProviderByMail(user.email).subscribe(data => {
             this.storage.set(PROVIDER_ID, data);
           }, error => {
+            console.log(error);
             this.provider.name = user.given_name;
             this.provider.mail = user.email;
             this.provider.type = 'Provider';
