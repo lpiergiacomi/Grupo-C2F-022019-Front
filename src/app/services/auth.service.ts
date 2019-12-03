@@ -112,21 +112,20 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
-        this.provider.name = user.given_name;
-        //this.provider.id = +user.sub.substring(user.sub.indexOf("|")+1, user.sub.length);
-        //console.log(this.provider.id);
-        //this.storage.set(PROVIDER_ID, this.provider.id);
         if(this.storage.get(VALUE_CHECK)) {
-          this.provider.type = 'Provider';
+          this.providerService.getProviderByMail(user.email).subscribe(data => {
+            this.storage.set(PROVIDER_ID, data);
+            console.log(data);
+          }, error => {
+            this.provider.name = user.given_name;
+            this.provider.mail = user.email;
+            this.provider.type = 'Provider';
+            this.providerService.createProviderForLogin(this.provider).subscribe(data => {
+              this.storage.set(PROVIDER_ID, data.provider.id);
+              console.log(data)
+            }, error => console.log(error));
+          });
         }
-        console.log(this.provider);
-        this.providerService.createProvider(this.provider)
-          .subscribe(data => {
-            this.storage.set(PROVIDER_ID, data.id);
-          console.log("data:");
-          console.log(data);
-          },
-          error => console.log(error)),
         this.router.navigate([targetRoute]);
       });
     }
