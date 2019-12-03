@@ -8,9 +8,12 @@ import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { ProviderService } from './provider.service';
 import { Provider } from '../model/provider';
+import { ClientService } from './client.service';
+import { Client } from '../model/client';
 
 const VALUE_CHECK = 'checked';
-const PROVIDER_ID = 'providerId'
+const PROVIDER_ID = 'providerId';
+const CLIENT_ID = 'clientId';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +22,7 @@ export class AuthService {
 
   checkboxValue = false;
   provider = new Provider();
+  client = new Client();
 
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
@@ -48,7 +52,7 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private router: Router, private providerService: ProviderService) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private router: Router, private providerService: ProviderService, private clientService: ClientService) { }
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -115,14 +119,24 @@ export class AuthService {
         if(this.storage.get(VALUE_CHECK)) {
           this.providerService.getProviderByMail(user.email).subscribe(data => {
             this.storage.set(PROVIDER_ID, data);
-            console.log(data);
           }, error => {
             this.provider.name = user.given_name;
             this.provider.mail = user.email;
             this.provider.type = 'Provider';
             this.providerService.createProviderForLogin(this.provider).subscribe(data => {
               this.storage.set(PROVIDER_ID, data.provider.id);
-              console.log(data)
+            }, error => console.log(error));
+          });
+        } else {
+          this.clientService.getClientByMail(user.email).subscribe(data => {
+            this.storage.set(CLIENT_ID, data);
+          }, error => {
+            this.client.firstName = user.given_name;
+            this.client.lastName = user.family_name;
+            this.client.mail = user.email;
+            this.client.type = 'Client';
+            this.clientService.createClientForLogin(this.client).subscribe(data => {
+              this.storage.set(CLIENT_ID, data.client.id);
             }, error => console.log(error));
           });
         }
@@ -142,10 +156,10 @@ export class AuthService {
     });
     this.storage.remove(VALUE_CHECK);
     this.storage.remove(PROVIDER_ID);
+    this.storage.remove(CLIENT_ID);
   }
 
   newFunction() {
-    console.log(this.provider);
     if(this.checkboxValue) {
       this.storage.set(VALUE_CHECK, this.checkboxValue);
     }
