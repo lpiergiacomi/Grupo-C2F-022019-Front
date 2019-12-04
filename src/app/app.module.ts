@@ -54,6 +54,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeAR from '@angular/common/locales/es-AR';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ModalComponent, ModalProviderDialog, ModalClientDialog } from './components/modal-provider/modal.component';
 
 registerLocaleData(localeAR, 'es');
 
@@ -83,7 +84,10 @@ export function hljsLanguages() {
     SuccessfulPurchaseComponent,
     NavbarComponent,
     ProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    ModalComponent,
+    ModalProviderDialog,
+    ModalClientDialog
   ],
   imports: [
     BrowserModule,
@@ -145,8 +149,12 @@ export function hljsLanguages() {
       provide: HTTP_INTERCEPTORS, 
       useClass: LoaderInterceptor, 
       multi: true
-    }
+    },
+    ModalComponent,
+    ModalProviderDialog,
+    ModalClientDialog
   ],
+  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog],
     
   bootstrap: [AppComponent]
 })

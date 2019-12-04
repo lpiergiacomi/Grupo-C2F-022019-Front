@@ -2,30 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { ModalProviderDialog, ModalComponent } from '../modal-provider/modal.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   title = 'iandasYa';
   isCollapsed = true;
   faUser = faUser;
   faPowerOff = faPowerOff;
 
-  constructor(private translate: TranslateService, public auth: AuthService) {
+  constructor(private translate: TranslateService, public modal: ModalComponent) {
     translate.setDefaultLang('es');
     translate.use('es');
   }
 
-  ngOnInit() {
-    this.auth.localAuthSetup();
-    this.auth.handleAuthCallback();
-  }
- 
-  setLanguage(language: string) {
+   setLanguage(language: string) {
     this.translate.use(language);
   }
 
