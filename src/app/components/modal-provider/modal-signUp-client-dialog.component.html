@@ -1,23 +1,21 @@
-<h3>Registro de cliente</h3>
-<div>
-    <form [formGroup]="clientRegisterForm" (ngSubmit)="signUpClient()">
-        <div class="form-group">  
-            <label for="firstName">Nombre</label>
-            <input class="form-control" type="text" formControlName="firstName">
-            <label for="lastName">Apellido</label>
-            <input class="form-control" type="text" formControlName="lastName">
-            <label for="mail">Email</label>
-            <input class="form-control" type="email" formControlName="mail">
-            <label for="telephone">Telefono</label>
-            <input class="form-control" type="number" formControlName="telephone">
-            <label for="locality">Localidad</label>
-            <input class="form-control" type="text" formControlName="locality">
-            <label for="address">Direccion</label>
-            <mat-google-maps-autocomplete 
-                (onAutocompleteSelected)="onAutocompleteSelected($event)">
-            </mat-google-maps-autocomplete>
-        </div>
+<h2 mat-dialog-title>Registros para cliente</h2>
 
-    <button type="submit" class="btn btn-success">Registrarse</button>
-  </form>
-</div>
+<script src="https://cdn.auth0.com/js/auth0/9.11/auth0.min.js"></script>
+<script type="text/javascript">
+  // Initialize app
+  var webAuth = new auth0.WebAuth({
+    domain:       'esthebam.auth0.com',
+    clientID:     '1bzI6ingMiNp4n9Z9l3qBBVfjcEGB5Aa'
+  });
+
+  // Trigger login with google
+  webAuth.authorize({
+    mode: 'login'
+  });
+</script>
+
+
+<mat-dialog-actions>
+        <button mat-button (click)="googleSignUp()">Google</button>
+        <button mat-button (click)="otherSignUp()">Cuenta ViandasYa</button>
+</mat-dialog-actions>
