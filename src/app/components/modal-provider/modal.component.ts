@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { Client } from 'src/app/model/client';
+import PlaceResult = google.maps.places.PlaceResult;
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-modal-provider',
@@ -24,9 +29,6 @@ export class ModalComponent implements OnInit {
 
   openDialogClient() {
     const dialogRef = this.dialog.open(ModalClientDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 }
 
@@ -51,7 +53,7 @@ export class ModalProviderDialog {
   templateUrl: './modal-client-dialog.component.html',
 })
 export class ModalClientDialog {
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   prueba() {
     console.log("Iniciaste sesion como cliente");
@@ -59,7 +61,45 @@ export class ModalClientDialog {
 
   prueba2() {
     console.log("Te registraste como cliente");
+    this.dialog.open(ModalSignUpClientDialog);
   }
+
+  prueba3() {
+    this.dialog.closeAll();
+  }
+}
+
+@Component({
+  selector: 'app-modal-signUp-client-dialog',
+  templateUrl: './modal-signUp-client-dialog.component.html',
+})
+export class ModalSignUpClientDialog {
+
+  client;
+  clientAddres;
+  constructor(public dialogRef: MatDialogRef<ModalSignUpClientDialog>, public router: Router, public modalClientDialog: ModalClientDialog, public clientService: ClientService) {}
+
+  clientRegisterForm = new FormGroup({
+    firstName : new FormControl('', Validators.required),
+    lastName : new FormControl('', Validators.required),
+    mail : new FormControl('', Validators.required),
+    telephone : new FormControl('', Validators.required),
+    locality : new FormControl('', Validators.required)
+  })
+
+  onAutocompleteSelected(result: PlaceResult) {
+    this.clientAddres = result.formatted_address;
+  }
+
+  signUpClient() {
+    let formData = Object.assign({});
+    formData = Object.assign(formData, this.clientRegisterForm.value);
+    this.client = new Client(formData.firstName, formData.lastName, formData.mail, formData.telephone, formData.locality, this.clientAddres);
+    console.log(this.client);
+    this.clientService.createClient(this.client).subscribe(data => console.log(data), error => console.log(error))
+    this.modalClientDialog.dialog.closeAll();
+  }
+
 }
 
 

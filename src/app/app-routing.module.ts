@@ -20,20 +20,20 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always', canActivate: [AuthGuard]},
-  { path: 'addProvider', component: CreateProviderComponent, canActivate: [AuthGuard]},
-  { path: 'updateProvider/:id', component: UpdateProviderComponent, canActivate: [AuthGuard]},
-  { path: 'detailsProvider/:id', component: ProviderDetailsComponent, canActivate: [AuthGuard]},
-  { path: 'credit/:id', component: AddRemoveCreditComponent, canActivate: [AuthGuard]},
-  { path: 'menus', component: MenuListComponent, runGuardsAndResolvers: 'always', canActivate: [AuthGuard]},
-  { path: 'addMenu', component: CreateMenuComponent, canActivate: [AuthGuard]},
-  { path: 'updateMenu/:id', component: UpdateMenuComponent, canActivate: [AuthGuard]},
-  { path: 'detailsMenu/:id', component: MenuDetailsComponent, canActivate: [AuthGuard]},
-  { path: 'providersMenus/:id', component: ProvidersMenusComponent, canActivate: [AuthGuard]},
-  { path: 'purchase/:id', component: PurchaseComponent, canActivate: [AuthGuard]},
-  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent, canActivate: [AuthGuard]},
-  { path: 'login', component: NavbarComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+  { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always'},
+  { path: 'addProvider', component: CreateProviderComponent},
+  { path: 'updateProvider/:id', component: UpdateProviderComponent},
+  { path: 'detailsProvider/:id', component: ProviderDetailsComponent},
+  { path: 'credit/:id', component: AddRemoveCreditComponent},
+  { path: 'menus', component: MenuListComponent, runGuardsAndResolvers: 'always'},
+  { path: 'addMenu', component: CreateMenuComponent},
+  { path: 'updateMenu/:id', component: UpdateMenuComponent},
+  { path: 'detailsMenu/:id', component: MenuDetailsComponent},
+  { path: 'providersMenus/:id', component: ProvidersMenusComponent},
+  { path: 'purchase/:id', component: PurchaseComponent},
+  { path: 'successfulPurchase', component: SuccessfulPurchaseComponent},
+  { path: 'login', component: NavbarComponent},
+  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

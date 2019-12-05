@@ -22,7 +22,7 @@ export class AuthService {
 
   checkboxValue = false;
   provider = new Provider();
-  client = new Client();
+  //client = new Client();
 
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
@@ -132,13 +132,13 @@ export class AuthService {
           this.clientService.getClientByMail(user.email).subscribe(data => {
             this.storage.set(CLIENT_ID, data);
           }, error => {
-            this.client.firstName = user.given_name;
-            this.client.lastName = user.family_name;
-            this.client.mail = user.email;
-            this.client.type = 'Client';
-            this.clientService.createClientForLogin(this.client).subscribe(data => {
-              this.storage.set(CLIENT_ID, data.client.id);
-            }, error => console.log(error));
+            //his.client.firstName = user.given_name;
+            //this.client.lastName = user.family_name;
+            //this.client.mail = user.email;
+            //this.client.type = 'Client';
+            //this.clientService.createClientForLogin(this.client).subscribe(data => {
+            //  this.storage.set(CLIENT_ID, data.client.id);
+           // }, error => console.log(error));
           });
         }
         this.router.navigate([targetRoute]);
