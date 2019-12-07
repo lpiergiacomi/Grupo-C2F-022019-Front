@@ -2,6 +2,8 @@ import { ProviderService } from '../../services/provider.service';
 import { Provider } from '../../model/provider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WeekDay } from '@angular/common';
+
 import PlaceResult = google.maps.places.PlaceResult;
 import swal from 'sweetalert2'
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -14,9 +16,14 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class CreateProviderComponent implements OnInit {
 
   provider: Provider = new Provider();
+  //dias = [WeekDay.Sunday, WeekDay.Monday, WeekDay.Tuesday, WeekDay.Wednesday, WeekDay.Thursday, WeekDay.Friday,  WeekDay.Saturday];
+  dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  
   constructor(private providerService: ProviderService, private router: Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   phone = new FormControl('', Validators.required);
+  attentionTimeBegin = new FormControl('', Validators.required);
+  attentionTimeEnd = new FormControl('', Validators.required);
   private logoSeleccionado: File;
 
   getEmailErrorMessage() {
@@ -63,6 +70,13 @@ export class CreateProviderComponent implements OnInit {
 
   seleccionarLogo(event){
     this.logoSeleccionado = event.target.files[0];
+
+  }
+
+  camposValidos(): boolean{
+    return this.provider.address != undefined &&
+           this.provider.address != "" &&
+           this.logoSeleccionado != undefined
   }
 
  

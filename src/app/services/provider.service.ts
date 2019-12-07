@@ -48,7 +48,15 @@ export class ProviderService {
     }
   
     getProvidersList(): Observable<Provider[]> {
-      return this.http.get(`${this.urlEndPoint}`).pipe(map(response => response as Provider[])
+      return this.http.get(`${this.urlEndPoint}`).pipe(
+        map(response => response as Provider[]),
+        catchError(e => {
+          if (e.status == 400) {
+            return throwError(e);
+          }
+          swal.fire("Error", "Ocurrió un error al mostrar los proveedores. Por favor, te pedimos que intentes nuevamente más tarde.", "error");
+          return throwError(e);
+        })
       );
     }
 

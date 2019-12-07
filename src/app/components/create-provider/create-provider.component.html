@@ -10,11 +10,12 @@
     
 
     <mat-card-actions>
-        <div class="custom-file">
-            <input (change)="seleccionarLogo($event)" type="file" class="custom-file-input"
-                id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" required>
-            <label class="custom-file-label" for="inputGroupFile04">Elegir archivo</label>
-        </div>
+      <div class="custom-file">
+        <input (change)="seleccionarLogo($event)" type="file" class="custom-file-input"
+            id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" accept=".jpg, .jpeg, .png" required>
+        <label *ngIf=!logoSeleccionado class="custom-file-label" for="inputGroupFile04">Elegir archivo</label>
+        <label *ngIf=logoSeleccionado class="custom-file-label" for="inputGroupFile04">{{logoSeleccionado.name}}</label>
+      </div>
     </mat-card-actions>
 
     <mat-card-content>
@@ -23,16 +24,18 @@
           <input matInput placeholder="Nombre" [(ngModel)]="provider.name" name="name" #name="ngModel" required>
         </mat-form-field>
 
-       <mat-form-field>
-          <input matInput placeholder="Localidad" [(ngModel)]="provider.locality" name="locality" #locality="ngModel"> <!-- REQUERIDO -->
+        <mat-form-field>
+            <input matInput placeholder="Localidad" [(ngModel)]="provider.locality" name="locality" #locality="ngModel" required>
         </mat-form-field>
 
-      <mat-google-maps-autocomplete 
-        (onAutocompleteSelected)="onAutocompleteSelected($event)">
-      </mat-google-maps-autocomplete>
+
+
+        <mat-google-maps-autocomplete 
+          (onAutocompleteSelected)="onAutocompleteSelected($event)">
+        </mat-google-maps-autocomplete>
 
         <mat-form-field hintLabel="Entre 30 y 200 caract.">
-          <input matInput minlength="30" maxlength="200" placeholder="Descripción" [(ngModel)]="provider.description" name="description" #description="ngModel"> <!-- REQUERIDO -->
+          <input matInput minlength="30" maxlength="200" placeholder="Descripción" [(ngModel)]="provider.description" name="description" #description="ngModel" required>
           <mat-hint align="end">{{description.value?.length || 0}}/200</mat-hint>
         </mat-form-field>
 
@@ -40,51 +43,47 @@
           <input matInput placeholder="Sitio web" [(ngModel)]="provider.site" name="site" #site="ngModel">
         </mat-form-field>
 
-          <mat-form-field>
-            <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="provider.mail" name="mail"> <!-- REQUERIDO -->
-            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-          </mat-form-field>
-          
-
-            <mat-form-field>
-            <ngx-mat-intl-tel-input placeholder="Teléfono"
-            [formControl]="phone" [(ngModel)]="provider.phone" name="phone" [preferredCountries]="['ar']" [enablePlaceholder]="true" [enableSearch]="true"></ngx-mat-intl-tel-input> <!-- REQUERIDO -->
-            <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
-          </mat-form-field>
-
-
-
         <mat-form-field>
-          <input matInput [matDatepicker]="attentionDayBegin" placeholder="Día de apertura" [(ngModel)]="provider.attentionDayBegin" name="attentionDayBegin"> <!-- REQUERIDO -->
-          <mat-datepicker-toggle matSuffix [for]="attentionDayBegin"></mat-datepicker-toggle>
-          <mat-datepicker #attentionDayBegin></mat-datepicker>
+          <input matInput placeholder="Email" [formControl]="email" [(ngModel)]="provider.mail" name="mail" required>
+          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <ngx-mat-intl-tel-input placeholder="Teléfono"
+          [formControl]="phone" [(ngModel)]="provider.phone" name="phone" [preferredCountries]="['ar']" [enablePlaceholder]="true" [enableSearch]="true"></ngx-mat-intl-tel-input> <!-- REQUERIDO -->
+          <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="attentionDayEnd" placeholder="Día de cierre" [(ngModel)]="provider.attentionDayEnd" name="attentionDayEnd"> <!-- REQUERIDO -->
-          <mat-datepicker-toggle matSuffix [for]="attentionDayEnd"></mat-datepicker-toggle>
-          <mat-datepicker #attentionDayEnd></mat-datepicker>
+          <mat-label>Días de atención</mat-label>
+          <mat-select multiple [(ngModel)]="provider.daysAttention" name="daysAttention" #daysAttention="ngModel" required>
+            <mat-option *ngFor="let dia of dias" [value]="dia" >{{ dia | translate}}</mat-option>
+          </mat-select>
         </mat-form-field>
 
-        <mat-form-field hintLabel="HORA DE APERTURA">
-          <input matInput placeholder="HORA DE APERTURA"> <!-- REQUERIDO -->
-        </mat-form-field>
+      <div>
+          <mat-form-field class="example-full-width">
+              <mat-label>Hora inicial</mat-label>
+              <input matInput [ngxTimepicker]="attentionTimeBegin" [format]="24" placeholder="Hora inicial" [(ngModel)]="provider.attentionTimeBegin" name="attentionTimeBegin" required />
+              <ngx-material-timepicker #attentionTimeBegin></ngx-material-timepicker>
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width">
+              <mat-label>Hora final</mat-label>
+              <input matInput [ngxTimepicker]="attentionTimeEnd" [format]="24" placeholder="Hora final" [(ngModel)]="provider.attentionTimeEnd" name="attentionTimeEnd" required />
+              <ngx-material-timepicker #attentionTimeEnd></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field hintLabel="HORA DE CIERRE">
-          <input matInput placeholder="HORA DE CIERRE"> <!-- REQUERIDO -->
-        </mat-form-field>
-
-
-         <mat-form-field>
+        <mat-form-field>
           <input matInput placeholder="Localidad de entregas" [(ngModel)]="provider.deliveryLocalities" name="deliveryLocalities" #deliveryLocalities="ngModel">
         </mat-form-field>
-
                                     
       </div>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)='createProvider()' [disabled]="!providerForm.form.valid">Crear</button>
+      <button mat-raised-button color="primary" (click)='createProvider()' [disabled]="!providerForm.form.valid || !camposValidos()">Crear</button>
     </mat-card-actions>
 
   </mat-card>

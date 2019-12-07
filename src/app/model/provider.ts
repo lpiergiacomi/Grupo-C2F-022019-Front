@@ -10,10 +10,9 @@ export class Provider {
     site: string;
     mail: string;
     phone: string;
+    daysAttention: [];
     attentionTimeBegin: string;
     attentionTimeEnd: string;
-    attentionDayBegin: string;
-    attentionDayEnd: string;
     deliveryLocalities: [];
     menus: Array<Menu>;
     credit: number;

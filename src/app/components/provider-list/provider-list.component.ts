@@ -13,14 +13,14 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 export class ProviderListComponent implements OnInit {
 
   provider: Provider = new Provider();
-  displayedColumns = ['logo', 'name', 'locality', 'address', 'description', 'site', 'mail', 'phone', 'attentionTimeBegin', 'attentionTimeEnd', 'attentionDayBegin', 'attentionDayEnd', 'deliveryLocalities','action'];
+  displayedColumns = ['logo', 'name', 'locality', 'address', 'description', 'site', 'mail', 'phone', 'attentionTimeBegin', 'daysAttention', 'deliveryLocalities','action'];
   dataSource: MatTableDataSource<Provider>;
   providers: Array<Provider>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(public providerService: ProviderService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

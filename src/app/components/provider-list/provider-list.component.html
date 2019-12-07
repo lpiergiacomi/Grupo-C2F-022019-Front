@@ -1,4 +1,8 @@
-<div class="mat-elevation-z8">
+<div *ngIf="providers?.length == 0" class="alert alert-info">
+    No existen proveedores para mostrar
+  </div>
+
+<div *ngIf="providers?.length > 0" class="mat-elevation-z8">
   <div>
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'Buscar' | translate }}">
@@ -69,16 +73,10 @@
       <mat-cell *matCellDef="let provider"> {{provider.attentionTimeEnd}} </mat-cell>
     </ng-container>
 
-  <!-- Attention Day Begin Column -->
-  <ng-container matColumnDef="attentionDayBegin">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Dia de apertura </mat-header-cell>
-    <mat-cell *matCellDef="let provider"> {{provider.attentionDayBegin}} </mat-cell>
-  </ng-container>
-
-  <!-- Attention Day Begin Column -->
-  <ng-container matColumnDef="attentionDayEnd">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Dia de cierre </mat-header-cell>
-    <mat-cell *matCellDef="let provider"> {{provider.attentionDayEnd}} </mat-cell>
+  <!-- Days Attention Column -->
+  <ng-container matColumnDef="daysAttention">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Días de atención </mat-header-cell>
+    <mat-cell *matCellDef="let provider"> {{provider.daysAttention}} </mat-cell>
   </ng-container>
 
     <!-- Delivery Localities Column -->
