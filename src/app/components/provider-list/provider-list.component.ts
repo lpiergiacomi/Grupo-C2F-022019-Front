@@ -1,9 +1,9 @@
-import { Subject } from "rxjs";
 import { ProviderService } from "../../services/provider.service";
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Provider } from 'src/app/model/provider';
 import Swal from 'sweetalert2';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-provider-list',
@@ -12,32 +12,46 @@ import Swal from 'sweetalert2';
 })
 export class ProviderListComponent implements OnInit {
 
-  providers: Provider[];
-  dtTrigger: Subject<any> = new Subject();
-  dtOptions: DataTables.Settings = {};
+  provider: Provider = new Provider();
+  displayedColumns = ['logo', 'name', 'locality', 'address', 'description', 'site', 'mail', 'phone', 'attentionTimeBegin', 'attentionTimeEnd', 'attentionDayBegin', 'attentionDayEnd', 'deliveryLocalities','action'];
+  dataSource: MatTableDataSource<Provider>;
+  providers: Array<Provider>;
 
-  constructor(private providerService: ProviderService, private router: Router) { }
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   ngOnInit() {
-    this.getProviders(); 
-    this.dtOptions = {
-    pagingType: 'full_numbers',
-    pageLength: 5,
-    language: {
-      zeroRecords: "No existen proveedores"
-    }
-    };
+    this.route.params.subscribe(val => {
+      this.reloadData();
+    }); 
   }
 
-  getProviders(){
-    this.providerService.getProvidersList()
-      .subscribe(response =>{ 
-        this.providers = response; 
-        this.dtTrigger.next();
-        error => console.log(error)
-      },
-    )     
+  reloadData() {
+    this.providerService.getProvidersList().subscribe(data => {
+      this.providers = [];
+      data.forEach((x) => {
+        this.providers.push(x);
+      });
+      this.loadDataSource();
+    }, error => {});
+
   }
+
+  loadDataSource(){
+    this.dataSource = new MatTableDataSource(this.providers);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+  }
+
 
   
   deleteProvider(id: number) {
@@ -54,7 +68,7 @@ export class ProviderListComponent implements OnInit {
         this.providerService.deleteProvider(id)
         .subscribe(
           data => {
-            this.getProviders();
+            this.reloadData();
             Swal.fire(
               'Eliminado',
               'El proveedor fue eliminado correctamente.',
@@ -86,5 +100,4 @@ export class ProviderListComponent implements OnInit {
   purchase(id: number) {
     this.router.navigate(['purchase/' + id])
   }
-
 }
