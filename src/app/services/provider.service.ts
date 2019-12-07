@@ -10,8 +10,8 @@ import { formatDate } from '@angular/common';
   providedIn: 'root'
 })
 export class ProviderService {
-  //private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/providers';
-  private urlEndPoint: string = 'http://localhost:8080/providers';
+  //public urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/providers';
+  public urlEndPoint: string = 'http://localhost:8080/providers';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

@@ -24,7 +24,7 @@ export class CreateProviderComponent implements OnInit {
   phone = new FormControl('', Validators.required);
   attentionTimeBegin = new FormControl('', Validators.required);
   attentionTimeEnd = new FormControl('', Validators.required);
-  private logoSeleccionado: File;
+  public logoSeleccionado: File;
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'Campo obligatorio' :
