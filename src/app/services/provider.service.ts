@@ -37,6 +37,8 @@ export class ProviderService {
           swal.fire(e.error.mensaje, e.error.error, "error");
           return throwError(e);
         })
+      );
+    }
 
     createProviderForLogin(provider: any): Observable<any> {
       return this.http.post(`${this.urlEndPoint}`, provider);
