@@ -32,6 +32,7 @@ import { NavbarComponent } from './components/nav-bar/nav-bar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { StorageServiceModule } from 'ngx-webstorage-service';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
 
 
@@ -55,6 +56,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeAR from '@angular/common/locales/es-AR';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog } from './components/modal-provider/modal.component';
 
 registerLocaleData(localeAR, 'es');
 
@@ -84,7 +86,12 @@ export function hljsLanguages() {
     SuccessfulPurchaseComponent,
     NavbarComponent,
     ProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    ModalComponent,
+    ModalProviderDialog,
+    ModalClientDialog,
+    ModalSignUpClientDialog,
+    ModalSignUpOtherAccountClientDialog
   ],
   imports: [
     BrowserModule,
@@ -131,6 +138,7 @@ export function hljsLanguages() {
     MatGoogleMapsAutocompleteModule.forRoot(),
     MatGoogleMapsAutocompleteModule,
     AgmCoreModule.forRoot(),
+    StorageServiceModule,
     MatProgressSpinnerModule,
     NgxMatIntlTelInputModule
   ],
@@ -146,8 +154,14 @@ export function hljsLanguages() {
       provide: HTTP_INTERCEPTORS, 
       useClass: LoaderInterceptor, 
       multi: true
-    }
+    },
+    ModalComponent,
+    ModalProviderDialog,
+    ModalClientDialog,
+    ModalSignUpClientDialog,
+    ModalSignUpOtherAccountClientDialog
   ],
+  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog],
     
   bootstrap: [AppComponent]
 })

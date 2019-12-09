@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap, mergeMap } from 'rxjs/operators'
 import swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,9 @@ export class ProviderService {
           swal.fire(e.error.mensaje, e.error.error, "error");
           return throwError(e);
         })
-      );
+
+    createProviderForLogin(provider: any): Observable<any> {
+      return this.http.post(`${this.urlEndPoint}`, provider);
     }
 
     updateProvider(id: number, value: any): Observable<Object> {
@@ -61,11 +64,15 @@ export class ProviderService {
     }
 
     updateCredit(id: number, value: any): Observable<Object> {
-      return this.http.put(`${this.urlEndPoint}/${id}/credit`, value);
+      return this.http.put(`${this.urlEndPoint}${id}/credit`, value);
     }
 
     getProvidersMenus(id: number): Observable<Menu[]> {
-      return this.http.get(`${this.urlEndPoint}/${id}/menus`).pipe(map(response => response as Array<Menu>));
+      return this.http.get(`${this.urlEndPoint}${id}/menus`).pipe(map(response => response as Array<Menu>));
+    }
+
+    getProviderByMail(mail: string): Observable<any> {
+      return this.http.get(`${this.urlEndPoint}/find/${mail}`);
     }
 
     subirLogo(logo: File, id): Observable<Provider>{

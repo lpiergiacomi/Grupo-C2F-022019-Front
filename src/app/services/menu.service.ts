@@ -10,8 +10,8 @@ import { DatePipe } from '@angular/common';
   providedIn: 'root'
 })
 export class MenuService {
-  private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/menus';
-  //private urlEndPoint: string = 'http://localhost:8080/menus';
+  //private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/menus';
+  private urlEndPoint: string = 'http://localhost:8080/menus';
   
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

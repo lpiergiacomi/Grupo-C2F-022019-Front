@@ -16,4 +16,5 @@ export class Provider {
     deliveryLocalities: [];
     menus: Array<Menu>;
     credit: number;
+    type: string;
 }

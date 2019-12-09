@@ -1,14 +1,29 @@
-import { Injectable } from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Profile } from 'selenium-webdriver/firefox';
+import { Inject, Injectable } from '@angular/core';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { ProviderService } from './provider.service';
+import { Provider } from '../model/provider';
+import { ClientService } from './client.service';
+import { Client } from '../model/client';
+
+const VALUE_CHECK = 'checked';
+const PROVIDER_ID = 'providerId';
+const CLIENT_ID = 'clientId';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  checkboxValue = false;
+  provider = new Provider();
+  //client = new Client();
+
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
@@ -37,7 +52,7 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private router: Router, private providerService: ProviderService, private clientService: ClientService) { }
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -101,6 +116,31 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
+        if(this.storage.get(VALUE_CHECK)) {
+          this.providerService.getProviderByMail(user.email).subscribe(data => {
+            this.storage.set(PROVIDER_ID, data);
+          }, error => {
+            console.log(error);
+            this.provider.name = user.given_name;
+            this.provider.mail = user.email;
+            this.provider.type = 'Provider';
+            this.providerService.createProviderForLogin(this.provider).subscribe(data => {
+              this.storage.set(PROVIDER_ID, data.provider.id);
+            }, error => console.log(error));
+          });
+        } else {
+          this.clientService.getClientByMail(user.email).subscribe(data => {
+            this.storage.set(CLIENT_ID, data);
+          }, error => {
+            //his.client.firstName = user.given_name;
+            //this.client.lastName = user.family_name;
+            //this.client.mail = user.email;
+            //this.client.type = 'Client';
+            //this.clientService.createClientForLogin(this.client).subscribe(data => {
+            //  this.storage.set(CLIENT_ID, data.client.id);
+           // }, error => console.log(error));
+          });
+        }
         this.router.navigate([targetRoute]);
       });
     }
@@ -115,6 +155,18 @@ export class AuthService {
         returnTo: `${window.location.origin}`
       });
     });
+    this.storage.remove(VALUE_CHECK);
+    this.storage.remove(PROVIDER_ID);
+    this.storage.remove(CLIENT_ID);
+  }
+
+  newFunction() {
+    if(this.checkboxValue) {
+      this.storage.set(VALUE_CHECK, this.checkboxValue);
+    }
+    else {
+      this.storage.remove(VALUE_CHECK);
+    }
   }
 
 }
