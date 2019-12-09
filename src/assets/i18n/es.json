@@ -44,9 +44,12 @@
     "Tiempo promedio de espera": "Tiempo promedio de espera",
     "Tiempo de preparacion": "Tiempo de preparación",
     "MaximoDeVentasPorDia": "Máximo de ventas por día",
-    "Buscar": "Buscar"
-
-
-
-
+    "Buscar": "Buscar",
+    "Domingo": "Domingo",
+    "Lunes": "Lunes",
+    "Martes": "Martes",
+    "Miércoles": "Miércoles",
+    "Jueves": "Jueves",
+    "Viernes": "Viernes",
+    "Sábado": "Sábado"
 }

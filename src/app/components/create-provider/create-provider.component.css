@@ -1,0 +1,15 @@
+.provider-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .provider-container > * {
+    width: 100%;
+  }
+  
+  .provider-header-image {
+    background-image: url('../../../assets/menu-header.jpeg');
+    background-size: cover;
+  }
+
+  

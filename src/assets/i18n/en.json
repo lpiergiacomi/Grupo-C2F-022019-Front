@@ -44,6 +44,13 @@
     "Tiempo promedio de espera": "Average wait time",
     "Tiempo de preparacion": "Preparation time",
     "MaximoDeVentasPorDia": "Maximum sales per day",
-    "Buscar": "Search"
+    "Buscar": "Search",
+    "Domingo": "Sunday",
+    "Lunes": "Monday",
+    "Martes": "Tuesday",
+    "Miércoles": "Wednesday",
+    "Jueves": "Thursday",
+    "Viernes": "Friday",
+    "Sábado": "Saturday"
 
 }

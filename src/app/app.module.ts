@@ -33,6 +33,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { StorageServiceModule } from 'ngx-webstorage-service';
+import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+
 
 import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatPaginatorModule, MatSortModule} from '@angular/material'
 import {MatMomentDateModule} from '@angular/material-moment-adapter'
@@ -137,7 +139,8 @@ export function hljsLanguages() {
     MatGoogleMapsAutocompleteModule,
     AgmCoreModule.forRoot(),
     StorageServiceModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxMatIntlTelInputModule
   ],
   providers: [ProviderService, 
     MenuService, 
