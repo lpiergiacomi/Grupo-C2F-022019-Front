@@ -1,0 +1,25 @@
+<h3>Registro de cliente</h3>
+<div>
+    <form [formGroup]="clientRegisterForm" (ngSubmit)="signUpClient('encrypt')">
+        <div class="form-group">  
+            <label for="firstName">Nombre</label>
+            <input class="form-control" type="text" required formControlName="firstName">
+            <label for="lastName">Apellido</label>
+            <input class="form-control" type="text" required formControlName="lastName">
+            <label for="mail">Email</label>
+            <input class="form-control" type="email" required formControlName="mail">
+            <label for="password">Contraseña</label>
+            <input class="form-control" type="password" required formControlname="password">
+            <label for="telephone">Telefono</label>
+            <input class="form-control" type="number" required formControlName="telephone">
+            <label for="locality">Localidad</label>
+            <input class="form-control" type="text" required formControlName="locality">
+            <label for="address">Direccion</label>
+            <mat-google-maps-autocomplete 
+                (onAutocompleteSelected)="onAutocompleteSelected($event)">
+            </mat-google-maps-autocomplete>
+        </div>
+
+    <button type="submit" class="btn btn-success">Registrarse</button>
+  </form>
+</div>

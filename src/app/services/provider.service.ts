@@ -28,6 +28,8 @@ export class ProviderService {
        
           mergeMap(response => {
             let prov = response as Provider;
+            console.log(prov);
+
             return this.subirLogo(logo, prov.id);
         }),
         catchError(e => {

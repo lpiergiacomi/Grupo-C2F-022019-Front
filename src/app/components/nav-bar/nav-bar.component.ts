@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import { ModalProviderDialog, ModalComponent } from '../modal-provider/modal.component';
+import { ModalProviderDialog, ModalComponent } from '../modals/modal.component';
 
 @Component({
   selector: 'app-navbar',

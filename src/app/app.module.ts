@@ -56,7 +56,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeAR from '@angular/common/locales/es-AR';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog } from './components/modal-provider/modal.component';
+import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog } from './components/modals/modal.component';
 
 registerLocaleData(localeAR, 'es');
 
@@ -91,7 +91,8 @@ export function hljsLanguages() {
     ModalProviderDialog,
     ModalClientDialog,
     ModalSignUpClientDialog,
-    ModalSignUpOtherAccountClientDialog
+    ModalSignUpOtherAccountClientDialog,
+    ModalSignUpProviderDialog
   ],
   imports: [
     BrowserModule,
@@ -159,9 +160,10 @@ export function hljsLanguages() {
     ModalProviderDialog,
     ModalClientDialog,
     ModalSignUpClientDialog,
-    ModalSignUpOtherAccountClientDialog
+    ModalSignUpOtherAccountClientDialog,
+    ModalSignUpProviderDialog
   ],
-  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog],
+  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog],
     
   bootstrap: [AppComponent]
 })
