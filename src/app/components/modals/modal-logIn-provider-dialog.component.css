@@ -1,0 +1,8 @@
+.provider-login {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .provider-login > * {
+    width: 100%;
+  }

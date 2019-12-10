@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
 import { Menu } from '../../model/menu';
 import Swal from 'sweetalert2';
+import { ProviderService } from 'src/app/services/provider.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./menu-list.component.css']
 })
 export class MenuListComponent implements OnInit{
-  displayedColumns = ['name', 'description', 'categories', 'deliveryPrice', 'validityDateBegin', 'validityDateEnd', 'deliveryTimeAverage', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'maxSalesPerDay','action'];
+  displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'reputationProvider', 'addressProvider', 'nameProvider', 'action'];
   dataSource: MatTableDataSource<Menu>;
   menus: Array<Menu>;
 
@@ -40,6 +41,7 @@ constructor(private menuService: MenuService, private router: Router, private ro
       data.forEach((x) => {
         this.menus.push(x);
       });
+      console.log(this.menus);
       this.loadDataSource();
     }, error => {});
 

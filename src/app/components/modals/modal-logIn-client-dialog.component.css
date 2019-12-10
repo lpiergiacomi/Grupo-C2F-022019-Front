@@ -1,0 +1,8 @@
+.client-login {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .client-login > * {
+    width: 100%;
+  }

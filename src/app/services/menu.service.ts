@@ -5,6 +5,9 @@ import { map, catchError } from 'rxjs/operators'
 import { Menu } from './../model/menu';
 import swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { ProviderService } from './provider.service';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class MenuService {
   
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
-  constructor(private http: HttpClient) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient, private providerService: ProviderService) { }
 
     getMenu(id: number): Observable<any> {
       return this.http.get(`${this.urlEndPoint}/${id}`);
@@ -37,10 +40,18 @@ export class MenuService {
             let datePipe = new DatePipe('es')
             menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
             menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
+            this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
             return menu;
           });
         }
-        )
+        ),
+        catchError(e => {
+          if (e.status == 400) {
+            return throwError(e);
+          }
+          swal.fire("Error", "Ocurrió un error al mostrar los menus. Por favor, te pedimos que intentes nuevamente más tarde.", "error");
+          return throwError(e);
+        })
       );
     }
 

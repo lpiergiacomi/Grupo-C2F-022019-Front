@@ -9,6 +9,7 @@ export class Provider {
     description: string;
     site: string;
     mail: string;
+    password: string;
     phone: string;
     daysAttention: [];
     attentionTimeBegin: string;

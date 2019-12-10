@@ -19,39 +19,11 @@
       <mat-cell *matCellDef="let menu"> {{menu.description}} </mat-cell>
     </ng-container>
 
-     <!-- Categories Column -->
-     <ng-container matColumnDef="categories">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Categoria' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.categories}} </mat-cell>
-    </ng-container>
-
-    <!-- Delivery Price Column -->
-    <ng-container matColumnDef="deliveryPrice">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioDeDelivery' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.deliveryPrice}} </mat-cell>
-    </ng-container>
-
-    <!-- Validity Date Begin Column -->
-    <ng-container matColumnDef="validityDateBegin">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha vigencia desde </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.validityDateBegin}} </mat-cell>
-    </ng-container>
-
-  <!-- Validity Date End Column -->
-  <ng-container matColumnDef="validityDateEnd">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha vigencia hasta </mat-header-cell>
-    <mat-cell *matCellDef="let menu"> {{menu.validityDateEnd}} </mat-cell>
-  </ng-container>
-
-  <!-- Delivery Time Average Column -->
-  <ng-container matColumnDef="deliveryTimeAverage">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Tiempo promedio de espera' | translate }} </mat-header-cell>
-    <mat-cell *matCellDef="let menu"> {{menu.deliveryTimeAverage}} </mat-cell>
-  </ng-container>
+    
 
 
-      <!-- Price Column -->
-      <ng-container matColumnDef="price">
+     <!-- Price Column -->
+    <ng-container matColumnDef="price">
         <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Precio' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let menu"> {{menu.price}} </mat-cell>
       </ng-container>
@@ -80,11 +52,23 @@
           <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice2}} </mat-cell>
         </ng-container>
     
-        <!-- Max Sales PerDay Column -->
-        <ng-container matColumnDef="maxSalesPerDay">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'MaximoDeVentasPorDia' | translate }} </mat-header-cell>
-          <mat-cell *matCellDef="let menu"> {{menu.maxSalesPerDay}} </mat-cell>
-        </ng-container>
+        <!-- Reputation Provider Column -->
+    <ng-container matColumnDef="reputationProvider">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Reputación </mat-header-cell>
+        <mat-cell *matCellDef="let menu"> reputacion </mat-cell>
+      </ng-container>
+  
+      <!-- Address Provider Column -->
+      <ng-container matColumnDef="addressProvider">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
+        <mat-cell *matCellDef="let menu"> {{menu.provider.address}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name Provider Column -->
+      <ng-container matColumnDef="nameProvider">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </mat-header-cell>
+        <mat-cell *matCellDef="let menu"> {{menu.provider.name}} </mat-cell>
+      </ng-container>
 
 
     <!-- Action Column -->

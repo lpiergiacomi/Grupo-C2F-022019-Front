@@ -10,7 +10,9 @@ import * as CryptoJS from 'crypto-js';
 import { ProviderService } from 'src/app/services/provider.service';
 import { Provider } from 'src/app/model/provider';
 import swal from 'sweetalert2'
-
+import { catchError } from 'rxjs/operators';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Inject, Injectable } from '@angular/core';
 
 
 @Component({
@@ -43,6 +45,8 @@ export class ModalProviderDialog {
   constructor(public dialog: MatDialog) {}
 
   openLogInProviderDialog() {
+    this.dialog.closeAll();
+    this.dialog.open(ModalLogInProviderDialog)
     console.log("Iniciaste sesion como proveedor");
   }
 
@@ -67,6 +71,8 @@ export class ModalSignUpProviderDialog {
   phone = new FormControl('', Validators.required);
   attentionTimeBegin = new FormControl('', Validators.required);
   attentionTimeEnd = new FormControl('', Validators.required);
+  password = new FormControl('', Validators.required);
+
   public logoSeleccionado: File;
 
   getEmailErrorMessage() {
@@ -122,6 +128,39 @@ export class ModalSignUpProviderDialog {
  
 }
 
+const PROVIDER_ID = 'providerId'
+
+@Component({
+  selector: 'app-modal-logIn-provider-dialog',
+  templateUrl: './modal-logIn-provider-dialog.component.html',
+  styleUrls: ['./modal-logIn-provider-dialog.component.css']
+})
+export class ModalLogInProviderDialog {
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public dialog: MatDialog, public providerService: ProviderService) {}
+
+  providerLoginForm = new FormGroup({
+    email : new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  })
+
+  logInProvider() {
+    this.dialog.closeAll();
+    let formData = Object.assign({});
+    formData = Object.assign(formData, this.providerLoginForm.value);
+    
+    formData.password = CryptoJS.AES.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
+    console.log(formData);
+
+    this.providerService.getProviderByMail(formData.email)
+    .subscribe(data => {
+      this.storage.set(PROVIDER_ID, data.id), 
+      catchError => swal.fire('Error', 'No existe un proveedor con ese mail registrado', 'error');
+    })
+
+  }
+
+}
+
 @Component({
   selector: 'app-modal-client-dialog',
   templateUrl: './modal-client-dialog.component.html',
@@ -130,15 +169,59 @@ export class ModalClientDialog {
   constructor(public dialog: MatDialog) {}
 
   openLogInClientDialog() {
-    console.log("Iniciaste sesion como cliente");
+    this.dialog.closeAll();
+    this.dialog.open(ModalLogInClientDialog);
   }
 
   openSignUpClientDialog() {
     this.dialog.closeAll();
     this.dialog.open(ModalSignUpClientDialog);
-
   }
 
+}
+
+const CLIENT_ID = 'clientId';
+
+@Component({
+  selector: 'app-modal-logIn-client-dialog',
+  templateUrl: './modal-logIn-client-dialog.component.html',
+  styleUrls: ['./modal-logIn-client-dialog.component.css']
+
+})
+
+export class ModalLogInClientDialog {
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public auth: AuthService, public dialog: MatDialog, public clientService: ClientService) {}
+
+
+  clientLoginForm = new FormGroup({
+    email : new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  })
+
+  logInClient() {
+    this.dialog.closeAll();
+    let formData = Object.assign({});
+    formData = Object.assign(formData, this.clientLoginForm.value);
+    
+    formData.password = CryptoJS.AES.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
+    console.log(formData);
+
+    this.clientService.getClientByMail(formData.email)
+    .subscribe(data => {
+      this.storage.set(CLIENT_ID, data.id), 
+      catchError => swal.fire('Error', 'No existe un usuario con ese mail registrado', 'error');
+    })
+    
+  }
+  
+  googleLogIn() {
+    this.auth.login();
+  }
+
+  otherLogIn() {
+    this.dialog.closeAll();
+  }
+  
 }
 
 @Component({
@@ -148,19 +231,15 @@ export class ModalClientDialog {
 export class ModalSignUpClientDialog {
   constructor(public auth: AuthService, public dialog: MatDialog) {}
 
-
-
-  
   googleSignUp() {
     this.auth.login();
   }
 
   otherSignUp() {
     this.dialog.closeAll();
-    this.dialog.open(ModalSignUpOtherAccountClientDialog)
+    this.dialog.open(ModalSignUpOtherAccountClientDialog);
   }
 }
-
 
 @Component({
   selector: 'app-modal-signUp-other-account-client-dialog',

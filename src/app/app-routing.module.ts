@@ -21,7 +21,6 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'providers', component: ProviderListComponent, runGuardsAndResolvers: 'always'},
-  { path: 'addProvider', component: CreateProviderComponent},
   { path: 'updateProvider/:id', component: UpdateProviderComponent},
   { path: 'detailsProvider/:id', component: ProviderDetailsComponent},
   { path: 'credit/:id', component: AddRemoveCreditComponent},

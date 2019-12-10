@@ -24,10 +24,7 @@
       >
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a routerLink="providers" class="nav-link" routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="addProvider" class="nav-link" routerLinkActive="active">{{ 'AgregarProveedor' | translate }}</a>
+            <a routerLink="providers" *ngIf="isProvider()" class="nav-link" routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
           </li>
           <li class="nav-item">
             <a routerLink="menus" class="nav-link" routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
