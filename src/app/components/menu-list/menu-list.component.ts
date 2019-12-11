@@ -13,11 +13,12 @@ import { ProviderService } from 'src/app/services/provider.service';
   styleUrls: ['./menu-list.component.css']
 })
 export class MenuListComponent implements OnInit{
-  displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'reputationProvider', 'addressProvider', 'nameProvider', 'action'];
+  //displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'reputationProvider', 'addressProvider', 'nameProvider', 'action'];
+  displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'action'];
   dataSource: MatTableDataSource<Menu>;
   menus: Array<Menu>;
+  paginador: any;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 constructor(private menuService: MenuService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog){}
@@ -36,20 +37,21 @@ constructor(private menuService: MenuService, private router: Router, private ro
   }
 
   reloadData() {
-    this.menuService.getMenusList().subscribe(data => {
-      this.menus = [];
-      data.forEach((x) => {
-        this.menus.push(x);
-      });
-      console.log(this.menus);
-      this.loadDataSource();
-    }, error => {});
-
+    this.route.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page){ page = 0 }
+      this.menuService.getMenusList(page).subscribe(response => {
+        (response.content as Menu[]).forEach((x) => {
+          this.menus = response.content;
+          this.paginador = response;
+        });
+        this.loadDataSource();
+      }, error => {});
+    });
   }
 
   loadDataSource(){
     this.dataSource = new MatTableDataSource(this.menus);
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
 

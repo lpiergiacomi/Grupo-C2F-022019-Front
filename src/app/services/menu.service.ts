@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators'
+import { map, tap, catchError } from 'rxjs/operators'
 import { Menu } from './../model/menu';
 import swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
@@ -31,11 +31,26 @@ export class MenuService {
     deleteMenu(id: number): Observable<any> {
       return this.http.delete(`${this.urlEndPoint}/${id}`, { responseType: 'text' });
     }
-  
-    getMenusList(): Observable<Menu[]> {
-      return this.http.get(`${this.urlEndPoint}`).pipe(
-        map(response => {
-          let menus = response as Array<Menu>;
+
+    getMenusList(page: number): Observable<any> {
+      return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
+        map((response: any) => {
+          (response.content as Menu[]).map(menu => {
+            let datePipe = new DatePipe('es')
+            menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
+            menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
+            this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
+            return menu;
+          });
+          return response;
+        })
+      );
+    }
+  /*
+    getMenusList(page: number): Observable<any> {
+      return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
+        map((response:any) => {
+          let menus = response.content as Array<Menu>;
           return menus.map(menu => {
             let datePipe = new DatePipe('es')
             menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
@@ -43,6 +58,7 @@ export class MenuService {
             this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
             return menu;
           });
+          return response;
         }
         ),
         catchError(e => {
@@ -54,7 +70,7 @@ export class MenuService {
         })
       );
     }
-
+*/
     createMenu(menu: Menu): Observable<Menu> {
       return this.http.post<Menu>(this.urlEndPoint, menu, { headers: this.httpHeaders }).pipe(
         map((response: any) => 

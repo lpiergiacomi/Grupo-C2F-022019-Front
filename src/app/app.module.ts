@@ -57,6 +57,7 @@ import localeAR from '@angular/common/locales/es-AR';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog, ModalLogInClientDialog, ModalLogInProviderDialog } from './components/modals/modal.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 registerLocaleData(localeAR, 'es');
 
@@ -94,7 +95,8 @@ export function hljsLanguages() {
     ModalSignUpOtherAccountClientDialog,
     ModalSignUpProviderDialog,
     ModalLogInClientDialog,
-    ModalLogInProviderDialog
+    ModalLogInProviderDialog,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

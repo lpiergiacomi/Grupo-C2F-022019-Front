@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'detailsProvider/:id', component: ProviderDetailsComponent},
   { path: 'credit/:id', component: AddRemoveCreditComponent},
   { path: 'menus', component: MenuListComponent, runGuardsAndResolvers: 'always'},
+  { path: 'menus/page/:page', component: MenuListComponent, runGuardsAndResolvers: 'always'},
   { path: 'addMenu', component: CreateMenuComponent},
   { path: 'updateMenu/:id', component: UpdateMenuComponent},
   { path: 'detailsMenu/:id', component: MenuDetailsComponent},

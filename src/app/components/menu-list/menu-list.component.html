@@ -52,23 +52,23 @@
           <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice2}} </mat-cell>
         </ng-container>
     
-        <!-- Reputation Provider Column -->
+        <!-- Reputation Provider Column
     <ng-container matColumnDef="reputationProvider">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Reputación </mat-header-cell>
         <mat-cell *matCellDef="let menu"> reputacion </mat-cell>
-      </ng-container>
+      </ng-container> -->
   
-      <!-- Address Provider Column -->
+      <!-- Address Provider Column
       <ng-container matColumnDef="addressProvider">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
         <mat-cell *matCellDef="let menu"> {{menu.provider.address}} </mat-cell>
-      </ng-container>
+      </ng-container> -->
   
-      <!-- Name Provider Column -->
+      <!-- Name Provider Column
       <ng-container matColumnDef="nameProvider">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </mat-header-cell>
         <mat-cell *matCellDef="let menu"> {{menu.provider.name}} </mat-cell>
-      </ng-container>
+      </ng-container> -->
 
 
     <!-- Action Column -->
@@ -85,7 +85,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
+<paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
 </div>
