@@ -166,7 +166,7 @@ export class ModalLogInProviderDialog {
   templateUrl: './modal-client-dialog.component.html',
 })
 export class ModalClientDialog {
-  constructor(public dialog: MatDialog) {}
+  constructor(public auth: AuthService, public dialog: MatDialog) {}
 
   openLogInClientDialog() {
     this.dialog.closeAll();
@@ -176,6 +176,10 @@ export class ModalClientDialog {
   openSignUpClientDialog() {
     this.dialog.closeAll();
     this.dialog.open(ModalSignUpClientDialog);
+  }
+
+  googleSignUp() {
+    this.auth.login();
   }
 
 }
@@ -190,27 +194,38 @@ const CLIENT_ID = 'clientId';
 })
 
 export class ModalLogInClientDialog {
+  
+  client: Client = new Client();
+
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public auth: AuthService, public dialog: MatDialog, public clientService: ClientService) {}
 
 
-  clientLoginForm = new FormGroup({
-    email : new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
-
   logInClient() {
     this.dialog.closeAll();
-    let formData = Object.assign({});
-    formData = Object.assign(formData, this.clientLoginForm.value);
-    
-    formData.password = CryptoJS.AES.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
-    console.log(formData);
+  
+    console.log(this.client.password);
+    console.log(this.client.password.trim());
 
-    this.clientService.getClientByMail(formData.email)
+    this.client.password = CryptoJS.SHA256.encrypt(this.client.password.trim(), "ViandasYa".trim()).toString();
+    //console.log(this.client.password);
+
+    this.clientService.getClientByMail(this.client.mail)
     .subscribe(data => {
-      this.storage.set(CLIENT_ID, data.id), 
-      catchError => swal.fire('Error', 'No existe un usuario con ese mail registrado', 'error');
-    })
+      if (data.mensaje == 'ok'){
+        if (data.client.password == this.client.password){
+          this.storage.set(CLIENT_ID, data.id);
+        }
+        else {
+          swal.fire('Error', 'Datos incorrectos', 'error');
+        }
+      }
+      else {
+        swal.fire('Error', 'No existe un usuario con ese mail registrado', 'error');
+      }
+      console.log(data);
+      
+    }), catchError => swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
+
     
   }
   
@@ -229,11 +244,7 @@ export class ModalLogInClientDialog {
   templateUrl: './modal-signUp-client-dialog.component.html',
 })
 export class ModalSignUpClientDialog {
-  constructor(public auth: AuthService, public dialog: MatDialog) {}
-
-  googleSignUp() {
-    this.auth.login();
-  }
+  constructor(public dialog: MatDialog) {}
 
   otherSignUp() {
     this.dialog.closeAll();
@@ -268,15 +279,25 @@ export class ModalSignUpOtherAccountClientDialog {
     this.dialog.closeAll();
     let formData = Object.assign({});
     formData = Object.assign(formData, this.clientRegisterForm.value);
-    console.log(formData.password);
-    if(conversion === 'encrypt') {
-      formData.password = CryptoJS.AES.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
-    }
-    console.log(formData.password);
 
-    this.client = new Client(formData.firstName, formData.lastName, formData.mail, formData.password, formData.telephone, formData.locality, this.clientAddres);
+    formData.password = CryptoJS.SHA256.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
+    
+    this.client = new Client();
+    this.client.firstName = formData.firstName;
+    this.client.lastName = formData.lastName;
+    this.client.mail = formData.mail;
+    this.client.password = formData.password;
+    this.client.telephone = formData.telephone;
+    this.client.locality = formData.locality;
+    this.client.clientAddres = formData.clientAddres;
+
     this.client.type = 'Client';
-    this.clientService.createClient(this.client).subscribe(data => console.log(data), error => console.log(error))
+    this.clientService.createClient(this.client).subscribe(data => console.log(data), error => {
+      swal.fire("Email repetido", "El email " + this.client.mail + " ya fue registrado previamente.", 'error');
+      console.log(this.client);
+      console.log(formData);
+      console.log(error);
+    })
   }
 
 }

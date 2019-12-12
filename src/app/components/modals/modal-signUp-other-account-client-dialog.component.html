@@ -1,6 +1,6 @@
 <h3>Registro de cliente</h3>
 <div>
-    <form [formGroup]="clientRegisterForm" (ngSubmit)="signUpClient('encrypt')">
+    <form [formGroup]="clientRegisterForm" (ngSubmit)="signUpClient()">
         <div class="form-group">  
             <label for="firstName">Nombre</label>
             <input class="form-control" type="text" required formControlName="firstName">

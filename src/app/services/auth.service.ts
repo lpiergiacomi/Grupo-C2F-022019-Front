@@ -116,32 +116,34 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
-        if(this.storage.get(VALUE_CHECK)) {
-          this.providerService.getProviderByMail(user.email).subscribe(data => {
-            this.storage.set(PROVIDER_ID, data);
-          }, error => {
-            console.log(error);
-            this.provider.name = user.given_name;
-            this.provider.mail = user.email;
-            this.provider.type = 'Provider';
-            this.providerService.createProviderForLogin(this.provider).subscribe(data => {
-              this.storage.set(PROVIDER_ID, data.provider.id);
-            }, error => console.log(error));
-          });
-        } else {
-          this.clientService.getClientByMail(user.email).subscribe(data => {
-            this.storage.set(CLIENT_ID, data);
-          }, error => {
-            //his.client.firstName = user.given_name;
-            //this.client.lastName = user.family_name;
-            //this.client.mail = user.email;
-            //this.client.type = 'Client';
-            //this.clientService.createClientForLogin(this.client).subscribe(data => {
-            //  this.storage.set(CLIENT_ID, data.client.id);
-           // }, error => console.log(error));
-          });
-        }
-        this.router.navigate([targetRoute]);
+        this.clientService.getClientByMail(user.email).subscribe(data => {
+          if (data.mensaje == "ok"){
+            console.log("registro normal");
+            console.log("set storage normal");
+            this.storage.set(CLIENT_ID, data.client.id);
+          }
+          else {
+            console.log("registro con google");
+            let client = new Client();
+            client.firstName = user.given_name;
+            client.lastName = user.family_name;
+            client.mail = user.email;
+            console.log(client);
+            this.clientService.createClient(client).subscribe(data => {
+              console.log(data);
+              console.log("set storage gugel");
+              this.storage.set(CLIENT_ID, data.id);
+            }, error => {
+              console.log("rompio esta poronga 1");
+            })
+          }
+
+        }, error => {
+          console.log("rompio esta poronga 2");
+        });
+      this.router.navigate([targetRoute]);
+      }, error => {
+        console.log("rompio esta poronga 3");
       });
     }
   }

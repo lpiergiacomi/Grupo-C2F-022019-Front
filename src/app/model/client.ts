@@ -1,6 +1,14 @@
 import { Order } from './order';
 export class Client {
-    constructor(public firstName: string, public lastName: string, public mail: string, public password: string, public phone: string, public locality: string, public address: string) {}
+    constructor() {}
+    id: number;
+    firstName: string;
+    lastName: string;
+    mail: string;
+    password: string;
+    phone: string;
+    locality: string;
+    address: string;
     credit: number;
     orders: Array<Order>;
     type: string;

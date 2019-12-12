@@ -20,11 +20,11 @@ export class ClientService {
 
 
 
-  createClient(client: Client): Observable<any> {
+  createClient(client: Client): Observable<Client> {
     return this.http.post<Client>(this.urlEndPoint, client, { headers: this.httpHeaders }).pipe(
       map((response: any) => 
-
-      swal.fire(response.mensaje)),
+      
+      response.client as Client),
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);
@@ -36,8 +36,9 @@ export class ClientService {
     )
   }
 
-    getClientByMail(mail: string): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/find/${mail}`);
-    }
+  getClientByMail(mail: string): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/find/${mail}`);
+  }
+
 
 }
