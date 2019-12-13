@@ -1,0 +1,11 @@
+.menuOrder-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menuOrder-container > * {
+    width: 100%;
+  }
+
+
+  

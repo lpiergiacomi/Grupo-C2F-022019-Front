@@ -75,9 +75,10 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let menu"> 
-        <a (click)="updateMenu(menu.id)" title="{{ 'ActualizarMenu' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-edit"></i></a> | 
-        <a (click)="deleteMenu(menu.id)" title="{{ 'Eliminar' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-trash-alt"></i></a> |  
-        <a (click)="menuDetails(menu.id)" title="{{ 'DetallesDeMenu' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-info"></i></a> 
+        <a *ngIf="esDuenioDeMenu(menu)" (click)="updateMenu(menu.id)" title="{{ 'ActualizarMenu' | translate }}" style="cursor: pointer; margin: 5px;"><i class="fas fa-edit"></i></a>  
+        <a *ngIf="esDuenioDeMenu(menu)" (click)="deleteMenu(menu.id)" title="{{ 'Eliminar' | translate }}" style="cursor: pointer; margin: 5px;">| <i class="fas fa-trash-alt"></i></a>  
+        <a (click)="menuDetails(menu.id)" title="{{ 'DetallesDeMenu' | translate }}" style="cursor: pointer; margin: 5px;">| <i class="fas fa-info"></i></a> 
+        <a *ngIf="puedeComprar()" (click)="purchase(menu.id)" title="Comprar menú" style="cursor: pointer; margin: 5px;">| <i class="fas fa-shopping-cart"></i></a> 
 
       </td>
     </ng-container>

@@ -30,4 +30,8 @@ export class NavbarComponent {
     return this.storage.get('providerId') != null;
   }
 
+  isClient() {
+    return this.storage.get('clientId') != null;
+  }
+
 }

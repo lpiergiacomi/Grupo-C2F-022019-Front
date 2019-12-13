@@ -46,31 +46,7 @@ export class MenuService {
         })
       );
     }
-  /*
-    getMenusList(page: number): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
-        map((response:any) => {
-          let menus = response.content as Array<Menu>;
-          return menus.map(menu => {
-            let datePipe = new DatePipe('es')
-            menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
-            menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
-            this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
-            return menu;
-          });
-          return response;
-        }
-        ),
-        catchError(e => {
-          if (e.status == 400) {
-            return throwError(e);
-          }
-          swal.fire("Error", "Ocurrió un error al mostrar los menus. Por favor, te pedimos que intentes nuevamente más tarde.", "error");
-          return throwError(e);
-        })
-      );
-    }
-*/
+
     createMenu(menu: Menu): Observable<Menu> {
       return this.http.post<Menu>(this.urlEndPoint, menu, { headers: this.httpHeaders }).pipe(
         map((response: any) => 

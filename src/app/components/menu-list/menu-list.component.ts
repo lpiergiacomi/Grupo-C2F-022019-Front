@@ -1,11 +1,13 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
-import {MatTableDataSource, MatPaginator, MatSort, MatDialog} from '@angular/material';
+import {MatTableDataSource, MatSort, MatDialog} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from '../../services/menu.service';
 import { Menu } from '../../model/menu';
 import Swal from 'sweetalert2';
 import { ProviderService } from 'src/app/services/provider.service';
-
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Inject } from '@angular/core';
+import { Provider } from 'src/app/model/provider';
 
 @Component({
   selector: 'app-menu-list',
@@ -21,13 +23,11 @@ export class MenuListComponent implements OnInit{
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-constructor(private menuService: MenuService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog){}
+constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private menuService: MenuService, private router: Router, private providerService: ProviderService, private route: ActivatedRoute, public dialog: MatDialog){}
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+
   }
 
   ngOnInit() {
@@ -88,5 +88,20 @@ constructor(private menuService: MenuService, private router: Router, private ro
   updateMenu(id: number) {
     this.router.navigate(['updateMenu/' + id]);
   }
+  
+  purchase(id: number) {
+    this.router.navigate(['purchase/' + id])
+  }
+
+  esDuenioDeMenu(menu){
+    return this.storage.get('providerId') == menu.idProvider;
+  }
+
+  puedeComprar(menu){
+    return this.storage.get('clientId') != undefined && this.storage.get('providerId') == undefined;
+  }
+
+
+  
 }
 

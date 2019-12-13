@@ -11,7 +11,6 @@ import swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class ClientService {
-  //private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/menus';
   private urlEndPoint: string = 'http://localhost:8080/clients';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
