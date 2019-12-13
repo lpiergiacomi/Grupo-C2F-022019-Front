@@ -47,7 +47,6 @@ export class ModalProviderDialog {
   openLogInProviderDialog() {
     this.dialog.closeAll();
     this.dialog.open(ModalLogInProviderDialog)
-    console.log("Iniciaste sesion como proveedor");
   }
 
   openSignUpProviderDialog() {
@@ -63,7 +62,6 @@ export class ModalProviderDialog {
 })
 export class ModalSignUpProviderDialog {
   provider: Provider = new Provider();
-  //dias = [WeekDay.Sunday, WeekDay.Monday, WeekDay.Tuesday, WeekDay.Wednesday, WeekDay.Thursday, WeekDay.Friday,  WeekDay.Saturday];
   dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   
   constructor(private providerService: ProviderService, private router: Router) { }
@@ -96,6 +94,7 @@ export class ModalSignUpProviderDialog {
 
   createProvider(): void {
     if (this.logoSeleccionado){
+      this.provider.password = this.provider.password + this.provider.mail + 'ViandasYa'
       this.providerService.createProvider(this.provider, this.logoSeleccionado)
       .subscribe(response => {
         // Una vez que crea el provider tiene que redirigirse al inicio (lista de providers)
@@ -136,29 +135,32 @@ const PROVIDER_ID = 'providerId'
   styleUrls: ['./modal-logIn-provider-dialog.component.css']
 })
 export class ModalLogInProviderDialog {
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public dialog: MatDialog, public providerService: ProviderService) {}
 
-  providerLoginForm = new FormGroup({
-    email : new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  })
+  provider: Provider = new Provider();
+
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public dialog: MatDialog, public providerService: ProviderService) {}
 
   logInProvider() {
     this.dialog.closeAll();
-    let formData = Object.assign({});
-    formData = Object.assign(formData, this.providerLoginForm.value);
-    
-    formData.password = CryptoJS.AES.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
-    console.log(formData);
+  
+    this.provider.password = this.provider.password + this.provider.mail + 'ViandasYa';
 
-    this.providerService.getProviderByMail(formData.email)
+    this.providerService.getProviderByMail(this.provider.mail)
     .subscribe(data => {
-      this.storage.set(PROVIDER_ID, data.id), 
-      catchError => swal.fire('Error', 'No existe un proveedor con ese mail registrado', 'error');
-    })
+      if (data.mensaje == 'ok'){
+        if (data.provider.password == this.provider.password){
+          this.storage.set(PROVIDER_ID, data.provider.id);
+        }
+        else {
+          swal.fire('Error', 'Datos incorrectos', 'error');
+        }
+      }
+      else {
+        swal.fire('Error', 'No existe un proveedor con ese mail registrado', 'error');
+      }      
+    }), catchError => swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
 
   }
-
 }
 
 @Component({
@@ -175,7 +177,7 @@ export class ModalClientDialog {
 
   openSignUpClientDialog() {
     this.dialog.closeAll();
-    this.dialog.open(ModalSignUpClientDialog);
+    this.dialog.open(ModalSignUpOtherAccountClientDialog);
   }
 
   googleSignUp() {
@@ -203,17 +205,13 @@ export class ModalLogInClientDialog {
   logInClient() {
     this.dialog.closeAll();
   
-    console.log(this.client.password);
-    console.log(this.client.password.trim());
-
-    this.client.password = CryptoJS.SHA256.encrypt(this.client.password.trim(), "ViandasYa".trim()).toString();
-    //console.log(this.client.password);
+    this.client.password = this.client.password + this.client.mail + 'ViandasYa';
 
     this.clientService.getClientByMail(this.client.mail)
     .subscribe(data => {
       if (data.mensaje == 'ok'){
         if (data.client.password == this.client.password){
-          this.storage.set(CLIENT_ID, data.id);
+          this.storage.set(CLIENT_ID, data.client.id);
         }
         else {
           swal.fire('Error', 'Datos incorrectos', 'error');
@@ -221,9 +219,7 @@ export class ModalLogInClientDialog {
       }
       else {
         swal.fire('Error', 'No existe un usuario con ese mail registrado', 'error');
-      }
-      console.log(data);
-      
+      }      
     }), catchError => swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
 
     
@@ -279,14 +275,12 @@ export class ModalSignUpOtherAccountClientDialog {
     this.dialog.closeAll();
     let formData = Object.assign({});
     formData = Object.assign(formData, this.clientRegisterForm.value);
-
-    formData.password = CryptoJS.SHA256.encrypt(formData.password.trim(), "ViandasYa".trim()).toString();
     
     this.client = new Client();
     this.client.firstName = formData.firstName;
     this.client.lastName = formData.lastName;
     this.client.mail = formData.mail;
-    this.client.password = formData.password;
+    this.client.password = formData.password + formData.mail + 'ViandasYa';
     this.client.telephone = formData.telephone;
     this.client.locality = formData.locality;
     this.client.clientAddres = formData.clientAddres;

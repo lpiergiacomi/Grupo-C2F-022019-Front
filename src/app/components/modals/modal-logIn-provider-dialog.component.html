@@ -1,27 +1,27 @@
-<form [formGroup]="providerLoginForm" (ngSubmit)="logInProvider()">
-        <mat-card>
-    
-            <mat-card-header>
-            <div mat-card-avatar class="provider-header-image"></div>
-            <mat-card-title>Iniciar sesion proveedor</mat-card-title>
-            <mat-card-subtitle>Espacio dedicado para el inicio de sesion de un proveedor</mat-card-subtitle>
-            </mat-card-header>
-            
-            <mat-card-content>
-            <div class="provider-login">
-                <mat-form-field>
-                <input matInput placeholder="Email" type="email" required formControlName="email">
-                </mat-form-field>
-    
-                <mat-form-field>
-                    <input matInput placeholder="Contraseña" type="password" required formControlName="password">
-                </mat-form-field>
-            </div>
-            </mat-card-content>
-    
-            <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit">Log In</button>
-            </mat-card-actions>
-    
-        </mat-card>
-    </form>
+<form #providerLoginForm="ngForm">
+    <mat-card>
+
+        <mat-card-header>
+        <div mat-card-avatar class="provider-header-image"></div>
+        <mat-card-title>Iniciar sesion proveedor</mat-card-title>
+        <mat-card-subtitle>Espacio dedicado para el inicio de sesion de un proveedor</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+        <div class="provider-login">
+            <mat-form-field>
+            <input matInput placeholder="Email" type="email" required [(ngModel)]="provider.mail" name="mail" #mail="ngModel">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Contraseña" type="password" required [(ngModel)]="provider.password" name="password" #password="ngModel">
+            </mat-form-field>
+        </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" (click)="logInProvider()" [disabled]="!providerLoginForm.form.valid">Log In</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>
