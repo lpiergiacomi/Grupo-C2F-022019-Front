@@ -7,40 +7,45 @@
       <mat-card-title>Nuevo menú</mat-card-title>
       <mat-card-subtitle>Espacio dedicado para la creación de un menú</mat-card-subtitle>
     </mat-card-header>
-    
+
     <mat-card-content>
       <div class="menu-container">
         <mat-form-field hintLabel="Entre 4 y 30 caract.">
-          <input matInput minlength="4" maxlength="30" placeholder="Nombre de menú" [(ngModel)]="menu.name" name="name" #name="ngModel" required>
+          <input matInput minlength="4" maxlength="30" placeholder="Nombre de menú" [(ngModel)]="menu.name" name="name"
+            #name="ngModel" required>
           <mat-hint align="end">{{name.value?.length || 0}}/30</mat-hint>
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre 20 y 40 caract.">
-          <input matInput minlength="20" maxlength="40" placeholder="Descripción de menú" [(ngModel)]="menu.description" name="description" #description="ngModel" required>
+          <input matInput minlength="20" maxlength="40" placeholder="Descripción de menú" [(ngModel)]="menu.description"
+            name="description" #description="ngModel" required>
           <mat-hint align="end">{{description.value?.length || 0}}/40</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Categoría</mat-label>
           <mat-select multiple [(ngModel)]="menu.categories" name="categories" #categories="ngModel" required>
-            <mat-option *ngFor="let categoria of categorias" [value]="categoria" >{{categoria}}</mat-option>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre $10 y $40">
-          <input matInput placeholder="Valor de delivery" type="number" class="example-right-align" [(ngModel)]="menu.deliveryPrice" name="deliveryPrice" #deliveryPrice="ngModel">
+          <input matInput placeholder="Valor de delivery" type="number" class="example-right-align"
+            [(ngModel)]="menu.deliveryPrice" name="deliveryPrice" #deliveryPrice="ngModel">
           <span matPrefix>$&nbsp;</span>
           <span matSuffix>.00</span>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="validityDateBegin" placeholder="Fecha de vigencia desde" [(ngModel)]="menu.validityDateBegin" name="validityDateBegin" required>
+          <input matInput [matDatepicker]="validityDateBegin" placeholder="Fecha de vigencia desde"
+            [(ngModel)]="menu.validityDateBegin" name="validityDateBegin" required>
           <mat-datepicker-toggle matSuffix [for]="validityDateBegin"></mat-datepicker-toggle>
           <mat-datepicker #validityDateBegin></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [matDatepicker]="validityDateEnd" placeholder="Fecha de vigencia hasta" [(ngModel)]="menu.validityDateEnd" name="validityDateEnd" required>
+          <input matInput [matDatepicker]="validityDateEnd" placeholder="Fecha de vigencia hasta"
+            [(ngModel)]="menu.validityDateEnd" name="validityDateEnd" required>
           <mat-datepicker-toggle matSuffix [for]="validityDateEnd"></mat-datepicker-toggle>
           <mat-datepicker #validityDateEnd></mat-datepicker>
         </mat-form-field>
@@ -50,39 +55,47 @@
         </mat-form-field>
 
         <mat-form-field hintLabel="Mayor a 0">
-          <input matInput type="number" placeholder="Tiempo promedio de entrega" [(ngModel)]="menu.deliveryTimeAverage" name="deliveryTimeAverage" #deliveryTimeAverage="ngModel" required>
+          <input matInput type="number" placeholder="Tiempo promedio de entrega" [(ngModel)]="menu.deliveryTimeAverage"
+            name="deliveryTimeAverage" #deliveryTimeAverage="ngModel" required>
         </mat-form-field>
 
         <mat-form-field hintLabel="Mayor a $0">
-          <input matInput placeholder="Precio" type="number" class="example-right-align" [(ngModel)]="menu.price" name="price" #price="ngModel" min="0">
+          <input matInput placeholder="Precio" type="number" class="example-right-align" [(ngModel)]="menu.price"
+            name="price" #price="ngModel" min="0">
           <span matPrefix>$&nbsp;</span>
           <span matSuffix>.00</span>
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre 10 y 70">
-          <input matInput type="number" placeholder="Cantidad mínima" [(ngModel)]="menu.minQuantity" name="minQuantity" #minQuantity="ngModel" min="10" max="70" required>
+          <input matInput type="number" placeholder="Cantidad mínima" [(ngModel)]="menu.minQuantity" name="minQuantity"
+            #minQuantity="ngModel" min="10" max="70" required>
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre $0 y $1000; Menor a precio">
-          <input matInput placeholder="Precio cantidad mínima" type="number" class="example-right-align" [(ngModel)]="menu.minQuantityPrice" name="minQuantityPrice" #minQuantityPrice="ngModel" min="0" max="1000">
+          <input matInput placeholder="Precio cantidad mínima" type="number" class="example-right-align"
+            [(ngModel)]="menu.minQuantityPrice" name="minQuantityPrice" #minQuantityPrice="ngModel" min="0" max="1000">
           <span matPrefix>$&nbsp;</span>
           <span matSuffix>.00</span>
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre 40 y 150">
-          <input matInput type="number" placeholder="Cantidad mínima 2" [(ngModel)]="menu.minQuantity2" name="minQuantity2" #minQuantity2="ngModel" min="40" max="150">
+          <input matInput type="number" placeholder="Cantidad mínima 2" [(ngModel)]="menu.minQuantity2"
+            name="minQuantity2" #minQuantity2="ngModel" min="40" max="150">
         </mat-form-field>
 
         <mat-form-field hintLabel="Entre $0 y $1000">
-          <input matInput placeholder="Precio cantidad mínima 2" type="number" class="example-right-align" [(ngModel)]="menu.minQuantityPrice2" name="minQuantityPrice2" #minQuantityPrice2="ngModel" min="0" max="1000">
+          <input matInput placeholder="Precio cantidad mínima 2" type="number" class="example-right-align"
+            [(ngModel)]="menu.minQuantityPrice2" name="minQuantityPrice2" #minQuantityPrice2="ngModel" min="0"
+            max="1000">
           <span matPrefix>$&nbsp;</span>
           <span matSuffix>.00</span>
         </mat-form-field>
 
         <mat-form-field hintLabel="Mayor a 0">
-          <input matInput type="number" placeholder="Cantidad máxima de ventas por día" [(ngModel)]="menu.maxSalesPerDay" name="maxSalesPerDay" #maxSalesPerDay="ngModel" min="0" required>
+          <input matInput type="number" placeholder="Cantidad máxima de ventas por día"
+            [(ngModel)]="menu.maxSalesPerDay" name="maxSalesPerDay" #maxSalesPerDay="ngModel" min="0" required>
         </mat-form-field>
-                                    
+
       </div>
     </mat-card-content>
 

@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { ProviderService } from './provider.service';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
+import { Provider } from '../model/provider';
 
 @Injectable({
   providedIn: 'root'
@@ -15,75 +16,54 @@ import { Inject } from '@angular/core';
 export class MenuService {
   //private urlEndPoint: string = 'https://app-grupoc2f-022019.herokuapp.com/menus';
   private urlEndPoint: string = 'http://localhost:8080/menus';
-  
+
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient, private providerService: ProviderService) { }
 
-    getMenu(id: number): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/${id}`);
-    }
+  getMenu(id: number): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/${id}`);
+  }
 
-    updateMenu(id: number, value: any): Observable<Object> {
-      return this.http.put(`${this.urlEndPoint}/${id}`, value);
-    }
-  
-    deleteMenu(id: number): Observable<any> {
-      return this.http.delete(`${this.urlEndPoint}/${id}`, { responseType: 'text' });
-    }
+  updateMenu(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.urlEndPoint}/${id}`, value);
+  }
 
-    getMenusList(page: number): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
-        map((response: any) => {
-          (response.content as Menu[]).map(menu => {
-            let datePipe = new DatePipe('es')
-            menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
-            menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
-            this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
-            return menu;
-          });
-          return response;
-        })
-      );
-    }
-  /*
-    getMenusList(page: number): Observable<any> {
-      return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
-        map((response:any) => {
-          let menus = response.content as Array<Menu>;
-          return menus.map(menu => {
-            let datePipe = new DatePipe('es')
-            menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
-            menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
-            this.providerService.getProvider(this.storage.get('providerId')).subscribe(provider => menu.provider = provider);
-            return menu;
-          });
-          return response;
-        }
-        ),
-        catchError(e => {
-          if (e.status == 400) {
-            return throwError(e);
-          }
-          swal.fire("Error", "Ocurrió un error al mostrar los menus. Por favor, te pedimos que intentes nuevamente más tarde.", "error");
-          return throwError(e);
-        })
-      );
-    }
-*/
-    createMenu(menu: Menu): Observable<Menu> {
-      return this.http.post<Menu>(this.urlEndPoint, menu, { headers: this.httpHeaders }).pipe(
-        map((response: any) => 
-        
+  deleteMenu(id: number): Observable<any> {
+    return this.http.delete(`${this.urlEndPoint}/${id}`, { responseType: 'text' });
+  }
+
+  getMenusList(page: number): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
+      map((response: any) => {
+        (response.content as Menu[]).map(menu => {
+          let datePipe = new DatePipe('es')
+          menu.validityDateBegin = datePipe.transform(menu.validityDateBegin, 'dd/MM/yyyy');
+          menu.validityDateEnd = datePipe.transform(menu.validityDateEnd, 'dd/MM/yyyy');
+          this.providerService.getProvider(menu.idProvider)
+          .subscribe(response => {
+            menu.provider = response;
+          })
+          return menu;
+        });
+        return response;
+      })
+    );
+  }
+
+  createMenu(menu: Menu): Observable<Menu> {
+    return this.http.post<Menu>(this.urlEndPoint, menu, { headers: this.httpHeaders }).pipe(
+      map((response: any) =>
+
         response.menu as Menu),
-        catchError(e => {
-          if (e.status == 400) {
-            return throwError(e);
-          }
-          swal.fire(e.error.mensaje, e.error.error, "error");
+      catchError(e => {
+        if (e.status == 400) {
           return throwError(e);
-        })
+        }
+        swal.fire(e.error.mensaje, e.error.error, "error");
+        return throwError(e);
+      })
 
-      )
-    }
+    )
+  }
 }

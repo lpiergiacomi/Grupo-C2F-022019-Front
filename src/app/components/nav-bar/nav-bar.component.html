@@ -27,10 +27,10 @@
             <a routerLink="providers" *ngIf="isProvider()" class="nav-link" routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a routerLink="menus" class="nav-link" routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
+            <a routerLink="menus/page/0" *ngIf="isClient()" class="nav-link" routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a routerLink="addMenu" class="nav-link" routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
+            <a routerLink="addMenu" *ngIf="isProvider()" class="nav-link" routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
           </li>
         </ul>
         <ul class="nav navbar-nav ml-auto">

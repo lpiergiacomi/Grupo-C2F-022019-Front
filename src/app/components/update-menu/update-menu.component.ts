@@ -47,7 +47,7 @@ export class UpdateMenuComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/menus']);
+    this.router.navigate(['/menus/page/0']);
   }
 
 }

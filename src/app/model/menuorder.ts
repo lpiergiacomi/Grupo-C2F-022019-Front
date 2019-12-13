@@ -1,5 +1,9 @@
 import { Menu } from 'src/app/model/menu';
 
 export class MenuOrder {
-    constructor(public menu: Menu, public quantity: number) {}
+    menu: Menu
+    quantity: number
+    deliveryType: string
+    deliveryDate: string
+    deliveryTime: string
 }

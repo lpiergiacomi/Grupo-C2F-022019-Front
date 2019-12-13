@@ -14,6 +14,7 @@ export class Menu {
     minQuantity2: number;
     minQuantityPrice2: number;
     maxSalesPerDay: number;
+    idProvider: number;
 
 
     deliveryTimeBegin: string;
