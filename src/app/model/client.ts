@@ -11,5 +11,5 @@ export class Client {
     address: string;
     credit: number;
     orders: Array<Order>;
-    type: string;
+    type: string = 'Client';
 }

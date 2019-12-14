@@ -2,27 +2,29 @@
     <mat-card>
 
         <mat-card-header>
-        <div mat-card-avatar class="provider-header-image"></div>
-        <mat-card-title>Iniciar sesion cliente</mat-card-title>
-        <mat-card-subtitle>Espacio dedicado para el inicio de sesion de un cliente</mat-card-subtitle>
+            <div mat-card-avatar class="provider-header-image"></div>
+            <mat-card-title>Iniciar sesion cliente</mat-card-title>
+            <mat-card-subtitle>Espacio dedicado para el inicio de sesion de un cliente</mat-card-subtitle>
         </mat-card-header>
-        
-        <mat-card-content>
-        <div class="client-login">
-            <mat-form-field>
-            <input matInput placeholder="Email" type="email" required [(ngModel)]="client.mail" name="mail" #mail="ngModel">
-            </mat-form-field>
 
-            <mat-form-field>
-                <input matInput placeholder="Contraseña" type="password" required [(ngModel)]="client.password" name="password" #password="ngModel">
-            </mat-form-field>
-        </div>
+        <mat-card-content>
+            <div class="client-login">
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="email" required [(ngModel)]="client.mail" name="mail"
+                        #mail="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Contraseña" type="password" required [(ngModel)]="client.password"
+                        name="password" #password="ngModel">
+                </mat-form-field>
+            </div>
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit" (click)="logInClient()" [disabled]="!clientLoginForm.form.valid">Log In</button>
+            <button mat-raised-button color="primary" type="submit" (click)="logInClient()"
+                [disabled]="!clientLoginForm.form.valid">Log In</button>
         </mat-card-actions>
 
     </mat-card>
 </form>
-

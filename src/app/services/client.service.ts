@@ -28,7 +28,7 @@ export class ClientService {
         if (e.status == 400) {
           return throwError(e);
         }
-        swal.fire(e.error.mensaje, e.error.error, "error");
+        swal.fire("Email repetido", "El email " + client.mail + " ya fue registrado previamente.", 'error');
         return throwError(e);
       })
 
@@ -37,6 +37,10 @@ export class ClientService {
 
   getClientByMail(mail: string): Observable<any> {
     return this.http.get(`${this.urlEndPoint}/find/${mail}`);
+  }
+
+  getClientById(id: number): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/${id}`);
   }
 
 

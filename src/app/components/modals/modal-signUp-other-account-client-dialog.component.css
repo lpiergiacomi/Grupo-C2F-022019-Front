@@ -1,0 +1,23 @@
+
+.client-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.client-container > * {
+  width: 100%;
+}
+
+.client-header-image {
+  background-image: url('../../../assets/menu-header.jpeg');
+  background-size: cover;
+}
+
+.client-signUp {
+  display: flex;
+  flex-direction: column;
+}
+
+.client-signUp > * {
+  width: 100%;
+}

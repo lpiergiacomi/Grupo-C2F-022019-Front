@@ -4,43 +4,38 @@
       <div>
         <img class="logo" src="./../assets/viandasYa.png">
       </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        [attr.aria-expanded]="!isCollapsed"
-        aria-label="Toggle navigation"
-        (click)="isCollapsed = !isCollapsed"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div
-        class="collapse navbar-collapse"
-        id="navbarNav"
-        [ngbCollapse]="isCollapsed"
-      >
+      <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a routerLink="providers" *ngIf="isProvider()" class="nav-link" routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
+            <a routerLink="providers" *ngIf="isProvider()" class="nav-link"
+              routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a routerLink="menus/page/0" *ngIf="isClient()" class="nav-link" routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
+            <a routerLink="menus/page/0" *ngIf="isClient()" class="nav-link"
+              routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a routerLink="addMenu" *ngIf="isProvider()" class="nav-link" routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
+            <a routerLink="addMenu" *ngIf="isProvider()" class="nav-link"
+              routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
           </li>
         </ul>
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-globe"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" (click)="setLanguage('es')" style="cursor: pointer;">{{ 'Espaniol' | translate }}</a>
-              <a class="dropdown-item" (click)="setLanguage('en')" style="cursor: pointer;">{{ 'Ingles' | translate }}</a>
+              <a class="dropdown-item" (click)="setLanguage('es')"
+                style="cursor: pointer;">{{ 'Espaniol' | translate }}</a>
+              <a class="dropdown-item" (click)="setLanguage('en')"
+                style="cursor: pointer;">{{ 'Ingles' | translate }}</a>
             </div>
           </li>
         </ul>
@@ -51,13 +46,26 @@
         </ul>
         <ul class="navbar-nav d-none d-md-block">
           <li class="nav-item">
-            <button mat-button (click)="modal.openDialogProvider()">Proveedores</button>
+            <button *ngIf="!isClient() && !isProvider()" mat-button
+              (click)="modal.openDialogProvider()">Proveedores</button>
           </li>
         </ul>
         <ul class="navbar-nav d-none d-md-block">
-            <li class="nav-item">
-              <button mat-button (click)="modal.openDialogClient()">Clientes</button>
-            </li>
+          <li class="nav-item">
+            <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Clientes</button>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-none d-md-block">
+          <li class="nav-item">
+            <button *ngIf="isClient()" mat-button (click)="infoCliente()">{{client.firstName}}</button>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-none d-md-block">
+          <li *ngIf="isProvider()" class="nav-item">
+            <img src="{{providerService.urlEndPoint}}/uploads/img/{{provider.logo}}" alt="{{provider.logo}}"
+          class="img-thumbnail rounded" style="width: 75px;">
+            <button mat-button (click)="infoProveedor()">{{provider.name}}</button>
+          </li>
         </ul>
         <!--
         <ul class="navbar-nav d-none d-md-block">
@@ -146,8 +154,7 @@
     </div>
   </nav>
   <br>
-  <h2 
-    style="text-align: center; color:#ed2d43">
+  <h2 style="text-align: center; color:#ed2d43">
     <img src="./../assets/viandasYagif.gif" width="70"> {{title}}
   </h2>
 </div>

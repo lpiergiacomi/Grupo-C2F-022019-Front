@@ -18,7 +18,7 @@ export class CreateProviderComponent implements OnInit {
   provider: Provider = new Provider();
   //dias = [WeekDay.Sunday, WeekDay.Monday, WeekDay.Tuesday, WeekDay.Wednesday, WeekDay.Thursday, WeekDay.Friday,  WeekDay.Saturday];
   dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-  
+
   constructor(private providerService: ProviderService, private router: Router) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   phone = new FormControl('', Validators.required);
@@ -28,17 +28,17 @@ export class CreateProviderComponent implements OnInit {
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'Campo obligatorio' :
-        this.email.hasError('email') ? 'Formato de mail inválido' : '';
+      this.email.hasError('email') ? 'Formato de mail inválido' : '';
   }
 
   getPhoneErrorMessage() {
     return this.phone.hasError('required') ? 'Campo obligatorio' :
-        this.phone.hasError('phone') ? 'Formato de teléfono inválido' : '';
+      this.phone.hasError('phone') ? 'Formato de teléfono inválido' : '';
   }
 
   ngOnInit() {
   }
-  
+
   onAutocompleteSelected(result: PlaceResult) {
     this.provider.address = result.formatted_address;
   }
@@ -49,36 +49,36 @@ export class CreateProviderComponent implements OnInit {
   }
 
   createProvider(): void {
-    if (this.logoSeleccionado){
+    if (this.logoSeleccionado) {
       this.providerService.createProvider(this.provider, this.logoSeleccionado)
-      .subscribe(response => {
-        // Una vez que crea el provider tiene que redirigirse al inicio (lista de providers)
-        this.gotoList();
-        swal.fire('Nuevo proveedor', `Proveedor creado con éxito!`, 'success')
-      },
-        // Como segundo parámetro suscribimos a un observador y manejamos cuando hay algún error:
-        err => {
-          let errores = err.error.errors as string[];
-          swal.fire('Error', `${errores}`, 'error')
-        }
-      );
+        .subscribe(response => {
+          // Una vez que crea el provider tiene que redirigirse al inicio (lista de providers)
+          this.gotoList();
+          swal.fire('Nuevo proveedor', `Proveedor creado con éxito!`, 'success')
+        },
+          // Como segundo parámetro suscribimos a un observador y manejamos cuando hay algún error:
+          err => {
+            let errores = err.error.errors as string[];
+            swal.fire('Error', `${errores}`, 'error')
+          }
+        );
     }
     else {
       swal.fire('Error', 'Debe seleccionar un logo', 'error')
     }
   }
 
-  seleccionarLogo(event){
+  seleccionarLogo(event) {
     this.logoSeleccionado = event.target.files[0];
 
   }
 
-  camposValidos(): boolean{
+  camposValidos(): boolean {
     return this.provider.address != undefined &&
-           this.provider.address != "" &&
-           this.logoSeleccionado != undefined
+      this.provider.address != "" &&
+      this.logoSeleccionado != undefined
   }
 
- 
+
 }
-  
+

@@ -1,25 +1,57 @@
-<h3>Registro de cliente</h3>
-<div>
-    <form [formGroup]="clientRegisterForm" (ngSubmit)="signUpClient()">
-        <div class="form-group">  
-            <label for="firstName">Nombre</label>
-            <input class="form-control" type="text" required formControlName="firstName">
-            <label for="lastName">Apellido</label>
-            <input class="form-control" type="text" required formControlName="lastName">
-            <label for="mail">Email</label>
-            <input class="form-control" type="email" required formControlName="mail">
-            <label for="password">Contraseña</label>
-            <input class="form-control" type="password" required formControlName="password">
-            <label for="telephone">Telefono</label>
-            <input class="form-control" type="number" required formControlName="telephone">
-            <label for="locality">Localidad</label>
-            <input class="form-control" type="text" required formControlName="locality">
-            <label for="address">Direccion</label>
-            <mat-google-maps-autocomplete 
-                (onAutocompleteSelected)="onAutocompleteSelected($event)">
-            </mat-google-maps-autocomplete>
-        </div>
+<form #clientSignUpForm="ngForm">
+    <mat-card>
 
-    <button type="submit" class="btn btn-success">Registrarse</button>
-  </form>
-</div>
+        <mat-card-header>
+            <div mat-card-avatar class="client-header-image"></div>
+            <mat-card-title>Registrarme como cliente</mat-card-title>
+            <mat-card-subtitle>Espacio dedicado para el registro de un cliente</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="client-signUp">
+                <mat-form-field>
+                    <input matInput placeholder="Nombre" type="text" required [(ngModel)]="client.firstName"
+                        name="firstName" #firstName="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Apellido" type="text" required [(ngModel)]="client.lastName"
+                        name="lastName" #lastName="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="email" required [(ngModel)]="client.mail" name="mail"
+                        #mail="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Contraseña" type="password" required [(ngModel)]="client.password"
+                        name="password" #password="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <ngx-mat-intl-tel-input placeholder="Teléfono" [formControl]="phone" [(ngModel)]="client.phone"
+                        name="phone" [preferredCountries]="['ar']" [enablePlaceholder]="true" [enableSearch]="true">
+                    </ngx-mat-intl-tel-input>
+                    <mat-error *ngIf="phone.invalid">{{getPhoneErrorMessage()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Localidad" type="text" required [(ngModel)]="client.locality"
+                        name="locality" #locality="ngModel">
+                </mat-form-field>
+
+                <mat-google-maps-autocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)">
+                </mat-google-maps-autocomplete>
+
+
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" (click)="signUpClient()"
+                [disabled]="!clientSignUpForm.form.valid || !camposValidos()">Registrarse</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>
