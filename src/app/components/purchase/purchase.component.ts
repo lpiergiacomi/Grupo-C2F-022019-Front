@@ -6,7 +6,9 @@ import { ProviderService } from "./../../services/provider.service";
 import { Menu } from './../../model/menu';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MenuService } from 'src/app/services/menu.service';
-
+import { ClientService } from 'src/app/services/client.service';
+import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-purchase',
@@ -17,12 +19,12 @@ export class PurchaseComponent implements OnInit {
 
   id: number;
   menu: Menu;
-  provider: Provider;
+  //provider: Provider;
   private menuOrder: MenuOrder = new MenuOrder();
 
   deliveryTypes = ['A domicilio', 'Retiro en local']
 
-  constructor(private route: ActivatedRoute, private providerService: ProviderService, private menuService: MenuService, private router: Router){}
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private route: ActivatedRoute, private providerService: ProviderService, private menuService: MenuService, private clientService: ClientService, private router: Router){}
 
   dateTime = new Date();
   purchaseForm = new FormGroup({
@@ -41,17 +43,24 @@ export class PurchaseComponent implements OnInit {
       .subscribe(menu => {
         this.menu = menu;
         this.menuOrder.menu = this.menu;
-        this.providerService.getProvider(menu.id)
+        this.providerService.getProvider(menu.idProvider)
         .subscribe(provider => {
-          this.provider = provider;
+          //this.provider = provider;
+          this.menu.provider = provider;
+          this.menuOrder.idClient = this.storage.get('clientId');
         })
       });
   }
 
-
   purchase(){
-    console.log(this.menuOrder);
-    //this.router.navigate(['/successfulPurchase']);  
+    this.clientService.createOrder(this.menuOrder)
+    .subscribe(data => {
+    }),
+    error => {
+      console.log(error);
+    }
   }
+    
+  
 
 }
