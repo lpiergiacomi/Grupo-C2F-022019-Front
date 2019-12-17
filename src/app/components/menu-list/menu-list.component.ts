@@ -99,5 +99,9 @@ export class MenuListComponent implements OnInit {
     return this.storage.get('clientId') != undefined && this.storage.get('providerId') == undefined;
   }
 
+  tieneMenu(){
+    return false;
+  }
+
 }
 

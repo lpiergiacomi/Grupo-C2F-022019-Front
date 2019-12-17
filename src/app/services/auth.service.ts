@@ -10,6 +10,7 @@ import { ProviderService } from './provider.service';
 import { Provider } from '../model/provider';
 import { ClientService } from './client.service';
 import { Client } from '../model/client';
+import swal from 'sweetalert2'
 
 const VALUE_CHECK = 'checked';
 const PROVIDER_ID = 'providerId';
@@ -117,33 +118,29 @@ export class AuthService {
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
         this.clientService.getClientByMail(user.email).subscribe(data => {
-          if (data.mensaje == "ok"){
-            console.log("registro normal");
-            console.log("set storage normal");
+          if (data.mensaje == "ok") {
             this.storage.set(CLIENT_ID, data.client.id);
+            window.location.reload();
           }
           else {
-            console.log("registro con google");
             let client = new Client();
             client.firstName = user.given_name;
             client.lastName = user.family_name;
             client.mail = user.email;
-            console.log(client);
             this.clientService.createClient(client).subscribe(data => {
-              console.log(data);
-              console.log("set storage gugel");
               this.storage.set(CLIENT_ID, data.id);
+              window.location.reload();
             }, error => {
-              console.log("rompio esta poronga 1");
+              swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
             })
           }
 
         }, error => {
-          console.log("rompio esta poronga 2");
+          swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
         });
-      this.router.navigate([targetRoute]);
+        this.router.navigate([targetRoute]);
       }, error => {
-        console.log("rompio esta poronga 3");
+        swal.fire('Error', 'Hubo un problema. Volvé a intentarlo más tarde', 'error');
       });
     }
   }
@@ -163,7 +160,7 @@ export class AuthService {
   }
 
   newFunction() {
-    if(this.checkboxValue) {
+    if (this.checkboxValue) {
       this.storage.set(VALUE_CHECK, this.checkboxValue);
     }
     else {

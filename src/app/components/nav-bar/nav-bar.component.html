@@ -67,6 +67,11 @@
             <button mat-button (click)="infoProveedor()">{{provider.name}}</button>
           </li>
         </ul>
+        <ul class="navbar-nav d-none d-md-block">
+          <li class="nav-item">
+            <button *ngIf="isClient() || isProvider()" mat-button (click)="logout()">Logout</button>
+          </li>
+        </ul>
         <!--
         <ul class="navbar-nav d-none d-md-block">
           <li class="nav-item" *ngIf="auth.loggedIn === false">

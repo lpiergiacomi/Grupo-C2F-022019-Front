@@ -73,4 +73,10 @@ export class NavbarComponent {
   infoProveedor() {
     alert(this.provider.name)
   }
+
+  logout(){
+    this.storage.remove('clientId');
+    this.storage.remove('providerId');
+    window.location.reload();
+  }
 }
