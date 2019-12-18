@@ -71,7 +71,7 @@ export class PurchaseComponent implements OnInit {
   purchase() {
     swal.fire({
       title: 'Compra de ' + this.menuOrder.menu.name,
-      text: "Precio: " + this.menuOrder.menu.price,
+      text: "Precio: $" + this.menuOrder.menu.price * this.menuOrder.quantity,
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

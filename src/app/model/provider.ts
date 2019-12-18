@@ -18,4 +18,5 @@ export class Provider {
     menus: Array<Menu>;
     credit: number;
     type: string;
+    reputation: number;
 }

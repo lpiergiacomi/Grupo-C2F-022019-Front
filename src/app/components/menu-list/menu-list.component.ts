@@ -8,6 +8,7 @@ import { ProviderService } from 'src/app/services/provider.service';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu-list',
@@ -22,7 +23,7 @@ export class MenuListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private menuService: MenuService, private router: Router, private providerService: ProviderService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private menuService: MenuService, private router: Router, private providerService: ProviderService, private route: ActivatedRoute, public dialog: MatDialog, private translate: TranslateService) { }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -102,6 +103,23 @@ export class MenuListComponent implements OnInit {
 
   tieneMenu(){
     return false;
+  }
+
+  getLanguage() {
+    return this.translate.currentLang;
+  }
+
+  getCurrencyFormat() {
+    return '2.2-2';
+  }
+
+  getCurrency(){
+    switch (this.translate.currentLang) {
+      case 'es':
+        return 'ARS'
+      case 'en':
+        return 'USD';
+    }
   }
 
 }
