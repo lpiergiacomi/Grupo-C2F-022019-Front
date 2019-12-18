@@ -1,92 +1,64 @@
-<div class="nav-container">
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container">
-      <div>
-        <img class="logo" src="./../assets/viandasYa.png">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="./../assets/viandasYa.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    ViandasYa
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a routerLink="providers" *ngIf="isProvider()" class="nav-link"
+          routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="menus/page/0" *ngIf="isClient()" class="nav-link"
+          routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="addMenu" *ngIf="isProvider()" class="nav-link"
+          routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
+      </li>
+
+    </ul>
+
+    <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogProvider()">Login proveedor</button>
+    <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Login cliente</button>
+
+    <button *ngIf="isClient()" mat-button (click)="modal.openDialogProvider()">Saldo: {{client.credit}}</button>
+    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit}}</button>
+
+    <li class="nav-item dropdown" style="list-style-type: none;">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-globe"></i></a>
+
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" (click)="setLanguage('es')" style="cursor: pointer;">{{ 'Espaniol' | translate }}</a>
+        <a class="dropdown-item" (click)="setLanguage('en')" style="cursor: pointer;">{{ 'Ingles' | translate }}</a>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
-        (click)="isCollapsed = !isCollapsed">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    </li>
 
-      <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a routerLink="providers" *ngIf="isProvider()" class="nav-link"
-              routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="menus/page/0" *ngIf="isClient()" class="nav-link"
-              routerLinkActive="active">{{ 'ListaDeMenus' | translate }}</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="addMenu" *ngIf="isProvider()" class="nav-link"
-              routerLinkActive="active">{{ 'AgregarMenu' | translate }}</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-globe"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" (click)="setLanguage('es')"
-                style="cursor: pointer;">{{ 'Espaniol' | translate }}</a>
-              <a class="dropdown-item" (click)="setLanguage('en')"
-                style="cursor: pointer;">{{ 'Ingles' | translate }}</a>
-            </div>
-          </li>
-        </ul>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a routerLink="/" class="nav-link">Home</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-none d-md-block">
-          <li class="nav-item">
-            <button *ngIf="!isClient() && !isProvider()" mat-button
-              (click)="modal.openDialogProvider()">Proveedores</button>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-none d-md-block">
-          <li class="nav-item">
-            <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Clientes</button>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-none d-md-block">
+    <li class="nav-item dropdown" style="list-style-type: none;">
+      <a class="nav-link dropdown-toggle" *ngIf="isClient()" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">{{client.firstName}}</a>
 
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" *ngIf="isClient()" id="navbarDropdown" role="button"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{client.firstName}}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" (click)="miPerfil()" style="cursor: pointer;">Mi perfil</a>
-              <a class="dropdown-item" (click)="misPedidos()" style="cursor: pointer;">Mis pedidos</a>
-            </div>
-          </li>
-
-        </ul>
-        <ul class="navbar-nav d-none d-md-block">
-          <li *ngIf="isProvider()" class="nav-item">
-            <img src="{{providerService.urlEndPoint}}/uploads/img/{{provider.logo}}" alt="{{provider.logo}}"
-              class="img-thumbnail rounded" style="width: 75px;">
-            <button mat-button (click)="infoProveedor()">{{provider.name}}</button>
-          </li>
-        </ul>
-        <ul class="navbar-nav d-none d-md-block">
-          <li class="nav-item">
-            <button *ngIf="isClient() || isProvider()" mat-button (click)="logout()">Logout</button>
-          </li>
-        </ul>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" (click)="miPerfil()" style="cursor: pointer;">Mi perfil</a>
+        <a class="dropdown-item" (click)="misPedidos()" style="cursor: pointer;">Mis pedidos</a>
       </div>
-    </div>
-  </nav>
-  <br>
-  <h2 style="text-align: center; color:#ed2d43">
-    <img src="./../assets/viandasYagif.gif" width="70"> {{title}}
-  </h2>
-</div>
+    </li>
+
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-danger my-2 my-sm-0" *ngIf="isClient() || isProvider()" mat-button
+        (click)="logout()">Logout</button>
+    </form>
+
+  </div>
+</nav>
