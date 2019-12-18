@@ -7,6 +7,7 @@ import { MenuOrder } from 'src/app/model/menuorder';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { MenuOrderService } from 'src/app/services/menuorder.service';
 import { ClientService } from 'src/app/services/client.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-orders',
@@ -25,7 +26,10 @@ export class MyOrdersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private menuOrderService: MenuOrderService, private router: Router, private menuService: MenuService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private menuOrderService: MenuOrderService, private router: Router, private menuService: MenuService, private route: ActivatedRoute, public dialog: MatDialog, private translate: TranslateService) {
+    translate.setDefaultLang('es');
+    translate.use('es');
+   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -42,9 +46,7 @@ export class MyOrdersComponent implements OnInit {
   }
 
   reloadData() {
-    console.log("asd");
     this.menuOrderService.getMenuOrdersByIdClient(this.idClient).subscribe(data => {
-      console.log(data);
       this.menuOrders = data;
       this.loadDataSource();
     }, error => { console.log(error) });
@@ -55,6 +57,10 @@ export class MyOrdersComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.menuOrders);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getLanguage(){
+    return this.translate.currentLang;
   }
 
 

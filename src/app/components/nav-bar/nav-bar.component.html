@@ -31,8 +31,8 @@
     <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogProvider()">Login proveedor</button>
     <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Login cliente</button>
 
-    <button *ngIf="isClient()" mat-button (click)="modal.openDialogProvider()">Saldo: {{client.credit}}</button>
-    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit}}</button>
+    <button *ngIf="isClient()" mat-button (click)="modal.openDialogProvider()">Saldo: {{client.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
+    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit | currency}}</button>
 
     <li class="nav-item dropdown" style="list-style-type: none;">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"

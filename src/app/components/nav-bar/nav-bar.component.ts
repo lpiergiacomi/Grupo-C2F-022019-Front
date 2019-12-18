@@ -43,6 +43,23 @@ export class NavbarComponent {
     this.translate.use(language);
   }
 
+  getLanguage() {
+    return this.translate.currentLang;
+  }
+
+  getCurrencyFormat() {
+    return '3.2-2';
+  }
+
+  getCurrency(){
+    switch (this.translate.currentLang) {
+      case 'es':
+        return 'ARS'
+      case 'en':
+        return 'USD';
+    }
+  }
+
   isProvider() {
     return this.providerId != null;
   }
@@ -71,17 +88,17 @@ export class NavbarComponent {
     alert(this.provider.name)
   }
 
-  logout(){
+  logout() {
     this.storage.remove('clientId');
     this.storage.remove('providerId');
     window.location.reload();
   }
 
-  miPerfil(){
+  miPerfil() {
     this.router.navigate(['profile/' + this.clientId]);
   }
 
-  misPedidos(){
+  misPedidos() {
     this.router.navigate(['myOrders/']);
   }
 }

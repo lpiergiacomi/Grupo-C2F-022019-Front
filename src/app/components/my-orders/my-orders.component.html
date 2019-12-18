@@ -14,7 +14,7 @@
     <!-- Delivery Date Column -->
     <ng-container matColumnDef="deliveryDate">
       <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.deliveryDate | date:"fullDate"}} </mat-cell>
+      <mat-cell *matCellDef="let menuOrder">{{menuOrder.deliveryDate | date:"shortDate": "" : getLanguage()}} </mat-cell>
     </ng-container>
 
     <!-- Menu Name Column -->
@@ -26,7 +26,7 @@
     <!-- Qualification Column -->
     <ng-container matColumnDef="qualification">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Mi calificación </mat-header-cell>
-      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.qualification}} </mat-cell>
+      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.qualification}}/5 </mat-cell>
     </ng-container>
 
     <!-- Menu Price Column -->
