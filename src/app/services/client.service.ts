@@ -4,9 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Client } from '../model/client';
 import { map, catchError } from 'rxjs/operators'
 import swal from 'sweetalert2';
-import { Provider } from '../model/provider';
 import { MenuOrder } from '../model/menuorder';
-import { Moment } from 'moment';
 
 
 
@@ -24,9 +22,9 @@ export class ClientService {
 
   createClient(client: Client): Observable<Client> {
     return this.http.post<Client>(this.urlEndPoint, client, { headers: this.httpHeaders }).pipe(
-      map((response: any) => 
-      
-      response.client as Client),
+      map((response: any) =>
+
+        response.client as Client),
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);
@@ -48,9 +46,9 @@ export class ClientService {
 
   createOrder(menuOrder: MenuOrder): Observable<MenuOrder> {
     return this.http.post<MenuOrder>(`${this.urlEndPoint}/purchase`, menuOrder, { headers: this.httpHeaders }).pipe(
-      map((response: any) => 
-      
-      response.client as MenuOrder),
+      map((response: any) =>
+
+        response.menuOrder as MenuOrder),
       catchError(e => {
         if (e.status == 400) {
           return throwError(e);

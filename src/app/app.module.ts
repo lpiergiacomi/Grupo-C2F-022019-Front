@@ -7,12 +7,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProviderService } from './services/provider.service';
 import { MenuService } from './services/menu.service';
+import { MenuOrderService } from './services/menuorder.service';
+
 
 import { AppComponent } from './app.component';
 import { ProviderListComponent } from './components/provider-list/provider-list.component';
 import { ProviderDetailsComponent } from './components/provider-details/provider-details.component';
 import { UpdateProviderComponent } from './components/update-provider/update-provider.component';
 import { CreateProviderComponent } from './components/create-provider/create-provider.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { AddRemoveCreditComponent } from './components/add-remove-credit/add-remove-credit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuListComponent } from './components/menu-list/menu-list.component';
@@ -34,6 +37,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { NgxMatIntlTelInputModule } from 'ngx-mat-intl-tel-input';
+import { RatingModule } from 'ng-starrating';
+
 
 
 import {MatDatepickerModule, MatNativeDateModule, MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatPaginatorModule, MatSortModule} from '@angular/material'
@@ -77,6 +82,7 @@ export function hljsLanguages() {
     ProviderDetailsComponent,
     UpdateProviderComponent,
     CreateProviderComponent,
+    MyOrdersComponent,
     AddRemoveCreditComponent,
     MenuListComponent,
     CreateMenuComponent,
@@ -145,10 +151,12 @@ export function hljsLanguages() {
     AgmCoreModule.forRoot(),
     StorageServiceModule,
     MatProgressSpinnerModule,
-    NgxMatIntlTelInputModule
+    NgxMatIntlTelInputModule,
+    RatingModule
   ],
   providers: [ProviderService, 
     MenuService, 
+    MenuOrderService,
     {
       provide: LOCALE_ID, 
       useValue: 'es'

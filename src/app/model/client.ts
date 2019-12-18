@@ -1,4 +1,4 @@
-import { Order } from './order';
+import { MenuOrder } from './menuorder';
 export class Client {
     constructor() {}
     id: number;
@@ -10,6 +10,6 @@ export class Client {
     locality: string;
     address: string;
     credit: number;
-    orders: Array<Order>;
+    orders: Array<MenuOrder>;
     type: string = 'Client';
 }

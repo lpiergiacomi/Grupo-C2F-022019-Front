@@ -1,0 +1,44 @@
+<div *ngIf="menuOrders?.length == 0" class="alert alert-info">
+  No existen ordenes para mostrar
+</div>
+
+<div *ngIf="menuOrders?.length > 0" class="mat-elevation-z8">
+  <div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'Buscar' | translate }}">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Delivery Date Column -->
+    <ng-container matColumnDef="deliveryDate">
+      <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.deliveryDate | date:"fullDate"}} </mat-cell>
+    </ng-container>
+
+    <!-- Menu Name Column -->
+    <ng-container matColumnDef="menuName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Menú </mat-header-cell>
+      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.menu.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Qualification Column -->
+    <ng-container matColumnDef="qualification">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Mi calificación </mat-header-cell>
+      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.qualification}} </mat-cell>
+    </ng-container>
+
+    <!-- Menu Price Column -->
+    <ng-container matColumnDef="menuPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.menu.price}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+</div>

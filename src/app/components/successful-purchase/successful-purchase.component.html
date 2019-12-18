@@ -1,1 +1,18 @@
-<h3>Compra realizada con exito!</h3>
+<h3>Gracias {{this.client.firstName}}!</h3>
+
+Tu pedido a <b> {{this.provider.name}} </b> se está preprando
+<br>
+<br>
+<b>Menú:</b> {{this.menuOrder.menu.name}}
+<br>
+<b>Cantidad:</b> {{this.menuOrder.quantity}}
+<br>
+<b>Tipo:</b> {{this.menuOrder.deliveryType}}
+<br><br>
+Recibirás un mail a <b>{{this.client.mail}}</b> con más información.
+
+
+<br><br>
+
+<star-rating value="3" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+<i>No podrás comprar otro menú si tenés puntuaciones pendientes</i>

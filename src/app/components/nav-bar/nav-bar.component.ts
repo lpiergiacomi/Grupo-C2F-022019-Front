@@ -8,6 +8,7 @@ import { Client } from 'src/app/model/client';
 import { Provider } from 'src/app/model/provider';
 import { ClientService } from 'src/app/services/client.service';
 import { ProviderService } from 'src/app/services/provider.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +27,7 @@ export class NavbarComponent {
   providerId: number;
   logoProveedor;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private providerService: ProviderService, private translate: TranslateService, public modal: ModalComponent) {
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private router: Router, private clientService: ClientService, private providerService: ProviderService, private translate: TranslateService, public modal: ModalComponent) {
     translate.setDefaultLang('es');
     translate.use('es');
   }
@@ -66,10 +67,6 @@ export class NavbarComponent {
       error => this.provider = null;
   }
 
-  infoCliente() {
-    alert(this.client.firstName)
-  }
-
   infoProveedor() {
     alert(this.provider.name)
   }
@@ -78,5 +75,13 @@ export class NavbarComponent {
     this.storage.remove('clientId');
     this.storage.remove('providerId');
     window.location.reload();
+  }
+
+  miPerfil(){
+    this.router.navigate(['profile/' + this.clientId]);
+  }
+
+  misPedidos(){
+    this.router.navigate(['myOrders/']);
   }
 }

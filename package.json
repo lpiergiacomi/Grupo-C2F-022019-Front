@@ -47,6 +47,7 @@
     "jquery": "^3.4.1",
     "libphonenumber-js": "^1.7.29",
     "moment": "^2.24.0",
+    "ng-starrating": "^1.0.11",
     "ngx-datepicker-material": "^1.0.1",
     "ngx-highlightjs": "^3.0.3",
     "ngx-mat-intl-tel-input": "^2.0.4",

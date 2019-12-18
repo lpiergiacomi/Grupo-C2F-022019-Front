@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ProviderService } from 'src/app/services/provider.service';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-menu-list',
@@ -21,7 +22,7 @@ export class MenuListComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private menuService: MenuService, private router: Router, private providerService: ProviderService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private clientService: ClientService, private menuService: MenuService, private router: Router, private providerService: ProviderService, private route: ActivatedRoute, public dialog: MatDialog) { }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
