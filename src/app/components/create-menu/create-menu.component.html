@@ -48,11 +48,7 @@
             [(ngModel)]="menu.validityDateEnd" name="validityDateEnd" required>
           <mat-datepicker-toggle matSuffix [for]="validityDateEnd"></mat-datepicker-toggle>
           <mat-datepicker #validityDateEnd></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field hintLabel="Turnos/Horarios de entrega/Envio">
-          <input matInput placeholder="??????">
-        </mat-form-field>
+        </mat-form-field>>
 
         <mat-form-field hintLabel="Mayor a 0">
           <input matInput type="number" placeholder="Tiempo promedio de entrega" [(ngModel)]="menu.deliveryTimeAverage"
