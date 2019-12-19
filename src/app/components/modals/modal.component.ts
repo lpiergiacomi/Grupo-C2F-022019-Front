@@ -214,7 +214,7 @@ export class ModalLogInClientDialog {
           if (data.client.password == this.client.password) {
             this.storage.set(CLIENT_ID, data.client.id);
             this.dialog.closeAll();
-            window.location.reload();
+            window.location.href = "/menus/page/0";
 
           }
           else {

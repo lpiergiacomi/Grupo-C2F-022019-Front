@@ -25,7 +25,7 @@
     <!-- Price Column -->
     <ng-container matColumnDef="price">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Precio' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.price}} </mat-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.price | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}} </mat-cell>
     </ng-container>
 
     <!-- Min Quantity Column -->
@@ -37,7 +37,7 @@
     <!-- Min Quantity Price Column -->
     <ng-container matColumnDef="minQuantityPrice">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioCantidadMinima' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice}} </mat-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}} </mat-cell>
     </ng-container>
 
     <!-- Min Quantity 2 Column -->
@@ -49,13 +49,13 @@
     <!-- Min Quantity Price 2 Column -->
     <ng-container matColumnDef="minQuantityPrice2">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PrecioCantidadMinima2' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice2}} </mat-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.minQuantityPrice2 | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}} </mat-cell>
     </ng-container>
 
     <!-- Reputation Provider Column -->
     <ng-container matColumnDef="reputationProvider">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Reputación </mat-header-cell>
-      <mat-cell *matCellDef="let menu"> reputacion </mat-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.provider.reputation}} </mat-cell>
     </ng-container>
 
     <!-- Address Provider Column -->

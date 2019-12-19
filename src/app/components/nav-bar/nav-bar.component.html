@@ -32,7 +32,7 @@
     <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Login cliente</button>
 
     <button *ngIf="isClient()" mat-button (click)="modal.openDialogProvider()">Saldo: {{client.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
-    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit | currency}}</button>
+    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
 
     <li class="nav-item dropdown" style="list-style-type: none;">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -47,11 +47,21 @@
 
     <li class="nav-item dropdown" style="list-style-type: none;">
       <a class="nav-link dropdown-toggle" *ngIf="isClient()" id="navbarDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">{{client.firstName}}</a>
+        aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">{{client.firstName}}</a>
 
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
         <a class="dropdown-item" (click)="miPerfil()" style="cursor: pointer;">Mi perfil</a>
         <a class="dropdown-item" (click)="misPedidos()" style="cursor: pointer;">Mis pedidos</a>
+      </div>
+    </li>
+
+    <li class="nav-item dropdown" style="list-style-type: none;">
+      <a class="nav-link dropdown-toggle" *ngIf="isProvider()" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">{{provider.name}}</a>
+
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" (click)="miPerfilProveedor()" style="cursor: pointer;">Mi perfil</a>
+        <a class="dropdown-item" (click)="misVentas()" style="cursor: pointer;">Mis ventas</a>
       </div>
     </li>
 

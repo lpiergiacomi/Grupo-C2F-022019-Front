@@ -14,7 +14,8 @@
     <!-- Delivery Date Column -->
     <ng-container matColumnDef="deliveryDate">
       <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-      <mat-cell *matCellDef="let menuOrder">{{menuOrder.deliveryDate | date:"shortDate": "" : getLanguage()}} </mat-cell>
+      <mat-cell *matCellDef="let menuOrder">{{menuOrder.deliveryDate | date:"shortDate": "" : getLanguage()}}
+      </mat-cell>
     </ng-container>
 
     <!-- Menu Name Column -->
@@ -26,14 +27,30 @@
     <!-- Qualification Column -->
     <ng-container matColumnDef="qualification">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Mi calificación </mat-header-cell>
-      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.qualification}}/5 </mat-cell>
+      <ng-container>
+        <mat-cell *matCellDef="let menuOrder"> {{getQualificationSpan(menuOrder.qualification)}}</mat-cell>
+      </ng-container>
+
+
     </ng-container>
 
     <!-- Menu Price Column -->
     <ng-container matColumnDef="menuPrice">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
-      <mat-cell *matCellDef="let menuOrder"> {{menuOrder.menu.price}} </mat-cell>
+      <mat-cell *matCellDef="let menuOrder">
+        {{menuOrder.menu.price | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}} </mat-cell>
     </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let menuOrder">
+        <a *ngIf="menuOrder.qualification <= 0; else elseBlock" [routerLink]="['/successfulPurchase/' + menuOrder.id]" style="cursor: pointer;">Calificar</a>
+        <ng-template #elseBlock>Calificar</ng-template>
+
+      </td>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

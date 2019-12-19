@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class MyOrdersComponent implements OnInit {
-  displayedColumns = ['deliveryDate', 'menuName', 'qualification', 'menuPrice'];
+  displayedColumns = ['deliveryDate', 'menuName', 'qualification', 'menuPrice', 'action'];
   dataSource: MatTableDataSource<MenuOrder>;
   menuOrder: MenuOrder = new MenuOrder();
   menuOrders: Array<MenuOrder>;
@@ -59,8 +59,25 @@ export class MyOrdersComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  getLanguage(){
+  getLanguage() {
     return this.translate.currentLang;
+  }
+
+  getCurrencyFormat() {
+    return '2.2-2';
+  }
+
+  getCurrency(){
+    switch (this.translate.currentLang) {
+      case 'es':
+        return 'ARS'
+      case 'en':
+        return 'USD';
+    }
+  }
+
+  getQualificationSpan(qualification){
+    return qualification == 0 ? "Sin calificar" : qualification + "/5"
   }
 
 

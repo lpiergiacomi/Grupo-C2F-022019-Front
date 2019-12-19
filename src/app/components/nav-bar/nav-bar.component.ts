@@ -48,7 +48,7 @@ export class NavbarComponent {
   }
 
   getCurrencyFormat() {
-    return '3.2-2';
+    return '2.2-2';
   }
 
   getCurrency(){
@@ -91,14 +91,22 @@ export class NavbarComponent {
   logout() {
     this.storage.remove('clientId');
     this.storage.remove('providerId');
-    window.location.reload();
+    window.location.href = "/"
   }
 
   miPerfil() {
     this.router.navigate(['profile/' + this.clientId]);
   }
 
+  miPerfilProveedor() {
+    this.router.navigate(['profile/' + this.providerId]);
+  }
+
   misPedidos() {
     this.router.navigate(['myOrders/']);
+  }
+
+  misVentas(){
+    alert("Esto te lleva a las ventas");
   }
 }
