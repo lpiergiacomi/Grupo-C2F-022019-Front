@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import { ModalComponent } from '../modals/modal.component';
+import { ModalComponent, ModalClientCreditDialog } from '../modals/modal.component';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import { Client } from 'src/app/model/client';
@@ -107,6 +107,6 @@ export class NavbarComponent {
   }
 
   misVentas(){
-    alert("Esto te lleva a las ventas");
+    this.router.navigate(['mySales/']);
   }
 }

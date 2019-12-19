@@ -11,6 +11,7 @@ import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject } from '@angular/core';
 import swal from 'sweetalert2'
 import { Client } from 'src/app/model/client';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -69,9 +70,10 @@ export class PurchaseComponent implements OnInit {
   }
 
   purchase() {
+    this.menuOrder.price = this.menuOrder.menu.price * this.menuOrder.quantity;
     swal.fire({
       title: 'Compra de ' + this.menuOrder.menu.name,
-      text: "Precio: $" + this.menuOrder.menu.price * this.menuOrder.quantity,
+      text: "Precio: $" + this.menuOrder.price,
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -82,8 +84,20 @@ export class PurchaseComponent implements OnInit {
       if (result.value) {
         this.clientService.createOrder(this.menuOrder)
           .subscribe(menuOrder => {
-            console.log(menuOrder);
-            this.router.navigate(['successfulPurchase/' + menuOrder.id])
+            let provider = new Provider();
+            provider.credit = menuOrder.price;
+            this.providerService.updateCreditProvider(menuOrder.menu.idProvider, provider)
+              .subscribe(data => {
+                if (data.mensaje == "error") {
+                  Swal.fire('Error', data.error, 'error');
+                }
+                else {
+                  console.log(menuOrder);
+                  window.location.href = "/successfulPurchase/" + menuOrder.id;
+                }
+              });
+
+
           }),
           error => {
             console.log(error);

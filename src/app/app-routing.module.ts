@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProviderDetailsComponent } from './components/provider-details/provider-details.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MySalesComponent } from './components/my-sales/my-sales.component';
 import { ProviderListComponent } from './components/provider-list/provider-list.component';
 import { UpdateProviderComponent } from './components/update-provider/update-provider.component';
 import { AddRemoveCreditComponent } from './components/add-remove-credit/add-remove-credit.component';
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'successfulPurchase/:id', component: SuccessfulPurchaseComponent },
   { path: 'login', component: NavbarComponent },
   { path: 'profile/:id', component: ProfileComponent },
-  { path: 'myOrders', component: MyOrdersComponent }
+  { path: 'myOrders', component: MyOrdersComponent },
+  { path: 'mySales', component: MySalesComponent }
 
 ];
 

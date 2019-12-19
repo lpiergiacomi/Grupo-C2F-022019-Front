@@ -13,7 +13,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 export class ProviderListComponent implements OnInit {
 
   provider: Provider = new Provider();
-  displayedColumns = ['logo', 'name', 'locality', 'address', 'description', 'site', 'mail', 'phone', 'attentionTimeBegin', 'daysAttention', 'deliveryLocalities','action'];
+  displayedColumns = ['logo', 'name', 'locality', 'address', 'site', 'mail', 'phone', 'attentionTimeBegin', 'daysAttention', 'action'];
   dataSource: MatTableDataSource<Provider>;
   providers: Array<Provider>;
 

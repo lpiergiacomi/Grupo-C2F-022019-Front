@@ -60,5 +60,9 @@ export class ClientService {
     )
   }
 
+  depositCredit(idClient: number, client: Client): Observable<any> {
+    return this.http.put(`${this.urlEndPoint}/deposit/${idClient}`, client);
+  }
+
 
 }

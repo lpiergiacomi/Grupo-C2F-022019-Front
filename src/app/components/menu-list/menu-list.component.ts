@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./menu-list.component.css']
 })
 export class MenuListComponent implements OnInit {
-  displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'reputationProvider', 'addressProvider', 'nameProvider', 'action'];
+  displayedColumns = ['name', 'description', 'price', 'minQuantity', 'minQuantityPrice', 'minQuantity2', 'minQuantityPrice2', 'addressProvider', 'nameProvider', 'action'];
   dataSource: MatTableDataSource<Menu>;
   menus: Array<Menu>;
   paginador: any;

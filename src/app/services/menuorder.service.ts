@@ -22,6 +22,10 @@ export class MenuOrderService {
     return this.http.get(`${this.urlEndPoint}/client/${idClient}`);
   }
 
+  getMenuOrdersByIdProvider(idProvider: number): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/provider/${idProvider}`);
+  }
+
   getMenuOrderById(id: number): Observable<any> {
     return this.http.get(`${this.urlEndPoint}/${id}`);
   }

@@ -12,7 +12,7 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a routerLink="providers" *ngIf="isProvider()" class="nav-link"
+        <a routerLink="providers" *ngIf="isProvider() || isClient()" class="nav-link"
           routerLinkActive="active">{{ 'ListaDeProveedores' | translate }}</a>
       </li>
 
@@ -31,8 +31,8 @@
     <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogProvider()">Login proveedor</button>
     <button *ngIf="!isClient() && !isProvider()" mat-button (click)="modal.openDialogClient()">Login cliente</button>
 
-    <button *ngIf="isClient()" mat-button (click)="modal.openDialogProvider()">Saldo: {{client.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
-    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogClient()">Saldo: {{provider.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
+    <button *ngIf="isClient()" mat-button (click)="modal.openDialogClientCredit()">Saldo: {{client.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
+    <button *ngIf="isProvider()" mat-button (click)="modal.openDialogProviderCredit()">Saldo: {{provider.credit | currency: getCurrency():'symbol':getCurrencyFormat():getLanguage()}}</button>
 
     <li class="nav-item dropdown" style="list-style-type: none;">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"

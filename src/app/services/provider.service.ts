@@ -95,4 +95,12 @@ export class ProviderService {
       })
     )
   }
+
+  withdrawCredit(idProvider: number, provider: Provider): Observable<any> {
+    return this.http.put(`${this.urlEndPoint}/withdraw/${idProvider}`, provider);
+  }
+
+  updateCreditProvider(idProvider: number, provider: Provider): Observable<any> {
+    return this.http.put(`${this.urlEndPoint}/updatecredit/${idProvider}`, provider);
+  }
 }

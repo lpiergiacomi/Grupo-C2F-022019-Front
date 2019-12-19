@@ -13,6 +13,7 @@ import swal from 'sweetalert2'
 import { catchError } from 'rxjs/operators';
 import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject, Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -34,6 +35,14 @@ export class ModalComponent implements OnInit {
 
   openDialogClient() {
     const dialogRef = this.dialog.open(ModalClientDialog);
+  }
+
+  openDialogClientCredit() {
+    const dialogRef = this.dialog.open(ModalClientCreditDialog);
+  }
+
+  openDialogProviderCredit() {
+    const dialogRef = this.dialog.open(ModalProviderCreditDialog);
   }
 }
 
@@ -309,7 +318,61 @@ export class ModalSignUpOtherAccountClientDialog {
 
 }
 
+@Component({
+  selector: 'app-modal-client-credit-dialog',
+  templateUrl: './modal-client-credit-dialog.component.html'
+})
+export class ModalClientCreditDialog {
 
+  client: Client = new Client();
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public dialog: MatDialog, public router: Router, public clientService: ClientService) { }
 
+  depositarCreditoCliente() {
+    let idCliente: number = this.storage.get('clientId')
+    this.clientService.getClientById(idCliente)
+      .subscribe(data => {
+        this.clientService.depositCredit(idCliente, this.client)
+          .subscribe(data => {
+            Swal.fire('Depósito exitoso', data.mensaje, 'success');
+            this.dialog.closeAll();
+            window.location.reload();
+          });
+      }), error => {
+        Swal.fire('Error', error, 'error');
+      }
+  }
+
+}
+
+@Component({
+  selector: 'app-modal-provider-credit-dialog',
+  templateUrl: './modal-provider-credit-dialog.component.html'
+})
+export class ModalProviderCreditDialog {
+
+  provider: Provider = new Provider();
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService, public dialog: MatDialog, public router: Router, public providerService: ProviderService) { }
+
+  retirarCreditoProveedor() {
+    let idProvider: number = this.storage.get('providerId')
+    this.providerService.getProvider(idProvider)
+      .subscribe(data => {
+        this.providerService.withdrawCredit(idProvider, this.provider)
+          .subscribe(data => {
+            if (data.mensaje == "error") {
+              Swal.fire('Error', data.error, 'error');
+            }
+            else {
+              Swal.fire('Retiro exitoso', data.error, 'success');
+              this.dialog.closeAll();
+              window.location.reload();
+            }
+          });
+      }), error => {
+        Swal.fire('Error', error, 'error');
+      }
+  }
+
+}
 
 

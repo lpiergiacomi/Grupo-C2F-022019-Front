@@ -16,6 +16,7 @@ import { ProviderDetailsComponent } from './components/provider-details/provider
 import { UpdateProviderComponent } from './components/update-provider/update-provider.component';
 import { CreateProviderComponent } from './components/create-provider/create-provider.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MySalesComponent } from './components/my-sales/my-sales.component';
 import { AddRemoveCreditComponent } from './components/add-remove-credit/add-remove-credit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuListComponent } from './components/menu-list/menu-list.component';
@@ -61,7 +62,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeAR from '@angular/common/locales/es-AR';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog, ModalLogInClientDialog, ModalLogInProviderDialog } from './components/modals/modal.component';
+import { ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog, ModalLogInClientDialog, ModalLogInProviderDialog, ModalClientCreditDialog, ModalProviderCreditDialog } from './components/modals/modal.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 
 registerLocaleData(localeAR, 'es');
@@ -83,6 +84,7 @@ export function hljsLanguages() {
     UpdateProviderComponent,
     CreateProviderComponent,
     MyOrdersComponent,
+    MySalesComponent,
     AddRemoveCreditComponent,
     MenuListComponent,
     CreateMenuComponent,
@@ -102,7 +104,10 @@ export function hljsLanguages() {
     ModalSignUpProviderDialog,
     ModalLogInClientDialog,
     ModalLogInProviderDialog,
-    PaginatorComponent
+    PaginatorComponent,
+    ModalClientCreditDialog,
+    ModalProviderCreditDialog
+
   ],
   imports: [
     BrowserModule,
@@ -175,9 +180,11 @@ export function hljsLanguages() {
     ModalSignUpOtherAccountClientDialog,
     ModalSignUpProviderDialog,
     ModalLogInClientDialog,
-    ModalLogInProviderDialog
+    ModalLogInProviderDialog,
+    ModalClientCreditDialog,
+    ModalProviderCreditDialog
   ],
-  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog, ModalLogInClientDialog, ModalLogInProviderDialog],
+  entryComponents: [ModalComponent, ModalProviderDialog, ModalClientDialog, ModalSignUpClientDialog, ModalSignUpOtherAccountClientDialog, ModalSignUpProviderDialog, ModalLogInClientDialog, ModalLogInProviderDialog, ModalClientCreditDialog, ModalProviderCreditDialog],
     
   bootstrap: [AppComponent]
 })

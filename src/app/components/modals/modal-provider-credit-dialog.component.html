@@ -1,0 +1,24 @@
+<form #providerCreditForm="ngForm">
+    <mat-card>
+
+        <mat-card-header>
+            <mat-card-title>Credito</mat-card-title>
+            <mat-card-subtitle>Retirar dinero que recaudaste de tus ventas</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" required [(ngModel)]="provider.credit" name="credit"
+                        #credit="ngModel" placeholder="Dinero a retirar">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" (click)="retirarCreditoProveedor()"
+                [disabled]="!providerCreditForm.form.valid">Retirar</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>

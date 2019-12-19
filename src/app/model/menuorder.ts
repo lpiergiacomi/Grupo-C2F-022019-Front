@@ -9,4 +9,5 @@ export class MenuOrder {
     deliveryDate: string;
     deliveryTime: string;
     qualification: number;
+    price: number;
 }
