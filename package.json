@@ -44,7 +44,7 @@
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "libphonenumber-js": "^1.7.29",
     "moment": "^2.24.0",
     "ng-starrating": "^1.0.11",
